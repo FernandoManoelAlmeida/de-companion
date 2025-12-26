@@ -1,408 +1,208 @@
-# Plano de Execução - Detetive Existencial Companion App
-## Adaptado para Execução Autônoma por IA
+# Plano de Execução Mestre: Detetive Existencial Companion App
 
+**Versão:** 1.1 (Consolidada)  
 **Data:** 26 de Dezembro de 2025  
-**Objetivo:** Desenvolvimento incremental e executável do projeto completo
+**Objetivo:** Fonte única de verdade para implementação completa e autônoma por IA.
 
 ---
 
-## 🎯 ESTRATÉGIA DE EXECUÇÃO
+## 🛠️ 1. FUNDAÇÃO TÉCNICA
 
-### Princípios
-1. **Desenvolvimento Incremental:** Uma feature por vez, totalmente funcional
-2. **Validação Contínua:** Testar após cada fase
-3. **Commits Frequentes:** Salvar progresso regularmente
-4. **Priorização:** MVP primeiro, features avançadas depois
+### 1.1. Stack de Tecnologia
+- **Framework:** Next.js 14+ (App Router)
+- **Linguagem:** TypeScript 5+
+- **Estilização:** Tailwind CSS + Radix UI
+- **Banco Local:** IndexedDB via Dexie.js
+- **Estado:** Zustand + React Hook Form + Zod
+- **Multiplayer:** Firebase (Realtime DB + Auth)
+- **i18n:** next-intl + DeepL API
+- **PWA:** next-pwa (Workbox)
 
-### Estrutura
-- **Checkpoints:** Pontos de validação obrigatórios
-- **Rollback:** Possibilidade de reverter se algo falhar
-- **Documentação:** Código auto-documentado
-
----
-
-## 📦 FASE 0: PREPARAÇÃO (AGORA)
-
-### 0.1. Verificar Ambiente
-```bash
-# Verificar Node.js
-node --version  # Deve ser >= 18
-
-# Verificar npm
-npm --version
-
-# Verificar diretório
-pwd  # Deve estar em /home/progfernando/Projetos/pessoal/de-companion
-```
-
-### 0.2. Limpar Diretório (se necessário)
-```bash
-# Verificar se já existe projeto
-ls -la
-
-# Se existir node_modules ou package.json, perguntar ao usuário
-```
-
-**CHECKPOINT 0:** Ambiente verificado e pronto
+### 1.2. Padrões de Código
+- **Arquitetura:** Atomic Design (atoms, molecules, organisms, templates)
+- **Tipagem:** Interfaces TypeScript obrigatórias para todo dado persistido
+- **Offline-First:** Sincronização Firebase <-> IndexedDB com prioridade local
 
 ---
 
-## 📦 FASE 1: SETUP INICIAL (30 min)
+## 💾 2. ARQUITETURA DE DADOS (SCHEMAS)
 
-### 1.1. Criar Projeto Next.js
-```bash
-cd /home/progfernando/Projetos/pessoal/de-companion
-npx create-next-app@latest . --typescript --tailwind --app --src-dir --no-git
-```
-
-**Respostas automáticas:**
-- TypeScript: Yes
-- ESLint: Yes
-- Tailwind CSS: Yes
-- `src/` directory: Yes
-- App Router: Yes
-- Import alias: Yes (@/*)
-
-### 1.2. Instalar Dependências Core
-```bash
-npm install dexie zustand react-hook-form zod
-npm install @radix-ui/react-accordion @radix-ui/react-dialog @radix-ui/react-select
-npm install lucide-react
-npm install -D @types/node
-```
-
-### 1.3. Configurar PWA
-```bash
-npm install next-pwa
-```
-
-Criar `next.config.js`:
-```javascript
-const withPWA = require('next-pwa')({
-  dest: 'public',
-  disable: process.env.NODE_ENV === 'development'
-});
-
-module.exports = withPWA({
-  reactStrictMode: true,
-});
-```
-
-### 1.4. Criar Estrutura de Pastas
-```bash
-mkdir -p src/components/ui
-mkdir -p src/components/character
-mkdir -p src/components/dice
-mkdir -p src/components/campaign
-mkdir -p src/lib
-mkdir -p src/types
-mkdir -p src/data
-mkdir -p src/hooks
-mkdir -p public/icons
-```
-
-### 1.5. Criar Arquivos Base
-- `src/lib/db.ts` (Dexie setup)
-- `src/types/index.ts` (TypeScript types)
-- `src/lib/utils.ts` (Utility functions)
-- `public/manifest.json` (PWA manifest)
-
-**CHECKPOINT 1:** Projeto criado, dependências instaladas, estrutura pronta
-
----
-
-## 📦 FASE 2: DESIGN SYSTEM (2 horas)
-
-### 2.1. Configurar Tailwind
-Atualizar `tailwind.config.ts` com cores customizadas:
+### 2.1. Interfaces TypeScript (`src/types/index.ts`)
 ```typescript
-export default {
-  theme: {
-    extend: {
-      colors: {
-        noir: {
-          bg: '#0a0a0a',
-          accent: '#d4af37',
-          // ... outras cores
-        }
-      }
-    }
-  }
+// Personagem Independente
+export interface Character {
+  id: string; // UUID
+  name: string;
+  archetype?: string;
+  attributes: Attributes;
+  skills: Record<string, number>;
+  resources: {
+    morale: number;
+    moraleMax: number;
+    health: number;
+    healthMax: number;
+    money: number;
+    xp: number;
+    xpTotal: number;
+  };
+  thoughtCabinet: {
+    slots: number;
+    thoughts: Thought[];
+  };
+  inventory: Item[];
+  conditions: string[];
+  progression: {
+    xpHistory: XPTransaction[];
+    upgrades: UpgradeLog[];
+  };
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// Campanha (Multiplayer/Narrador)
+export interface Campaign {
+  id: string;
+  name: string;
+  description: string;
+  narratorId: string;
+  mode: 'local' | 'multiplayer';
+  inviteCode?: string;
+  cityHealth: { morale: number; health: number };
+  sessions: Session[];
+  narratorNotes: Note[];
+  npcs: NPC[];
+}
+
+// Vínculo N:N entre Personagem e Campanha
+export interface CampaignCharacterLink {
+  id: string;
+  characterId: string;
+  campaignId: string;
+  role: 'player' | 'narrator';
+  isActive: boolean;
 }
 ```
 
-### 2.2. Criar Componentes Base
-Criar em ordem:
-1. `src/components/ui/Button.tsx`
-2. `src/components/ui/Input.tsx`
-3. `src/components/ui/Card.tsx`
-4. `src/components/ui/Badge.tsx`
-
-### 2.3. Testar Design System
-Criar `src/app/design-system/page.tsx` para visualizar componentes
-
-**CHECKPOINT 2:** Design system funcionando, componentes testados
-
----
-
-## 📦 FASE 3: DATA LAYER (3 horas)
-
-### 3.1. Definir Types
-Criar todos os tipos em `src/types/index.ts`:
-- `Character`
-- `Campaign`
-- `Skill`
-- `Attribute`
-- `Thought`
-- etc.
-
-### 3.2. Setup Dexie (IndexedDB)
+### 2.2. Banco de Dados (`src/lib/db.ts`)
 ```typescript
-// src/lib/db.ts
-import Dexie, { Table } from 'dexie';
-
 class DEDatabase extends Dexie {
   characters!: Table<Character>;
   campaigns!: Table<Campaign>;
-  
+  characterLinks!: Table<CampaignCharacterLink>;
+  translations!: Table<{ key: string; text: string; lang: string }>;
+
   constructor() {
     super('DetetiveExistencialDB');
     this.version(1).stores({
       characters: 'id, name, createdAt',
-      campaigns: 'id, name, createdAt'
+      campaigns: 'id, name, narratorId, mode',
+      characterLinks: 'id, characterId, campaignId, role',
+      translations: 'key, lang'
     });
   }
 }
-
-export const db = new DEDatabase();
 ```
 
-### 3.3. Criar Hooks
-- `src/hooks/useCharacters.ts`
-- `src/hooks/useCampaigns.ts`
-
-### 3.4. Testar CRUD
-Criar página de teste para verificar:
-- Criar personagem
-- Ler personagem
-- Atualizar personagem
-- Deletar personagem
-
-**CHECKPOINT 3:** IndexedDB funcionando, CRUD testado
-
 ---
 
-## 📦 FASE 4: CRIAÇÃO DE PERSONAGEM (5 horas)
+## 🧮 3. ALGORITMOS CORE
 
-### 4.1. Wizard Multi-Step
-Criar componentes:
-1. `src/components/character/CharacterWizard.tsx`
-2. `src/components/character/StepName.tsx`
-3. `src/components/character/StepAttributes.tsx`
-4. `src/components/character/StepSkills.tsx`
-5. `src/components/character/StepThought.tsx`
-6. `src/components/character/StepReview.tsx`
-
-### 4.2. Validação
-Implementar validação com Zod:
-- Atributos: soma = 8, cada 1-5
-- Perícias: respeitam limite (Atributo + 1)
-
-### 4.3. Página de Criação
-Criar `src/app/characters/new/page.tsx`
-
-### 4.4. Testar Fluxo Completo
-- Criar personagem do início ao fim
-- Verificar salvamento no IndexedDB
-- Verificar validações
-
-**CHECKPOINT 4:** Criação de personagem completa e funcional
-
----
-
-## 📦 FASE 5: FICHA INTERATIVA (4 horas)
-
-### 5.1. Componentes da Ficha
-1. `src/components/character/CharacterSheet.tsx`
-2. `src/components/character/AttributeDisplay.tsx`
-3. `src/components/character/SkillList.tsx`
-4. `src/components/character/ResourceBar.tsx`
-5. `src/components/character/ThoughtCabinet.tsx`
-
-### 5.2. Sistema de Rolagem
-1. `src/components/dice/DiceRoller.tsx` (2d6 padrão)
-2. `src/components/dice/GenericDiceRoller.tsx` (xdY)
-3. `src/lib/dice.ts` (lógica de rolagem)
-
-### 5.3. Página da Ficha
-Criar `src/app/characters/[id]/page.tsx`
-
-### 5.4. Testar
-- Visualizar ficha
-- Rolar dados (padrão e genérico)
-- Editar recursos (Moral, Saúde)
-
-**CHECKPOINT 5:** Ficha interativa funcional
-
----
-
-## 📦 FASE 6: REPOSITÓRIO DE CONTEÚDO (3 horas)
-
-### 6.1. Dados Estáticos
-Criar arquivos em `src/data/`:
-1. `skills.ts` (24 perícias)
-2. `thoughts.ts` (reflexões)
-3. `items.ts` (equipamentos)
-4. `conditions.ts` (condições)
-
-### 6.2. Páginas de Repositório
-1. `src/app/repository/skills/page.tsx`
-2. `src/app/repository/thoughts/page.tsx`
-3. `src/app/repository/reference/page.tsx`
-
-### 6.3. Busca e Filtros
-Implementar busca simples
-
-**CHECKPOINT 6:** Repositório completo e navegável
-
----
-
-## 📦 FASE 7: EXPORTAÇÃO (2 horas)
-
-### 7.1. Exportar JSON
+### 3.1. Sistema de Dados (xdY Parser)
 ```typescript
-// src/lib/export.ts
-export async function exportCharacterJSON(id: string) {
-  const char = await db.characters.get(id);
-  const json = JSON.stringify(char, null, 2);
-  downloadFile(`${char.name}.json`, json);
+function parseRoll(notation: string) {
+  const regex = /^(\d+)d(\d+)([+-]\d+)?$/i;
+  const match = notation.match(regex);
+  if (!match) return null;
+  const [_, count, sides, mod] = match;
+  return { count: +count, sides: +sides, mod: mod ? +mod : 0 };
 }
 ```
 
-### 7.2. Exportar Markdown
-Template de ficha em MD
+### 3.2. Progressão XP (Fórmulas)
+- **Custo Perícia:** `currentLevel * 2` XP.
+- **Custo Atributo:** `currentLevel * 10` XP.
+- **Custo Slot Reflexão:** `currentSlots * 5` XP.
+- **Limite Perícia:** `ParentAttribute + 1`.
 
-### 7.3. Importar
-Validar e importar JSON
-
-**CHECKPOINT 7:** Export/Import funcionando
-
----
-
-## 📦 FASE 8: GERADOR ALEATÓRIO (3 horas)
-
-### 8.1. Algoritmos
-Implementar em `src/lib/character-generator.ts`:
-- `generateRandomAttributes()`
-- `generateSkills()`
-- `generateBrazilianName()`
-
-### 8.2. Componente UI
-`src/components/character/RandomCharacterGenerator.tsx`
-
-### 8.3. Testar
-Gerar 10 personagens aleatórios
-
-**CHECKPOINT 8:** Gerador funcionando
+### 3.3. Gerador Aleatório (Arquétipos)
+- **Detetive:** INT 4, PSY 2, FYS 2, MOT 2.
+- **Emocional:** INT 1, PSY 5, FYS 2, MOT 2.
+- **Brutamontes:** INT 1, PSY 2, FYS 5, MOT 2.
+- **Veloz:** INT 2, PSY 1, FYS 3, MOT 4.
 
 ---
 
-## 📦 FASE 9: PROGRESSÃO XP (4 horas)
+## 🎨 4. DESIGN SYSTEM (NOIR EXISTENCIAL)
 
-### 9.1. Funções de Progressão
-Implementar em `src/lib/progression.ts`:
-- `calculateSkillUpgradeCost()`
-- `upgradeSkill()`
-- `upgradeAttribute()`
-- `gainXP()`
+### 4.1. Tokens de Cores
+- **Fundo:** `#0a0a0a` (Noir Base)
+- **Acento:** `#d4af37` (Âmbar Existencial)
+- **Perigo:** `#c44536` (Vermelho Físico)
+- **Psique:** `#9b59b6` (Roxo Moral)
+- **Texto:** `#e8e8e8` (Branco Sujo)
 
-### 9.2. UI de Progressão
-`src/components/character/ProgressionPanel.tsx`
-
-### 9.3. Testar
-- Ganhar XP
-- Gastar XP em perícia
-- Gastar XP em atributo
-
-**CHECKPOINT 9:** Progressão XP completa
+### 4.2. Tipografia
+- **Títulos:** `Playfair Display` (Serifada)
+- **Corpo:** `Inter` (Sans-Serif)
 
 ---
 
-## 📦 FASE 10: PWA (1 hora)
+## 🚀 5. ROADMAP DE EXECUÇÃO (15 FASES)
 
-### 10.1. Manifest
-Criar `public/manifest.json` completo
+### FASE 1: Setup & PWA
+- Inicializar Next.js 14+, configurar `next-pwa` e manifest.
+- **Bash:** `npx create-next-app@14 . --typescript --tailwind --app --src-dir`
 
-### 10.2. Ícones
-Gerar ícones 72x72 até 512x512
+### FASE 2: Database & Schemas
+- Implementar `src/lib/db.ts` com Dexie e as interfaces TypeScript completas.
 
-### 10.3. Service Worker
-Configurar cache strategies
+### FASE 3: Design System & UI Base
+- Configurar `tailwind.config.ts`. Criar `Button`, `Input`, `Card` e `Badge`.
 
-### 10.4. Testar
-- Instalar PWA
-- Funcionar offline
+### FASE 4: Criação de Personagem (Wizard)
+- Formulário multi-step com validação Zod. Distribuição de 8 pts em Atributos e 12 pts em Perícias.
 
-**CHECKPOINT 10:** PWA instalável e offline
+### FASE 5: Ficha Interativa & Dados
+- Tela `/characters/[id]`. Implementar `DiceRoller` (2d6 e xdY).
 
----
+### FASE 6: Gabinete de Reflexões
+- Gerenciamento de slots (3-12). Lógica de processamento e bônus/penalidades.
 
-## 🎯 MVP COMPLETO
+### FASE 7: Repositório de Conteúdo
+- Biblioteca estática: 24 Vozes (Perícias), Itens, Reflexões Nível 1-4.
 
-Após Fase 10, teremos um **MVP funcional** com:
-- ✅ Criação de personagem
-- ✅ Ficha interativa
-- ✅ Rolagem de dados
-- ✅ Repositório de conteúdo
-- ✅ Export/Import
-- ✅ Gerador aleatório
-- ✅ Progressão XP
-- ✅ PWA offline
+### FASE 8: Sistema de Progressão XP
+- Fórmulas de custo, histórico de upgrades e coupling Atributo-Perícia.
 
----
+### FASE 9: Gerador Aleatório
+- Algoritmo de nomes brasileiros e builds baseadas em arquétipos.
 
-## 📦 FASES AVANÇADAS (Pós-MVP)
+### FASE 10: Ferramentas do Narrador
+- Cadastro de Campanhas, NPCs e Controle de Revelação de Informação.
 
-### FASE 11: Ferramentas do Narrador (6 horas)
-- Campanhas
-- Modo Narrador vs Jogador
-- Anotações privadas
-- Revelação granular
+### FASE 11: Modo Multiplayer (Firebase)
+- Integração Realtime DB, convites (códigos), presença e chat de mesa.
 
-### FASE 12: Multiplayer (1 semana)
-- Firebase setup
-- Convites
-- Sincronização tempo real
-- Chat
+### FASE 12: Internacionalização (i18n)
+- `next-intl` (pt-BR e en nativos) + Tradução dinâmica via DeepL/Gemini.
 
-### FASE 13: Internacionalização (1 semana)
-- next-intl setup
-- Traduções pt-BR + en
-- Language switcher
+### FASE 13: Calculadora de Combate
+- Modo Automático (cálculos de regra) e Modo Manual (Toggle Narrador).
 
-### FASE 14: Calculadora de Combate (1 semana)
-- Modo automático
-- Modo manual
-- Rastreamento de iniciativa
+### FASE 14: Polish & PWA Offline
+- Cache de assets pesados, Service Worker robusto e animações Framer Motion.
+
+### FASE 15: Exportação & Lançamento
+- Exportar JSON/Markdown. Deploy final na Vercel.
 
 ---
 
-## 🚀 EXECUÇÃO
-
-### Como Executar Este Plano
-
-**Passo 1:** Começar pela Fase 0 (Preparação)
-**Passo 2:** Executar cada fase sequencialmente
-**Passo 3:** Validar checkpoint antes de prosseguir
-**Passo 4:** Commit após cada checkpoint
-**Passo 5:** Testar continuamente
-
-### Estimativa de Tempo (MVP)
-- **Total:** ~30 horas de desenvolvimento
-- **Distribuição:** 10 fases × 3h média
-- **Prazo:** 1-2 semanas (desenvolvimento focado)
+## ✅ CHECKPOINT FINAL DE VALIDAÇÃO
+- [ ] Personagem criado com 8/12 pts?
+- [ ] Rolar "2d6+5" funciona?
+- [ ] Upgrade de Atributo aumenta 6 Perícias?
+- [ ] Narrador revelou anotação privada?
+- [ ] Offline funciona (Service Worker)?
 
 ---
-
-**Este plano está pronto para execução imediata.**  
-**Posso começar pela Fase 0 agora mesmo?**
+**Execução:** Siga cada fase sequencialmente, realizando commits após cada checkpoint.
