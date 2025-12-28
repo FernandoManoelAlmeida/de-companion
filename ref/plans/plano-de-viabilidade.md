@@ -11,14 +11,16 @@
 ### 1.1. Requisitos Funcionais Críticos
 
 #### RF1: Funcionamento Offline Completo
+
 - **Prioridade:** CRÍTICA
 - **Descrição:** App deve funcionar 100% sem conexão à internet
-- **Implicações:** 
+- **Implicações:**
   - Armazenamento local robusto (IndexedDB)
   - Service Workers para cache de assets
   - Sincronização futura (opcional)
 
 #### RF2: Instalação como App Nativo
+
 - **Prioridade:** ALTA
 - **Descrição:** Usuário deve poder "instalar" via navegador
 - **Implicações:**
@@ -27,6 +29,7 @@
   - Ícones e splash screens
 
 #### RF3: Responsividade Mobile/Desktop
+
 - **Prioridade:** CRÍTICA
 - **Descrição:** Layout adaptável para telas 320px-4K
 - **Implicações:**
@@ -35,6 +38,7 @@
   - Touch-friendly UI
 
 #### RF4: Exportação/Importação de Dados
+
 - **Prioridade:** ALTA
 - **Descrição:** Exportar fichas e campanhas em JSON e Markdown
 - **Implicações:**
@@ -43,6 +47,7 @@
   - Validação de schemas
 
 #### RF5: Performance
+
 - **Prioridade:** ALTA
 - **Descrição:** Carregamento rápido, interações fluidas
 - **Implicações:**
@@ -52,14 +57,14 @@
 
 ### 1.2. Requisitos Não-Funcionais
 
-| Requisito | Meta | Medição |
-|-----------|------|---------|
-| **Tempo de Carregamento Inicial** | < 3s (3G) | Lighthouse Performance |
-| **Tempo de Interação** | < 100ms | First Input Delay |
-| **Tamanho do Bundle** | < 500KB (gzipped) | Webpack Bundle Analyzer |
-| **Acessibilidade** | WCAG 2.1 AA | Lighthouse Accessibility |
-| **Compatibilidade** | Chrome 90+, Safari 14+, Firefox 88+ | BrowserStack |
-| **Armazenamento Local** | Suporte a 50+ personagens | IndexedDB quota |
+| Requisito                         | Meta                                | Medição                  |
+| --------------------------------- | ----------------------------------- | ------------------------ |
+| **Tempo de Carregamento Inicial** | < 3s (3G)                           | Lighthouse Performance   |
+| **Tempo de Interação**            | < 100ms                             | First Input Delay        |
+| **Tamanho do Bundle**             | < 500KB (gzipped)                   | Webpack Bundle Analyzer  |
+| **Acessibilidade**                | WCAG 2.1 AA                         | Lighthouse Accessibility |
+| **Compatibilidade**               | Chrome 90+, Safari 14+, Firefox 88+ | BrowserStack             |
+| **Armazenamento Local**           | Suporte a 50+ personagens           | IndexedDB quota          |
 
 ---
 
@@ -68,6 +73,7 @@
 ### 2.1. Opção 1: Next.js 14+ (App Router)
 
 #### Prós
+
 ✅ **PWA Nativo:** Plugin `next-pwa` com suporte completo  
 ✅ **Performance:** React Server Components, streaming SSR  
 ✅ **SEO:** Renderização server-side para landing page  
@@ -75,14 +81,16 @@
 ✅ **Ecossistema:** Vasto, com bibliotecas maduras  
 ✅ **Deployment:** Vercel (zero-config), Netlify, self-hosted  
 ✅ **Offline-First:** Service Workers com estratégias de cache avançadas  
-✅ **Code Splitting:** Automático por rota  
+✅ **Code Splitting:** Automático por rota
 
 #### Contras
+
 ❌ **Curva de Aprendizado:** App Router é novo (2023)  
 ❌ **Overhead:** Mais pesado que Vite para apps simples  
-❌ **Complexidade:** Conceitos de Server/Client Components  
+❌ **Complexidade:** Conceitos de Server/Client Components
 
 #### Viabilidade: ⭐⭐⭐⭐⭐ (5/5)
+
 **Recomendação:** **ALTAMENTE RECOMENDADO**
 
 ---
@@ -90,18 +98,21 @@
 ### 2.2. Opção 2: React + Vite
 
 #### Prós
+
 ✅ **Leveza:** Bundle menor, build mais rápido  
 ✅ **Simplicidade:** Menos conceitos abstratos  
 ✅ **Performance de Dev:** HMR extremamente rápido  
-✅ **Flexibilidade:** Controle total sobre configuração  
+✅ **Flexibilidade:** Controle total sobre configuração
 
 #### Contras
+
 ❌ **PWA Manual:** Requer configuração manual de Service Workers  
 ❌ **Sem SSR:** Apenas client-side rendering  
 ❌ **Menos Baterias:** Precisa configurar roteamento, meta tags, etc.  
-❌ **SEO Limitado:** Sem renderização server-side  
+❌ **SEO Limitado:** Sem renderização server-side
 
 #### Viabilidade: ⭐⭐⭐⭐ (4/5)
+
 **Recomendação:** Viável, mas requer mais trabalho manual
 
 ---
@@ -109,33 +120,36 @@
 ### 2.3. Opção 3: React Native (Expo)
 
 #### Prós
+
 ✅ **Apps Nativos:** Publicação em App Store e Google Play  
 ✅ **Performance Nativa:** Acesso a APIs nativas  
-✅ **Expo:** Simplifica desenvolvimento e build  
+✅ **Expo:** Simplifica desenvolvimento e build
 
 #### Contras
+
 ❌ **Não é Web:** Requer publicação em stores (custo, aprovação)  
 ❌ **Complexidade:** Duas bases de código (iOS + Android)  
 ❌ **Overhead:** Mais pesado que PWA  
 ❌ **Distribuição:** Usuário precisa baixar da store  
-❌ **Atualizações:** Processo de review para updates  
+❌ **Atualizações:** Processo de review para updates
 
 #### Viabilidade: ⭐⭐ (2/5)
+
 **Recomendação:** **NÃO RECOMENDADO** para este caso de uso
 
 ---
 
 ### 2.4. Decisão Final
 
-| Critério | Next.js | Vite | React Native | Peso |
-|----------|---------|------|--------------|------|
-| **PWA Support** | 5/5 | 3/5 | 1/5 | 30% |
-| **Offline-First** | 5/5 | 4/5 | 5/5 | 25% |
-| **Developer Experience** | 5/5 | 5/5 | 3/5 | 15% |
-| **Performance** | 5/5 | 5/5 | 4/5 | 15% |
-| **Deployment** | 5/5 | 4/5 | 2/5 | 10% |
-| **Manutenibilidade** | 5/5 | 4/5 | 3/5 | 5% |
-| **TOTAL** | **5.0** | **4.0** | **2.8** | 100% |
+| Critério                 | Next.js | Vite    | React Native | Peso |
+| ------------------------ | ------- | ------- | ------------ | ---- |
+| **PWA Support**          | 5/5     | 3/5     | 1/5          | 30%  |
+| **Offline-First**        | 5/5     | 4/5     | 5/5          | 25%  |
+| **Developer Experience** | 5/5     | 5/5     | 3/5          | 15%  |
+| **Performance**          | 5/5     | 5/5     | 4/5          | 15%  |
+| **Deployment**           | 5/5     | 4/5     | 2/5          | 10%  |
+| **Manutenibilidade**     | 5/5     | 4/5     | 3/5          | 5%   |
+| **TOTAL**                | **5.0** | **4.0** | **2.8**      | 100% |
 
 ### 🏆 Vencedor: **Next.js 14+ (App Router)**
 
@@ -204,15 +218,15 @@ interface Character {
   name: string;
   createdAt: Date;
   updatedAt: Date;
-  
+
   // Atributos (8 pontos totais)
   attributes: {
     intellect: number; // 1-5
-    psyche: number;    // 1-5
-    physique: number;  // 1-5
-    motorics: number;  // 1-5
+    psyche: number; // 1-5
+    physique: number; // 1-5
+    motorics: number; // 1-5
   };
-  
+
   // Perícias (24 total, 6 por atributo)
   skills: {
     // INTELECTO
@@ -222,7 +236,7 @@ interface Character {
     conceptualization: number;
     visualCalculus: number;
     drama: number;
-    
+
     // PSIQUE
     volition: number;
     inlandEmpire: number;
@@ -230,7 +244,7 @@ interface Character {
     authority: number;
     espritDeCorps: number;
     suggestion: number;
-    
+
     // FÍSICO
     endurance: number;
     painThreshold: number;
@@ -238,7 +252,7 @@ interface Character {
     electrochemistry: number;
     shivers: number;
     halfLight: number;
-    
+
     // MOTRICIDADE
     handEyeCoordination: number;
     perception: number;
@@ -247,7 +261,7 @@ interface Character {
     interfacing: number;
     composure: number;
   };
-  
+
   // Recursos
   resources: {
     morale: number;
@@ -257,19 +271,19 @@ interface Character {
     money: number; // R$
     xp: number;
   };
-  
+
   // Gabinete de Reflexões
   thoughtCabinet: {
     slots: number; // 3-12
     thoughts: Thought[];
   };
-  
+
   // Inventário
   inventory: Item[];
-  
+
   // Condições ativas
   conditions: Condition[];
-  
+
   // Histórico
   history: {
     rollHistory: Roll[];
@@ -298,22 +312,22 @@ interface Campaign {
   createdAt: Date;
   updatedAt: Date;
   narratorId: string; // Identificador do narrador (pode ser device ID)
-  
+
   // Personagens vinculados (N:N relationship)
   characterLinks: CampaignCharacterLink[];
-  
+
   // NPCs
   npcs: NPC[];
-  
+
   // Sessões
   sessions: Session[];
-  
+
   // Saúde da Cidade
   cityHealth: {
     morale: number; // 0-10
     health: number; // 0-10
   };
-  
+
   // Anotações do Narrador (privadas)
   narratorNotes: NarratorNote[];
 }
@@ -363,11 +377,14 @@ interface ExportData {
   exportedAt: Date;
   type: 'character' | 'campaign' | 'full';
   mode: 'narrator' | 'player'; // Determina se exporta dados privados
-  data: Character | Campaign | {
-    characters: Character[];
-    campaigns: Campaign[];
-    characterLinks: CampaignCharacterLink[];
-  };
+  data:
+    | Character
+    | Campaign
+    | {
+        characters: Character[];
+        campaigns: Campaign[];
+        characterLinks: CampaignCharacterLink[];
+      };
 }
 
 // View Mode (controla visibilidade)
@@ -399,7 +416,7 @@ class DEDatabase extends Dexie {
       sessions: 'id, campaignId, date',
       npcs: 'id, campaignId, name',
       notes: 'id, campaignId, createdAt',
-      settings: 'key'
+      settings: 'key',
     });
   }
 }
@@ -461,6 +478,7 @@ app/
 ### 3.4. PWA Configuration
 
 #### 3.4.1. next.config.js
+
 ```javascript
 const withPWA = require('next-pwa')({
   dest: 'public',
@@ -475,9 +493,9 @@ const withPWA = require('next-pwa')({
         cacheName: 'google-fonts',
         expiration: {
           maxEntries: 4,
-          maxAgeSeconds: 365 * 24 * 60 * 60 // 1 year
-        }
-      }
+          maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
+        },
+      },
     },
     {
       urlPattern: /\.(?:eot|otf|ttc|ttf|woff|woff2|font.css)$/i,
@@ -486,9 +504,9 @@ const withPWA = require('next-pwa')({
         cacheName: 'static-font-assets',
         expiration: {
           maxEntries: 4,
-          maxAgeSeconds: 7 * 24 * 60 * 60 // 1 week
-        }
-      }
+          maxAgeSeconds: 7 * 24 * 60 * 60, // 1 week
+        },
+      },
     },
     {
       urlPattern: /\.(?:jpg|jpeg|gif|png|svg|ico|webp)$/i,
@@ -497,9 +515,9 @@ const withPWA = require('next-pwa')({
         cacheName: 'static-image-assets',
         expiration: {
           maxEntries: 64,
-          maxAgeSeconds: 24 * 60 * 60 // 24 hours
-        }
-      }
+          maxAgeSeconds: 24 * 60 * 60, // 24 hours
+        },
+      },
     },
     {
       urlPattern: /\.(?:js)$/i,
@@ -508,9 +526,9 @@ const withPWA = require('next-pwa')({
         cacheName: 'static-js-assets',
         expiration: {
           maxEntries: 32,
-          maxAgeSeconds: 24 * 60 * 60 // 24 hours
-        }
-      }
+          maxAgeSeconds: 24 * 60 * 60, // 24 hours
+        },
+      },
     },
     {
       urlPattern: /\.(?:css|less)$/i,
@@ -519,9 +537,9 @@ const withPWA = require('next-pwa')({
         cacheName: 'static-style-assets',
         expiration: {
           maxEntries: 32,
-          maxAgeSeconds: 24 * 60 * 60 // 24 hours
-        }
-      }
+          maxAgeSeconds: 24 * 60 * 60, // 24 hours
+        },
+      },
     },
     {
       urlPattern: /\/api\/.*/i,
@@ -530,10 +548,10 @@ const withPWA = require('next-pwa')({
         cacheName: 'apis',
         expiration: {
           maxEntries: 16,
-          maxAgeSeconds: 24 * 60 * 60 // 24 hours
+          maxAgeSeconds: 24 * 60 * 60, // 24 hours
         },
-        networkTimeoutSeconds: 10
-      }
+        networkTimeoutSeconds: 10,
+      },
     },
     {
       urlPattern: /.*/i,
@@ -542,23 +560,24 @@ const withPWA = require('next-pwa')({
         cacheName: 'others',
         expiration: {
           maxEntries: 32,
-          maxAgeSeconds: 24 * 60 * 60 // 24 hours
+          maxAgeSeconds: 24 * 60 * 60, // 24 hours
         },
-        networkTimeoutSeconds: 10
-      }
-    }
-  ]
+        networkTimeoutSeconds: 10,
+      },
+    },
+  ],
 });
 
 module.exports = withPWA({
   reactStrictMode: true,
   typescript: {
-    ignoreBuildErrors: false
-  }
+    ignoreBuildErrors: false,
+  },
 });
 ```
 
 #### 3.4.2. manifest.json
+
 ```json
 {
   "name": "Detetive Existencial Companion",
@@ -635,24 +654,25 @@ module.exports = withPWA({
 
 ### 4.1. Riscos Identificados
 
-| Risco | Probabilidade | Impacto | Mitigação |
-|-------|---------------|---------|-----------|
-| **Quota de IndexedDB** | Baixa | Alto | Implementar limpeza de dados antigos, alertar usuário |
-| **Incompatibilidade de Navegadores** | Média | Médio | Polyfills, feature detection, fallbacks |
-| **Performance em Mobile Antigo** | Média | Médio | Code splitting agressivo, lazy loading |
-| **Bugs no Service Worker** | Média | Alto | Testes extensivos, estratégia de fallback |
-| **Complexidade de Exportação** | Baixa | Baixo | Schemas bem definidos, validação robusta |
-| **Perda de Dados** | Baixa | Crítico | Backup automático, exportação fácil |
+| Risco                                | Probabilidade | Impacto | Mitigação                                             |
+| ------------------------------------ | ------------- | ------- | ----------------------------------------------------- |
+| **Quota de IndexedDB**               | Baixa         | Alto    | Implementar limpeza de dados antigos, alertar usuário |
+| **Incompatibilidade de Navegadores** | Média         | Médio   | Polyfills, feature detection, fallbacks               |
+| **Performance em Mobile Antigo**     | Média         | Médio   | Code splitting agressivo, lazy loading                |
+| **Bugs no Service Worker**           | Média         | Alto    | Testes extensivos, estratégia de fallback             |
+| **Complexidade de Exportação**       | Baixa         | Baixo   | Schemas bem definidos, validação robusta              |
+| **Perda de Dados**                   | Baixa         | Crítico | Backup automático, exportação fácil                   |
 
 ### 4.2. Plano de Contingência
 
 #### Quota de IndexedDB Excedida
+
 ```typescript
 async function checkStorageQuota() {
   if ('storage' in navigator && 'estimate' in navigator.storage) {
     const { usage, quota } = await navigator.storage.estimate();
     const percentUsed = (usage! / quota!) * 100;
-    
+
     if (percentUsed > 80) {
       // Alertar usuário para exportar dados
       showWarning('Armazenamento quase cheio. Exporte seus dados.');
@@ -662,6 +682,7 @@ async function checkStorageQuota() {
 ```
 
 #### Fallback para Navegadores Antigos
+
 ```typescript
 const supportsIndexedDB = 'indexedDB' in window;
 const supportsServiceWorker = 'serviceWorker' in navigator;
@@ -683,31 +704,34 @@ if (!supportsServiceWorker) {
 
 ### 5.1. Breakdown de Desenvolvimento
 
-| Fase | Tarefas | Horas | Complexidade |
-|------|---------|-------|--------------|
-| **Setup Inicial** | Next.js, TypeScript, Tailwind, Dexie | 16h | Baixa |
-| **Design System** | Componentes UI, temas, responsividade | 40h | Média |
-| **Data Layer** | Schemas, IndexedDB, CRUD operations | 32h | Média |
-| **Criação de Personagem** | Formulário, validação, cálculos | 48h | Alta |
-| **Ficha Interativa** | Visualização, edição, rolagem de dados | 64h | Alta |
-| **Gabinete de Reflexões** | Processamento, internalização, UI | 32h | Média |
-| **Repositório de Conteúdo** | Perícias, reflexões, tabelas | 24h | Baixa |
-| **Ferramentas do Narrador** | Campanhas, NPCs, sessões | 56h | Alta |
-| **Exportação/Importação** | JSON, Markdown, validação | 24h | Média |
-| **PWA Configuration** | Service Workers, manifest, ícones | 16h | Média |
-| **Testes** | Unit, integration, E2E | 48h | Média |
-| **Polish & Bugs** | Refinamentos, correções | 40h | Variável |
-| **TOTAL** | | **440h** | |
+| Fase                        | Tarefas                                | Horas    | Complexidade |
+| --------------------------- | -------------------------------------- | -------- | ------------ |
+| **Setup Inicial**           | Next.js, TypeScript, Tailwind, Dexie   | 16h      | Baixa        |
+| **Design System**           | Componentes UI, temas, responsividade  | 40h      | Média        |
+| **Data Layer**              | Schemas, IndexedDB, CRUD operations    | 32h      | Média        |
+| **Criação de Personagem**   | Formulário, validação, cálculos        | 48h      | Alta         |
+| **Ficha Interativa**        | Visualização, edição, rolagem de dados | 64h      | Alta         |
+| **Gabinete de Reflexões**   | Processamento, internalização, UI      | 32h      | Média        |
+| **Repositório de Conteúdo** | Perícias, reflexões, tabelas           | 24h      | Baixa        |
+| **Ferramentas do Narrador** | Campanhas, NPCs, sessões               | 56h      | Alta         |
+| **Exportação/Importação**   | JSON, Markdown, validação              | 24h      | Média        |
+| **PWA Configuration**       | Service Workers, manifest, ícones      | 16h      | Média        |
+| **Testes**                  | Unit, integration, E2E                 | 48h      | Média        |
+| **Polish & Bugs**           | Refinamentos, correções                | 40h      | Variável     |
+| **TOTAL**                   |                                        | **440h** |              |
 
 ### 5.2. Cronograma Realista
 
 **Assumindo 1 desenvolvedor full-time (40h/semana):**
+
 - **Duração:** 11 semanas (~3 meses)
 
 **Assumindo 1 desenvolvedor part-time (20h/semana):**
+
 - **Duração:** 22 semanas (~5-6 meses)
 
 **Assumindo equipe de 2 desenvolvedores (40h/semana cada):**
+
 - **Duração:** 6 semanas (~1.5 meses)
 
 ---
@@ -715,11 +739,13 @@ if (!supportsServiceWorker) {
 ## 6. REQUISITOS DE INFRAESTRUTURA
 
 ### 6.1. Desenvolvimento
+
 - **Hardware:** Computador moderno (8GB+ RAM)
 - **Software:** Node.js 18+, Git, VS Code
 - **Serviços:** GitHub (repositório), Vercel (preview deployments)
 
 ### 6.2. Produção
+
 - **Hospedagem:** Vercel (gratuito para projetos open source)
   - Bandwidth: Ilimitado
   - Build time: 100h/mês (suficiente)
@@ -730,12 +756,12 @@ if (!supportsServiceWorker) {
 
 ### 6.3. Custos Operacionais
 
-| Item | Custo Mensal | Custo Anual |
-|------|--------------|-------------|
-| Hospedagem (Vercel) | R$ 0 | R$ 0 |
-| Domínio | R$ 3 | R$ 40 |
-| CDN (Cloudflare) | R$ 0 | R$ 0 |
-| **TOTAL** | **R$ 3** | **R$ 40** |
+| Item                | Custo Mensal | Custo Anual |
+| ------------------- | ------------ | ----------- |
+| Hospedagem (Vercel) | R$ 0         | R$ 0        |
+| Domínio             | R$ 3         | R$ 40       |
+| CDN (Cloudflare)    | R$ 0         | R$ 0        |
+| **TOTAL**           | **R$ 3**     | **R$ 40**   |
 
 ---
 
@@ -743,24 +769,24 @@ if (!supportsServiceWorker) {
 
 ### 7.1. Performance Targets
 
-| Métrica | Target | Ferramenta |
-|---------|--------|------------|
-| **Lighthouse Performance** | > 90 | Chrome DevTools |
-| **First Contentful Paint** | < 1.5s | Web Vitals |
-| **Time to Interactive** | < 3.0s | Web Vitals |
-| **Cumulative Layout Shift** | < 0.1 | Web Vitals |
-| **Bundle Size (Initial)** | < 300KB | Next.js Bundle Analyzer |
-| **Bundle Size (Total)** | < 500KB | Next.js Bundle Analyzer |
+| Métrica                     | Target  | Ferramenta              |
+| --------------------------- | ------- | ----------------------- |
+| **Lighthouse Performance**  | > 90    | Chrome DevTools         |
+| **First Contentful Paint**  | < 1.5s  | Web Vitals              |
+| **Time to Interactive**     | < 3.0s  | Web Vitals              |
+| **Cumulative Layout Shift** | < 0.1   | Web Vitals              |
+| **Bundle Size (Initial)**   | < 300KB | Next.js Bundle Analyzer |
+| **Bundle Size (Total)**     | < 500KB | Next.js Bundle Analyzer |
 
 ### 7.2. Quality Targets
 
-| Métrica | Target | Ferramenta |
-|---------|--------|------------|
-| **Test Coverage** | > 80% | Vitest |
-| **TypeScript Strict** | 100% | tsc --noEmit |
-| **Accessibility** | WCAG 2.1 AA | Lighthouse, axe-core |
-| **Browser Support** | 95%+ users | BrowserStack |
-| **PWA Score** | 100 | Lighthouse PWA |
+| Métrica               | Target      | Ferramenta           |
+| --------------------- | ----------- | -------------------- |
+| **Test Coverage**     | > 80%       | Vitest               |
+| **TypeScript Strict** | 100%        | tsc --noEmit         |
+| **Accessibility**     | WCAG 2.1 AA | Lighthouse, axe-core |
+| **Browser Support**   | 95%+ users  | BrowserStack         |
+| **PWA Score**         | 100         | Lighthouse PWA       |
 
 ---
 

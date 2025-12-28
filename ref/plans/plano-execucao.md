@@ -1,6 +1,6 @@
 # Plano de Execução Mestre: Detetive Existencial Companion App
 
-**Versão:** 1.1 (Consolidada)  
+**Versão:** 1.1  
 **Data:** 26 de Dezembro de 2025  
 **Objetivo:** Fonte única de verdade para implementação completa e autônoma por IA.
 
@@ -9,25 +9,30 @@
 ## 🛠️ 1. FUNDAÇÃO TÉCNICA
 
 ### 1.1. Stack de Tecnologia
+
 - **Framework:** Next.js 14+ (App Router)
 - **Linguagem:** TypeScript 5+
-- **Estilização:** Tailwind CSS + Radix UI
+- **Estilização:** Tailwind CSS + Radix UI + Styled Components
 - **Banco Local:** IndexedDB via Dexie.js
 - **Estado:** Zustand + React Hook Form + Zod
 - **Multiplayer:** Firebase (Realtime DB + Auth)
-- **i18n:** next-intl + DeepL API
+- **i18n:** next-intl + DeepL API + LibreTranslate
 - **PWA:** next-pwa (Workbox)
+- **Testes:** Vitest + React Testing Library
 
 ### 1.2. Padrões de Código
+
 - **Arquitetura:** Atomic Design (atoms, molecules, organisms, templates)
 - **Tipagem:** Interfaces TypeScript obrigatórias para todo dado persistido
 - **Offline-First:** Sincronização Firebase <-> IndexedDB com prioridade local
+- **Testes:** Componentes e fluxos de dados
 
 ---
 
 ## 💾 2. ARQUITETURA DE DADOS (SCHEMAS)
 
 ### 2.1. Interfaces TypeScript (`src/types/index.ts`)
+
 ```typescript
 // Personagem Independente
 export interface Character {
@@ -84,6 +89,7 @@ export interface CampaignCharacterLink {
 ```
 
 ### 2.2. Banco de Dados (`src/lib/db.ts`)
+
 ```typescript
 class DEDatabase extends Dexie {
   characters!: Table<Character>;
@@ -97,7 +103,7 @@ class DEDatabase extends Dexie {
       characters: 'id, name, createdAt',
       campaigns: 'id, name, narratorId, mode',
       characterLinks: 'id, characterId, campaignId, role',
-      translations: 'key, lang'
+      translations: 'key, lang',
     });
   }
 }
@@ -108,6 +114,7 @@ class DEDatabase extends Dexie {
 ## 🧮 3. ALGORITMOS CORE
 
 ### 3.1. Sistema de Dados (xdY Parser)
+
 ```typescript
 function parseRoll(notation: string) {
   const regex = /^(\d+)d(\d+)([+-]\d+)?$/i;
@@ -119,12 +126,14 @@ function parseRoll(notation: string) {
 ```
 
 ### 3.2. Progressão XP (Fórmulas)
+
 - **Custo Perícia:** `currentLevel * 2` XP.
 - **Custo Atributo:** `currentLevel * 10` XP.
 - **Custo Slot Reflexão:** `currentSlots * 5` XP.
 - **Limite Perícia:** `ParentAttribute + 1`.
 
 ### 3.3. Gerador Aleatório (Arquétipos)
+
 - **Detetive:** INT 4, PSY 2, FYS 2, MOT 2.
 - **Emocional:** INT 1, PSY 5, FYS 2, MOT 2.
 - **Brutamontes:** INT 1, PSY 2, FYS 5, MOT 2.
@@ -135,6 +144,7 @@ function parseRoll(notation: string) {
 ## 🎨 4. DESIGN SYSTEM (NOIR EXISTENCIAL)
 
 ### 4.1. Tokens de Cores
+
 - **Fundo:** `#0a0a0a` (Noir Base)
 - **Acento:** `#d4af37` (Âmbar Existencial)
 - **Perigo:** `#c44536` (Vermelho Físico)
@@ -142,67 +152,114 @@ function parseRoll(notation: string) {
 - **Texto:** `#e8e8e8` (Branco Sujo)
 
 ### 4.2. Tipografia
-- **Títulos:** `Playfair Display` (Serifada)
-- **Corpo:** `Inter` (Sans-Serif)
+
+- **Títulos:** `Open Sans`
+- **Corpo:** `Noto Sans Mono`
 
 ---
 
 ## 🚀 5. ROADMAP DE EXECUÇÃO (15 FASES)
 
+### FASE 0: A cada fase validar referências
+
+- Sempre que passar para próxima fase verificar sistema de rpg, regras e planos de implementação na pasta ref para garantir que tudo está de acordo com o planejado
+
 ### FASE 1: Setup & PWA
+
 - Inicializar Next.js 14+, configurar `next-pwa` e manifest.
 - **Bash:** `npx create-next-app@14 . --typescript --tailwind --app --src-dir`
 
 ### FASE 2: Database & Schemas
+
 - Implementar `src/lib/db.ts` com Dexie e as interfaces TypeScript completas.
 
 ### FASE 3: Design System & UI Base
+
 - Configurar `tailwind.config.ts`. Criar `Button`, `Input`, `Card` e `Badge`.
 
 ### FASE 4: Criação de Personagem (Wizard)
+
 - Formulário multi-step com validação Zod. Distribuição de 8 pts em Atributos e 12 pts em Perícias.
 
 ### FASE 5: Ficha Interativa & Dados
+
 - Tela `/characters/[id]`. Implementar `DiceRoller` (2d6 e xdY).
 
 ### FASE 6: Gabinete de Reflexões
+
 - Gerenciamento de slots (3-12). Lógica de processamento e bônus/penalidades.
 
 ### FASE 7: Repositório de Conteúdo
+
 - Biblioteca estática: 24 Vozes (Perícias), Itens, Reflexões Nível 1-4.
 
 ### FASE 8: Sistema de Progressão XP
+
 - Fórmulas de custo, histórico de upgrades e coupling Atributo-Perícia.
 
 ### FASE 9: Gerador Aleatório
+
 - Algoritmo de nomes brasileiros e builds baseadas em arquétipos.
 
 ### FASE 10: Ferramentas do Narrador
+
 - Cadastro de Campanhas, NPCs e Controle de Revelação de Informação.
 
 ### FASE 11: Modo Multiplayer (Firebase)
-- Integração Realtime DB, convites (códigos), presença e chat de mesa.
+
+- Integração Realtime DB e convites (códigos)
 
 ### FASE 12: Internacionalização (i18n)
+
 - `next-intl` (pt-BR e en nativos) + Tradução dinâmica via DeepL/Gemini.
 
 ### FASE 13: Calculadora de Combate
+
 - Modo Automático (cálculos de regra) e Modo Manual (Toggle Narrador).
+  s
 
 ### FASE 14: Polish & PWA Offline
+
 - Cache de assets pesados, Service Worker robusto e animações Framer Motion.
 
 ### FASE 15: Exportação & Lançamento
+
 - Exportar JSON/Markdown. Deploy final na Vercel.
 
 ---
 
 ## ✅ CHECKPOINT FINAL DE VALIDAÇÃO
+
 - [ ] Personagem criado com 8/12 pts?
 - [ ] Rolar "2d6+5" funciona?
+- [ ] Existe botão de limpar histórico de dados rolados?
 - [ ] Upgrade de Atributo aumenta 6 Perícias?
 - [ ] Narrador revelou anotação privada?
 - [ ] Offline funciona (Service Worker)?
+- [ ] Exportar JSON/Markdown?
+- [ ] Deploy final na Vercel?
+- [ ] É possível editar, criar e excluir personagem offline?
+- [ ] É possível criar, editar e excluir Anotação?
+- [ ] É possível criar, editar e excluir Campanha?
+- [ ] É possível criar, editar e excluir NPC?
+- [ ] É possível criar, editar e excluir Item?
+- [ ] É possível criar, editar e excluir Reflexão?
+- [ ] i18n está mostrando todos os textos tanto em inglês quanto em português?
+- [ ] Os personagens pre definidos estão funcionando?
+- [ ] Ao clicar em perícias elas estão rolando os testes referentes?
+- [ ] Banco de Reflexões pre definidos está funcionando?
+- [ ] Existe uma animação de rolagem de dados?
+- [ ] É possível adicionar experiencia?
+- [ ] É possível adicionar itens?
+- [ ] É possível adicionar dinheiro?
+- [ ] Consigo visualizar página de personagens que criei offline?
+- [ ] Consigo visualizar página de campanhas que criei offline?
+- [ ] Consigo visualizar página de NPCs que criei offline?
+- [ ] Consigo visualizar página de itens que criei offline?
+- [ ] Consigo visualizar página de reflexões que criei offline?
+- [ ] Tenho uma página de ajuda com as regras do sistema?
+- [ ] Tenho uma página de Biblioteca estática: 24 Vozes (Perícias), Itens e Reflexões Nível 1-4?
 
 ---
+
 **Execução:** Siga cada fase sequencialmente, realizando commits após cada checkpoint.

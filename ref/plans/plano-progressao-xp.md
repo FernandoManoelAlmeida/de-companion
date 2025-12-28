@@ -8,14 +8,18 @@
 ## 1. REGRAS DE PROGRESSÃO (Seção 9 do Sistema)
 
 ### 1.1. Ganho de XP
+
 **Fontes de XP:**
+
 - **Testes Bem-Sucedidos:** 1 XP por teste importante
 - **Reflexões Internalizadas:** 2-5 XP (depende do nível)
 - **Marcos Narrativos:** 3-10 XP (decisão do narrador)
 - **Fim de Sessão:** 2-5 XP por jogador
 
 ### 1.2. Gasto de XP
+
 **Custos (Seção 9.2):**
+
 ```typescript
 const XP_COSTS = {
   skill: {
@@ -23,22 +27,23 @@ const XP_COSTS = {
     formula: (currentLevel: number) => currentLevel * 2,
     // Exemplo: Nível 3 → 4 custa 6 XP (3 * 2)
   },
-  
+
   attribute: {
     // Custo para aumentar atributo
     formula: (currentLevel: number) => currentLevel * 10,
     // Exemplo: INT 3 → 4 custa 30 XP (3 * 10)
   },
-  
+
   thoughtSlot: {
     // Custo para novo slot no Gabinete
     formula: (currentSlots: number) => currentSlots * 5,
     // Exemplo: 3 → 4 slots custa 15 XP (3 * 5)
-  }
+  },
 };
 ```
 
 ### 1.3. Limites e Validações
+
 - **Perícia:** Não pode exceder Atributo Pai + 1
 - **Atributo:** Máximo 6 (sem bônus especiais)
 - **Slots de Reflexão:** Máximo 12
@@ -52,12 +57,12 @@ const XP_COSTS = {
 ```typescript
 interface Character {
   // ... outros campos
-  
+
   resources: {
     xp: number; // XP atual disponível
     xpTotal: number; // XP total ganho na vida
   };
-  
+
   progression: {
     xpHistory: XPTransaction[];
     skillUpgrades: SkillUpgrade[];
@@ -131,24 +136,24 @@ export function canUpgradeSkill(
   const skill = character.skills[skillName];
   const parentAttribute = getParentAttribute(skillName);
   const attributeLevel = character.attributes[parentAttribute];
-  
+
   // Verificar limite (Atributo + 1)
   if (skill >= attributeLevel + 1) {
     return {
       valid: false,
-      reason: `Perícia não pode exceder ${parentAttribute.toUpperCase()} + 1 (máximo ${attributeLevel + 1})`
+      reason: `Perícia não pode exceder ${parentAttribute.toUpperCase()} + 1 (máximo ${attributeLevel + 1})`,
     };
   }
-  
+
   // Verificar XP disponível
   const cost = calculateSkillUpgradeCost(skill);
   if (character.resources.xp < cost) {
     return {
       valid: false,
-      reason: `XP insuficiente. Necessário: ${cost}, Disponível: ${character.resources.xp}`
+      reason: `XP insuficiente. Necessário: ${cost}, Disponível: ${character.resources.xp}`,
     };
   }
-  
+
   return { valid: true };
 }
 
@@ -160,55 +165,52 @@ export function canUpgradeAttribute(
   attributeName: string
 ): { valid: boolean; reason?: string } {
   const currentLevel = character.attributes[attributeName];
-  
+
   // Verificar limite máximo
   if (currentLevel >= 6) {
     return {
       valid: false,
-      reason: 'Atributo já está no máximo (6)'
+      reason: 'Atributo já está no máximo (6)',
     };
   }
-  
+
   // Verificar XP disponível
   const cost = calculateAttributeUpgradeCost(currentLevel);
   if (character.resources.xp < cost) {
     return {
       valid: false,
-      reason: `XP insuficiente. Necessário: ${cost}, Disponível: ${character.resources.xp}`
+      reason: `XP insuficiente. Necessário: ${cost}, Disponível: ${character.resources.xp}`,
     };
   }
-  
+
   return { valid: true };
 }
 
 /**
  * Aumentar perícia (com XP)
  */
-export async function upgradeSkill(
-  characterId: string,
-  skillName: string
-): Promise<void> {
+export async function upgradeSkill(characterId: string, skillName: string): Promise<void> {
   const character = await db.characters.get(characterId);
   if (!character) throw new Error('Personagem não encontrado');
-  
+
   // Validar
   const validation = canUpgradeSkill(character, skillName);
   if (!validation.valid) {
     throw new Error(validation.reason);
   }
-  
+
   const currentLevel = character.skills[skillName];
   const cost = calculateSkillUpgradeCost(currentLevel);
-  
+
   // Atualizar personagem
   await db.characters.update(characterId, {
     skills: {
       ...character.skills,
-      [skillName]: currentLevel + 1
+      [skillName]: currentLevel + 1,
     },
     resources: {
       ...character.resources,
-      xp: character.resources.xp - cost
+      xp: character.resources.xp - cost,
     },
     progression: {
       ...character.progression,
@@ -219,8 +221,8 @@ export async function upgradeSkill(
           type: 'spend',
           amount: cost,
           source: `Upgrade: ${skillName} ${currentLevel} → ${currentLevel + 1}`,
-          timestamp: new Date()
-        }
+          timestamp: new Date(),
+        },
       ],
       skillUpgrades: [
         ...character.progression.skillUpgrades,
@@ -230,12 +232,12 @@ export async function upgradeSkill(
           fromLevel: currentLevel,
           toLevel: currentLevel + 1,
           xpCost: cost,
-          timestamp: new Date()
-        }
-      ]
-    }
+          timestamp: new Date(),
+        },
+      ],
+    },
   });
-  
+
   // Verificar se perícia estava com Sobrecarga Temporal
   if (currentLevel === character.attributes[getParentAttribute(skillName)] + 1) {
     // Remover penalidade de sobrecarga (-4)
@@ -246,48 +248,41 @@ export async function upgradeSkill(
 /**
  * Aumentar atributo (com XP)
  */
-export async function upgradeAttribute(
-  characterId: string,
-  attributeName: string
-): Promise<void> {
+export async function upgradeAttribute(characterId: string, attributeName: string): Promise<void> {
   const character = await db.characters.get(characterId);
   if (!character) throw new Error('Personagem não encontrado');
-  
+
   // Validar
   const validation = canUpgradeAttribute(character, attributeName);
   if (!validation.valid) {
     throw new Error(validation.reason);
   }
-  
+
   const currentLevel = character.attributes[attributeName];
   const cost = calculateAttributeUpgradeCost(currentLevel);
-  
+
   // Perícias afetadas (todas do mesmo atributo)
   const affectedSkills = getSkillsByAttribute(attributeName);
-  
+
   // Atualizar personagem
   const newSkills = { ...character.skills };
-  affectedSkills.forEach(skill => {
+  affectedSkills.forEach((skill) => {
     // Perícias sobem automaticamente com o atributo
     newSkills[skill] = character.skills[skill] + 1;
   });
-  
+
   await db.characters.update(characterId, {
     attributes: {
       ...character.attributes,
-      [attributeName]: currentLevel + 1
+      [attributeName]: currentLevel + 1,
     },
     skills: newSkills,
     resources: {
       ...character.resources,
       xp: character.resources.xp - cost,
       // Moral e Saúde podem aumentar se Vontade/Endurance subiram
-      morale: attributeName === 'psyche' 
-        ? 1 + newSkills.volition 
-        : character.resources.morale,
-      health: attributeName === 'physique'
-        ? 1 + newSkills.endurance
-        : character.resources.health
+      morale: attributeName === 'psyche' ? 1 + newSkills.volition : character.resources.morale,
+      health: attributeName === 'physique' ? 1 + newSkills.endurance : character.resources.health,
     },
     progression: {
       ...character.progression,
@@ -298,8 +293,8 @@ export async function upgradeAttribute(
           type: 'spend',
           amount: cost,
           source: `Upgrade: ${attributeName.toUpperCase()} ${currentLevel} → ${currentLevel + 1}`,
-          timestamp: new Date()
-        }
+          timestamp: new Date(),
+        },
       ],
       attributeUpgrades: [
         ...character.progression.attributeUpgrades,
@@ -310,10 +305,10 @@ export async function upgradeAttribute(
           toLevel: currentLevel + 1,
           xpCost: cost,
           timestamp: new Date(),
-          affectedSkills
-        }
-      ]
-    }
+          affectedSkills,
+        },
+      ],
+    },
   });
 }
 
@@ -328,12 +323,12 @@ export async function gainXP(
 ): Promise<void> {
   const character = await db.characters.get(characterId);
   if (!character) throw new Error('Personagem não encontrado');
-  
+
   await db.characters.update(characterId, {
     resources: {
       ...character.resources,
       xp: character.resources.xp + amount,
-      xpTotal: character.resources.xpTotal + amount
+      xpTotal: character.resources.xpTotal + amount,
     },
     progression: {
       ...character.progression,
@@ -345,10 +340,10 @@ export async function gainXP(
           amount,
           source,
           timestamp: new Date(),
-          sessionId
-        }
-      ]
-    }
+          sessionId,
+        },
+      ],
+    },
   });
 }
 
@@ -384,9 +379,9 @@ function getParentAttribute(skillName: string): keyof Attributes {
     reactionSpeed: 'motorics',
     savoirFaire: 'motorics',
     interfacing: 'motorics',
-    composure: 'motorics'
+    composure: 'motorics',
   };
-  
+
   return skillMap[skillName];
 }
 
@@ -395,12 +390,33 @@ function getParentAttribute(skillName: string): keyof Attributes {
  */
 function getSkillsByAttribute(attributeName: string): string[] {
   const attributeSkills: Record<string, string[]> = {
-    intellect: ['logic', 'encyclopedia', 'rhetoric', 'conceptualization', 'visualCalculus', 'drama'],
+    intellect: [
+      'logic',
+      'encyclopedia',
+      'rhetoric',
+      'conceptualization',
+      'visualCalculus',
+      'drama',
+    ],
     psyche: ['volition', 'inlandEmpire', 'empathy', 'authority', 'espritDeCorps', 'suggestion'],
-    physique: ['endurance', 'painThreshold', 'physicalInstrument', 'electrochemistry', 'shivers', 'halfLight'],
-    motorics: ['handEyeCoordination', 'perception', 'reactionSpeed', 'savoirFaire', 'interfacing', 'composure']
+    physique: [
+      'endurance',
+      'painThreshold',
+      'physicalInstrument',
+      'electrochemistry',
+      'shivers',
+      'halfLight',
+    ],
+    motorics: [
+      'handEyeCoordination',
+      'perception',
+      'reactionSpeed',
+      'savoirFaire',
+      'interfacing',
+      'composure',
+    ],
   };
-  
+
   return attributeSkills[attributeName] || [];
 }
 ```
@@ -416,13 +432,13 @@ function getSkillsByAttribute(attributeName: string): string[] {
 'use client';
 import { useState } from 'react';
 import { useCharacter } from '@/hooks/useCharacter';
-import { 
-  calculateSkillUpgradeCost, 
+import {
+  calculateSkillUpgradeCost,
   calculateAttributeUpgradeCost,
   canUpgradeSkill,
   canUpgradeAttribute,
   upgradeSkill,
-  upgradeAttribute
+  upgradeAttribute,
 } from '@/lib/progression';
 
 export function ProgressionPanel({ characterId }: { characterId: string }) {
@@ -439,19 +455,17 @@ export function ProgressionPanel({ characterId }: { characterId: string }) {
           <span className="xp-amount">{character.resources.xp}</span>
           <span className="xp-label">XP Disponível</span>
         </div>
-        <div className="xp-total">
-          Total ganho: {character.resources.xpTotal} XP
-        </div>
+        <div className="xp-total">Total ganho: {character.resources.xpTotal} XP</div>
       </div>
 
       <div className="tabs">
-        <button 
+        <button
           className={selectedTab === 'skills' ? 'active' : ''}
           onClick={() => setSelectedTab('skills')}
         >
           Perícias
         </button>
-        <button 
+        <button
           className={selectedTab === 'attributes' ? 'active' : ''}
           onClick={() => setSelectedTab('attributes')}
         >
@@ -459,13 +473,9 @@ export function ProgressionPanel({ characterId }: { characterId: string }) {
         </button>
       </div>
 
-      {selectedTab === 'skills' && (
-        <SkillUpgradeList character={character} />
-      )}
+      {selectedTab === 'skills' && <SkillUpgradeList character={character} />}
 
-      {selectedTab === 'attributes' && (
-        <AttributeUpgradeList character={character} />
-      )}
+      {selectedTab === 'attributes' && <AttributeUpgradeList character={character} />}
     </div>
   );
 }
@@ -506,9 +516,7 @@ function SkillUpgradeList({ character }: { character: Character }) {
               </button>
             </div>
 
-            {!validation.valid && (
-              <div className="validation-error">{validation.reason}</div>
-            )}
+            {!validation.valid && <div className="validation-error">{validation.reason}</div>}
           </div>
         );
       })}
@@ -529,7 +537,7 @@ function AttributeUpgradeList({ character }: { character: Character }) {
     { name: 'intellect', label: 'Intelecto', icon: '🧠' },
     { name: 'psyche', label: 'Psique', icon: '💭' },
     { name: 'physique', label: 'Físico', icon: '💪' },
-    { name: 'motorics', label: 'Motricidade', icon: '⚡' }
+    { name: 'motorics', label: 'Motricidade', icon: '⚡' },
   ];
 
   return (
@@ -560,14 +568,10 @@ function AttributeUpgradeList({ character }: { character: Character }) {
             </div>
 
             <div className="affected-skills">
-              <small>
-                Aumenta: {affectedSkills.join(', ')}
-              </small>
+              <small>Aumenta: {affectedSkills.join(', ')}</small>
             </div>
 
-            {!validation.valid && (
-              <div className="validation-error">{validation.reason}</div>
-            )}
+            {!validation.valid && <div className="validation-error">{validation.reason}</div>}
           </div>
         );
       })}
@@ -588,23 +592,16 @@ export function ProgressionHistory({ character }: { character: Character }) {
   return (
     <div className="progression-history">
       <h3>Histórico de XP</h3>
-      
+
       <div className="history-list">
         {history.map((transaction) => (
-          <div 
-            key={transaction.id} 
-            className={`history-item ${transaction.type}`}
-          >
+          <div key={transaction.id} className={`history-item ${transaction.type}`}>
             <div className="transaction-type">
               {transaction.type === 'gain' ? '+ ' : '- '}
               {transaction.amount} XP
             </div>
-            <div className="transaction-source">
-              {transaction.source}
-            </div>
-            <div className="transaction-date">
-              {formatDate(transaction.timestamp)}
-            </div>
+            <div className="transaction-source">{transaction.source}</div>
+            <div className="transaction-date">{formatDate(transaction.timestamp)}</div>
           </div>
         ))}
       </div>
@@ -626,7 +623,7 @@ export function AwardXP({ campaignId }: { campaignId: string }) {
     for (const charId of selectedCharacters) {
       await gainXP(charId, amount, source);
     }
-    
+
     // Notificar jogadores (se multiplayer)
     if (isMultiplayer) {
       notifyPlayers(`Você ganhou ${amount} XP: ${source}`);
@@ -636,33 +633,29 @@ export function AwardXP({ campaignId }: { campaignId: string }) {
   return (
     <div className="award-xp">
       <h3>Conceder XP</h3>
-      
+
       <label>
         Quantidade:
-        <input 
-          type="number" 
-          value={amount} 
+        <input
+          type="number"
+          value={amount}
           onChange={(e) => setAmount(parseInt(e.target.value))}
           min={1}
         />
       </label>
-      
+
       <label>
         Motivo:
-        <input 
-          value={source} 
+        <input
+          value={source}
           onChange={(e) => setSource(e.target.value)}
           placeholder="Ex: Teste de Percepção bem-sucedido"
         />
       </label>
-      
-      <div className="character-selection">
-        {/* Lista de personagens para selecionar */}
-      </div>
-      
-      <button onClick={handleAward}>
-        Conceder XP
-      </button>
+
+      <div className="character-selection">{/* Lista de personagens para selecionar */}</div>
+
+      <button onClick={handleAward}>Conceder XP</button>
     </div>
   );
 }
@@ -673,6 +666,7 @@ export function AwardXP({ campaignId }: { campaignId: string }) {
 ## 4. WIREFRAMES
 
 ### Painel de Progressão
+
 ```
 ┌────────────────────────────────────────┐
 │ PROGRESSÃO                             │
@@ -705,24 +699,26 @@ export function AwardXP({ campaignId }: { campaignId: string }) {
 ## 5. NOTIFICAÇÕES E FEEDBACK
 
 ### 5.1. Notificação de XP Ganho
+
 ```tsx
 // Quando jogador ganha XP
 showNotification({
   type: 'success',
   title: 'XP Ganho!',
   message: `+${amount} XP: ${source}`,
-  duration: 3000
+  duration: 3000,
 });
 ```
 
 ### 5.2. Animação de Level Up
+
 ```tsx
 // Quando perícia/atributo sobe
 showAnimation({
   type: 'levelUp',
   target: skillName,
   from: oldLevel,
-  to: newLevel
+  to: newLevel,
 });
 ```
 
@@ -731,7 +727,9 @@ showAnimation({
 ## 6. INTEGRAÇÃO COM OUTRAS FEATURES
 
 ### 6.1. Testes de Perícia
+
 Após teste bem-sucedido importante:
+
 ```typescript
 // Após rolagem bem-sucedida
 if (isImportantTest && success) {
@@ -740,13 +738,16 @@ if (isImportantTest && success) {
 ```
 
 ### 6.2. Reflexões
+
 Ao internalizar reflexão:
+
 ```typescript
 const xpReward = thought.level * 2; // Nível 1 = 2 XP, Nível 2 = 4 XP, etc.
 await gainXP(characterId, xpReward, `Reflexão internalizada: ${thought.name}`);
 ```
 
 ### 6.3. Fim de Sessão
+
 ```typescript
 // Narrador concede XP no fim da sessão
 await gainXP(characterId, 5, 'Fim de sessão #12');

@@ -10,10 +10,12 @@
 ### 1.1. Níveis de Suporte
 
 #### Tier 1: Idiomas Nativos (Tradução Manual)
+
 - **Português (pt-BR)** - Idioma base, 100% completo
 - **Inglês (en)** - Tradução nativa manual, 100% completo
 
 #### Tier 2: Idiomas com Tradução AI (On-Demand)
+
 - **Espanhol (es)**
 - **Francês (fr)**
 - **Alemão (de)**
@@ -25,6 +27,7 @@
 ### 1.2. Sistema Híbrido (Inspirado no Reddit)
 
 **Como o Reddit Funciona:**
+
 - Conteúdo base em inglês (ou idioma original)
 - Botão "Translate" aparece para usuários de outros idiomas
 - Tradução via API (Google Translate ou similar)
@@ -32,9 +35,10 @@
 - Fallback para original se tradução falhar
 
 **Nossa Implementação:**
+
 1. **Interface (UI)**: Tradução manual (pt-BR + en)
 2. **Conteúdo Estático**: Tradução manual
-3. **Conteúdo Dinâmico** (nomes de personagens, anotações): 
+3. **Conteúdo Dinâmico** (nomes de personagens, anotações):
    - Opção de traduzir via AI
    - Botão "Traduzir" individual
    - Cache local de traduções
@@ -46,6 +50,7 @@
 ### 2.1. Biblioteca i18n: next-intl
 
 **Por que next-intl?**
+
 - ✅ Melhor integração com Next.js App Router (2024)
 - ✅ Type-safe (TypeScript)
 - ✅ Server Components support
@@ -59,6 +64,7 @@ npm install next-intl
 ### 2.2. API de Tradução AI
 
 **Opção 1: DeepL API (Recomendado)**
+
 - ✅ Qualidade superior (melhor que Google)
 - ✅ 500,000 caracteres/mês GRÁTIS
 - ✅ Suporta 31 idiomas
@@ -69,6 +75,7 @@ npm install deepl-node
 ```
 
 **Opção 2: LibreTranslate (Open Source)**
+
 - ✅ Completamente gratuito
 - ✅ Self-hosted ou API pública
 - ✅ Sem limites de caracteres
@@ -79,6 +86,7 @@ npm install @libretranslate/client
 ```
 
 **Opção 3: Google Gemini API**
+
 - ✅ Gratuito com limites generosos
 - ✅ Qualidade excelente
 - ✅ Contexto preservado
@@ -107,6 +115,7 @@ messages/
 ### 3.2. Exemplo de Arquivo de Tradução
 
 **messages/pt-BR.json**
+
 ```json
 {
   "common": {
@@ -157,6 +166,7 @@ messages/
 ```
 
 **messages/en.json**
+
 ```json
 {
   "common": {
@@ -195,6 +205,7 @@ messages/
 ### 4.1. Configuração next-intl
 
 **i18n.ts**
+
 ```typescript
 import { getRequestConfig } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -208,12 +219,13 @@ export default getRequestConfig(async ({ locale }) => {
   if (!locales.includes(locale as Locale)) notFound();
 
   return {
-    messages: (await import(`./messages/${locale}.json`)).default
+    messages: (await import(`./messages/${locale}.json`)).default,
   };
 });
 ```
 
 **middleware.ts**
+
 ```typescript
 import createMiddleware from 'next-intl/middleware';
 import { locales } from './i18n';
@@ -222,15 +234,16 @@ export default createMiddleware({
   locales,
   defaultLocale: 'pt-BR',
   localeDetection: true, // Auto-detecta via Accept-Language
-  localePrefix: 'as-needed' // /en/characters, mas / para pt-BR
+  localePrefix: 'as-needed', // /en/characters, mas / para pt-BR
 });
 
 export const config = {
-  matcher: ['/', '/(pt-BR|en|es|fr|de)/:path*']
+  matcher: ['/', '/(pt-BR|en|es|fr|de)/:path*'],
 };
 ```
 
 **app/[locale]/layout.tsx**
+
 ```typescript
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -259,13 +272,14 @@ export default async function LocaleLayout({
 ### 4.2. Uso em Componentes
 
 **Client Component**
+
 ```typescript
 'use client';
 import { useTranslations } from 'next-intl';
 
 export function CharacterForm() {
   const t = useTranslations('character');
-  
+
   return (
     <div>
       <h1>{t('create')}</h1>
@@ -278,12 +292,13 @@ export function CharacterForm() {
 ```
 
 **Server Component**
+
 ```typescript
 import { useTranslations } from 'next-intl';
 
 export default function CharactersPage() {
   const t = useTranslations('character');
-  
+
   return <h1>{t('create')}</h1>;
 }
 ```
@@ -291,6 +306,7 @@ export default function CharactersPage() {
 ### 4.3. Language Switcher
 
 **components/LanguageSwitcher.tsx**
+
 ```typescript
 'use client';
 import { useLocale } from 'next-intl';
@@ -319,8 +335,8 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <select 
-      value={locale} 
+    <select
+      value={locale}
       onChange={(e) => switchLocale(e.target.value)}
       className="language-switcher"
     >
@@ -341,6 +357,7 @@ export function LanguageSwitcher() {
 ### 5.1. Serviço de Tradução
 
 **lib/translation.ts**
+
 ```typescript
 import * as deepl from 'deepl-node';
 
@@ -348,10 +365,7 @@ import * as deepl from 'deepl-node';
 const translator = new deepl.Translator(process.env.DEEPL_API_KEY || '');
 
 // Fallback para LibreTranslate
-async function translateWithLibre(
-  text: string,
-  targetLang: string
-): Promise<string> {
+async function translateWithLibre(text: string, targetLang: string): Promise<string> {
   const response = await fetch('https://libretranslate.com/translate', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -359,8 +373,8 @@ async function translateWithLibre(
       q: text,
       source: 'pt',
       target: targetLang,
-      format: 'text'
-    })
+      format: 'text',
+    }),
   });
   const data = await response.json();
   return data.translatedText;
@@ -382,7 +396,7 @@ export async function translateText(
       );
       return result.text;
     }
-    
+
     // Fallback para LibreTranslate
     return await translateWithLibre(text, targetLang);
   } catch (error) {
@@ -406,11 +420,11 @@ export async function getCachedTranslation(
   const db = await openDB('translations');
   const key = `${text}_${targetLang}`;
   const cached = await db.get('cache', key);
-  
+
   if (cached && Date.now() - cached.timestamp < 7 * 24 * 60 * 60 * 1000) {
     return cached.translated; // Cache válido por 7 dias
   }
-  
+
   return null;
 }
 
@@ -421,18 +435,23 @@ export async function cacheTranslation(
 ): Promise<void> {
   const db = await openDB('translations');
   const key = `${text}_${targetLang}`;
-  await db.put('cache', {
-    original: text,
-    translated,
-    targetLang,
-    timestamp: Date.now()
-  }, key);
+  await db.put(
+    'cache',
+    {
+      original: text,
+      translated,
+      targetLang,
+      timestamp: Date.now(),
+    },
+    key
+  );
 }
 ```
 
 ### 5.2. Componente de Tradução Dinâmica
 
 **components/TranslatableText.tsx**
+
 ```typescript
 'use client';
 import { useState } from 'react';
@@ -456,7 +475,7 @@ export function TranslatableText({ text, originalLang = 'pt-BR' }: Props) {
 
   const handleTranslate = async () => {
     setLoading(true);
-    
+
     // Verificar cache primeiro
     const cached = await getCachedTranslation(text, locale);
     if (cached) {
@@ -468,7 +487,7 @@ export function TranslatableText({ text, originalLang = 'pt-BR' }: Props) {
     // Traduzir via API
     const result = await translateText(text, locale, originalLang);
     setTranslated(result);
-    
+
     // Cachear resultado
     await cacheTranslation(text, result, locale);
     setLoading(false);
@@ -478,7 +497,7 @@ export function TranslatableText({ text, originalLang = 'pt-BR' }: Props) {
     <div className="translatable-text">
       <span>{translated || text}</span>
       {!translated && (
-        <button 
+        <button
           onClick={handleTranslate}
           disabled={loading}
           className="translate-btn"
@@ -498,6 +517,7 @@ export function TranslatableText({ text, originalLang = 'pt-BR' }: Props) {
 ### 6.1. Script de Tradução Automática
 
 **scripts/generate-translations.ts**
+
 ```typescript
 import * as fs from 'fs';
 import * as path from 'path';
@@ -505,10 +525,7 @@ import * as deepl from 'deepl-node';
 
 const translator = new deepl.Translator(process.env.DEEPL_API_KEY!);
 
-async function translateFile(
-  sourcePath: string,
-  targetLang: string
-): Promise<void> {
+async function translateFile(sourcePath: string, targetLang: string): Promise<void> {
   // Ler arquivo fonte (pt-BR)
   const source = JSON.parse(fs.readFileSync(sourcePath, 'utf-8'));
   const translated: any = {};
@@ -533,10 +550,7 @@ async function translateFile(
   await translateObject(source, translated);
 
   // Salvar arquivo traduzido
-  const targetPath = path.join(
-    path.dirname(sourcePath),
-    `${targetLang}.json`
-  );
+  const targetPath = path.join(path.dirname(sourcePath), `${targetLang}.json`);
   fs.writeFileSync(targetPath, JSON.stringify(translated, null, 2));
   console.log(`✓ Generated ${targetLang}.json`);
 }
@@ -555,6 +569,7 @@ main();
 ```
 
 **package.json**
+
 ```json
 {
   "scripts": {
@@ -568,6 +583,7 @@ main();
 ## 7. VARIÁVEIS DE AMBIENTE
 
 **.env.local**
+
 ```bash
 # DeepL API (Free tier: 500k chars/month)
 DEEPL_API_KEY=your_deepl_api_key_here
@@ -622,28 +638,33 @@ describe('Translation Service', () => {
 ## 9. ROADMAP DE IMPLEMENTAÇÃO
 
 ### Fase 1: Setup Básico (1 semana)
+
 - [ ] Instalar next-intl
 - [ ] Configurar middleware e i18n.ts
 - [ ] Criar estrutura de pastas messages/
 - [ ] Traduzir manualmente pt-BR.json → en.json
 
 ### Fase 2: Language Switcher (3 dias)
+
 - [ ] Criar componente LanguageSwitcher
 - [ ] Integrar em layout principal
 - [ ] Testar troca de idiomas
 
 ### Fase 3: Tradução AI (1 semana)
+
 - [ ] Configurar DeepL API
 - [ ] Implementar serviço de tradução
 - [ ] Criar cache de traduções (IndexedDB)
 - [ ] Componente TranslatableText
 
 ### Fase 4: Geração Automática (3 dias)
+
 - [ ] Script generate-translations.ts
 - [ ] Gerar es.json, fr.json, de.json
 - [ ] Revisar traduções geradas
 
 ### Fase 5: Testes e Polish (3 dias)
+
 - [ ] Testes manuais
 - [ ] Testes automatizados
 - [ ] Ajustes de UX
@@ -655,11 +676,13 @@ describe('Translation Service', () => {
 ## 10. CUSTOS E LIMITES
 
 ### DeepL Free Tier
+
 - **500,000 caracteres/mês** grátis
 - Estimativa: ~100 páginas de texto
 - Suficiente para MVP
 
 ### LibreTranslate (Fallback)
+
 - **Gratuito e ilimitado**
 - Self-hosted ou API pública
 - Qualidade inferior, mas funcional

@@ -8,6 +8,7 @@
 ## 1. MODOS DE OPERAÇÃO
 
 ### 1.1. Modo Automático (Padrão)
+
 - ✅ Cálculos automáticos de ataque/defesa
 - ✅ Aplicação automática de dano
 - ✅ Condições aplicadas automaticamente
@@ -15,6 +16,7 @@
 - ✅ Histórico completo
 
 ### 1.2. Modo Manual (Opcional)
+
 - ✅ Narrador controla todos os cálculos
 - ✅ Sistema apenas registra ações
 - ✅ Sem validação automática
@@ -22,6 +24,7 @@
 - ✅ Histórico narrativo
 
 ### 1.3. Toggle de Modo
+
 ```tsx
 // components/CombatCalculator.tsx
 export function CombatCalculator({ campaignId }: { campaignId: string }) {
@@ -31,25 +34,21 @@ export function CombatCalculator({ campaignId }: { campaignId: string }) {
     <div className="combat-calculator">
       <div className="mode-toggle">
         <label>
-          <input 
-            type="checkbox" 
+          <input
+            type="checkbox"
             checked={autoMode}
             onChange={(e) => setAutoMode(e.target.checked)}
           />
           Cálculos Automáticos
         </label>
         <span className="mode-description">
-          {autoMode 
+          {autoMode
             ? 'Sistema calcula dano e aplica condições automaticamente'
             : 'Controle manual de todos os cálculos'}
         </span>
       </div>
 
-      {autoMode ? (
-        <AutomaticCombatInterface />
-      ) : (
-        <ManualCombatInterface />
-      )}
+      {autoMode ? <AutomaticCombatInterface /> : <ManualCombatInterface />}
     </div>
   );
 }
@@ -60,6 +59,7 @@ export function CombatCalculator({ campaignId }: { campaignId: string }) {
 ## 2. INTERFACE MODO AUTOMÁTICO
 
 ### 2.1. Ataque Automático
+
 ```tsx
 function AutomaticAttack({ attacker, defender }: Props) {
   const [weapon, setWeapon] = useState<Weapon | null>(null);
@@ -67,18 +67,12 @@ function AutomaticAttack({ attacker, defender }: Props) {
 
   const handleAttack = async () => {
     // 1. Rolar ataque
-    const attackRoll = rollDice(
-      attacker.skills.physicalInstrument,
-      attacker.attributes.physique
-    );
+    const attackRoll = rollDice(attacker.skills.physicalInstrument, attacker.attributes.physique);
     const attackBonus = weapon?.bonus || 0;
     const attackTotal = attackRoll.total + attackBonus;
 
     // 2. Rolar defesa
-    const defenseRoll = rollDice(
-      defender.skills.halfLight,
-      defender.attributes.physique
-    );
+    const defenseRoll = rollDice(defender.skills.halfLight, defender.attributes.physique);
     const coverBonus = cover ? rollDice(0, 0).dice[0] : 0; // +1d6
     const defenseTotal = defenseRoll.total + coverBonus;
 
@@ -89,10 +83,10 @@ function AutomaticAttack({ attacker, defender }: Props) {
     // 4. Aplicar dano
     if (hit) {
       await applyDamage(defender.id, damage);
-      
+
       // 5. Aplicar condições automáticas
       await applyCondition(defender.id, 'Sangramento Leve');
-      
+
       // 6. Verificar Instante de Morte
       if (defender.health <= 3 && defender.health - damage <= 0) {
         await checkInstantDeath(defender.id);
@@ -106,7 +100,7 @@ function AutomaticAttack({ attacker, defender }: Props) {
       attackRoll,
       defenseRoll,
       hit,
-      damage
+      damage,
     });
   };
 
@@ -124,6 +118,7 @@ function AutomaticAttack({ attacker, defender }: Props) {
 ## 3. INTERFACE MODO MANUAL
 
 ### 3.1. Registro Manual
+
 ```tsx
 function ManualCombatInterface() {
   const [action, setAction] = useState('');
@@ -134,7 +129,7 @@ function ManualCombatInterface() {
     await logNarrativeAction({
       description: action,
       result,
-      timestamp: new Date()
+      timestamp: new Date(),
     });
 
     setAction('');
@@ -148,7 +143,7 @@ function ManualCombatInterface() {
 
       <label>
         Ação:
-        <textarea 
+        <textarea
           value={action}
           onChange={(e) => setAction(e.target.value)}
           placeholder="Ex: João ataca o suspeito com faca"
@@ -157,28 +152,20 @@ function ManualCombatInterface() {
 
       <label>
         Resultado:
-        <textarea 
+        <textarea
           value={result}
           onChange={(e) => setResult(e.target.value)}
           placeholder="Ex: Acerto! Suspeito recebe 1 de dano"
         />
       </label>
 
-      <button onClick={handleLogAction}>
-        Registrar Ação
-      </button>
+      <button onClick={handleLogAction}>Registrar Ação</button>
 
       <div className="manual-tools">
         <h4>Ferramentas Auxiliares</h4>
-        <button onClick={() => rollDice(0, 0)}>
-          🎲 Rolar 2d6
-        </button>
-        <button onClick={() => applyDamageManual()}>
-          ❤️ Aplicar Dano Manual
-        </button>
-        <button onClick={() => addConditionManual()}>
-          ⚠️ Adicionar Condição
-        </button>
+        <button onClick={() => rollDice(0, 0)}>🎲 Rolar 2d6</button>
+        <button onClick={() => applyDamageManual()}>❤️ Aplicar Dano Manual</button>
+        <button onClick={() => addConditionManual()}>⚠️ Adicionar Condição</button>
       </div>
     </div>
   );
@@ -190,6 +177,7 @@ function ManualCombatInterface() {
 ## 4. WIREFRAME COMPARATIVO
 
 ### Modo Automático
+
 ```
 ┌────────────────────────────────────────┐
 │ COMBATE                                │
@@ -217,6 +205,7 @@ function ManualCombatInterface() {
 ```
 
 ### Modo Manual
+
 ```
 ┌────────────────────────────────────────┐
 │ COMBATE                                │
@@ -255,11 +244,14 @@ interface CombatSettings {
 }
 
 // Salvar em localStorage
-localStorage.setItem('combatSettings', JSON.stringify({
-  autoMode: true,
-  showAnimations: true,
-  confirmActions: false
-}));
+localStorage.setItem(
+  'combatSettings',
+  JSON.stringify({
+    autoMode: true,
+    showAnimations: true,
+    confirmActions: false,
+  })
+);
 ```
 
 ---

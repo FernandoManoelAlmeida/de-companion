@@ -8,7 +8,9 @@
 ## 1. VISÃO GERAL
 
 ### 1.1. Funcionalidade
+
 Gerar personagens completos e balanceados aleatoriamente, seguindo as regras do sistema:
+
 - 8 pontos em atributos (1-5 cada)
 - 12 pontos em perícias (respeitando limites)
 - 1 Reflexão inicial (Nível 1-2)
@@ -16,6 +18,7 @@ Gerar personagens completos e balanceados aleatoriamente, seguindo as regras do 
 - Recursos calculados automaticamente
 
 ### 1.2. Casos de Uso
+
 - Jogadores que querem começar rápido
 - Narradores criando NPCs
 - Testes e demonstrações
@@ -43,11 +46,11 @@ const ARCHETYPES = {
       empathy: 1.3,
       // MOTRICIDADE
       perception: 1.4,
-      reactionSpeed: 1.2
+      reactionSpeed: 1.2,
     },
-    thoughtPool: ['Advogado de Si Mesmo', 'Lente de Homem Morto']
+    thoughtPool: ['Advogado de Si Mesmo', 'Lente de Homem Morto'],
   },
-  
+
   emotional: {
     name: 'Trem-Bala Emocional',
     attributes: { intellect: 1, psyche: 5, physique: 2, motorics: 2 },
@@ -60,11 +63,11 @@ const ARCHETYPES = {
       // FÍSICO
       electrochemistry: 1.3,
       // MOTRICIDADE
-      reactionSpeed: 1.4
+      reactionSpeed: 1.4,
     },
-    thoughtPool: ['Camarada de Copas', 'O Apodrecimento']
+    thoughtPool: ['Camarada de Copas', 'O Apodrecimento'],
   },
-  
+
   brute: {
     name: 'Brutamontes com Sentimentos',
     attributes: { intellect: 1, psyche: 2, physique: 5, motorics: 2 },
@@ -77,11 +80,11 @@ const ARCHETYPES = {
       shivers: 1.8,
       halfLight: 1.4,
       // PSIQUE
-      empathy: 1.3
+      empathy: 1.3,
     },
-    thoughtPool: ['Coxinha do Bar', 'Foda-se o Mundo']
+    thoughtPool: ['Coxinha do Bar', 'Foda-se o Mundo'],
   },
-  
+
   fast: {
     name: 'Veloz e Perigoso',
     attributes: { intellect: 2, psyche: 1, physique: 3, motorics: 4 },
@@ -94,10 +97,10 @@ const ARCHETYPES = {
       // FÍSICO
       endurance: 1.4,
       physicalInstrument: 1.4,
-      halfLight: 1.4
+      halfLight: 1.4,
     },
-    thoughtPool: ['Gato Preto', 'Lutador de Rua']
-  }
+    thoughtPool: ['Gato Preto', 'Lutador de Rua'],
+  },
 };
 ```
 
@@ -108,7 +111,7 @@ const RANDOM_ARCHETYPE = {
   name: 'Aleatório',
   attributes: null, // Distribuir 8 pontos aleatoriamente
   skillWeights: null, // Sem pesos, distribuição uniforme
-  thoughtPool: null // Qualquer reflexão Nível 1-2
+  thoughtPool: null, // Qualquer reflexão Nível 1-2
 };
 ```
 
@@ -119,6 +122,7 @@ const RANDOM_ARCHETYPE = {
 ### 3.1. Distribuição de Atributos
 
 #### Opção 1: Baseada em Arquétipo
+
 ```typescript
 function generateAttributesFromArchetype(archetype: Archetype): Attributes {
   return archetype.attributes;
@@ -126,28 +130,29 @@ function generateAttributesFromArchetype(archetype: Archetype): Attributes {
 ```
 
 #### Opção 2: Aleatória Balanceada
+
 ```typescript
 function generateRandomAttributes(): Attributes {
   const attributes = {
     intellect: 1,
     psyche: 1,
     physique: 1,
-    motorics: 1
+    motorics: 1,
   };
-  
+
   let pointsRemaining = 4; // 8 total - 4 já distribuídos
-  
+
   while (pointsRemaining > 0) {
     // Escolher atributo aleatório
     const attr = randomChoice(['intellect', 'psyche', 'physique', 'motorics']);
-    
+
     // Verificar se não excede máximo (5)
     if (attributes[attr] < 5) {
       attributes[attr]++;
       pointsRemaining--;
     }
   }
-  
+
   return attributes;
 }
 ```
@@ -155,37 +160,34 @@ function generateRandomAttributes(): Attributes {
 ### 3.2. Distribuição de Perícias
 
 ```typescript
-function generateSkills(
-  attributes: Attributes,
-  archetype: Archetype | null
-): Skills {
+function generateSkills(attributes: Attributes, archetype: Archetype | null): Skills {
   const skills = initializeSkillsFromAttributes(attributes);
   let pointsRemaining = 12;
-  
+
   // Criar pool de perícias disponíveis
-  const skillPool = Object.keys(skills).map(skill => ({
+  const skillPool = Object.keys(skills).map((skill) => ({
     name: skill,
     weight: archetype?.skillWeights?.[skill] || 1.0,
-    limit: getSkillLimit(skill, attributes)
+    limit: getSkillLimit(skill, attributes),
   }));
-  
+
   while (pointsRemaining > 0) {
     // Escolher perícia com base em pesos
     const skill = weightedRandomChoice(skillPool);
-    
+
     // Verificar se pode aumentar
     if (skills[skill.name] < skill.limit) {
       skills[skill.name]++;
       pointsRemaining--;
     } else {
       // Remover do pool se atingiu limite
-      skillPool = skillPool.filter(s => s.name !== skill.name);
+      skillPool = skillPool.filter((s) => s.name !== skill.name);
     }
-    
+
     // Evitar loop infinito
     if (skillPool.length === 0) break;
   }
-  
+
   return skills;
 }
 
@@ -199,7 +201,7 @@ function initializeSkillsFromAttributes(attributes: Attributes): Skills {
     conceptualization: attributes.intellect,
     visualCalculus: attributes.intellect,
     drama: attributes.intellect,
-    
+
     // PSIQUE
     volition: attributes.psyche,
     inlandEmpire: attributes.psyche,
@@ -207,7 +209,7 @@ function initializeSkillsFromAttributes(attributes: Attributes): Skills {
     authority: attributes.psyche,
     espritDeCorps: attributes.psyche,
     suggestion: attributes.psyche,
-    
+
     // FÍSICO
     endurance: attributes.physique,
     painThreshold: attributes.physique,
@@ -215,29 +217,27 @@ function initializeSkillsFromAttributes(attributes: Attributes): Skills {
     electrochemistry: attributes.physique,
     shivers: attributes.physique,
     halfLight: attributes.physique,
-    
+
     // MOTRICIDADE
     handEyeCoordination: attributes.motorics,
     perception: attributes.motorics,
     reactionSpeed: attributes.motorics,
     savoirFaire: attributes.motorics,
     interfacing: attributes.motorics,
-    composure: attributes.motorics
+    composure: attributes.motorics,
   };
 }
 
 // Escolha ponderada
-function weightedRandomChoice<T extends { weight: number }>(
-  items: T[]
-): T {
+function weightedRandomChoice<T extends { weight: number }>(items: T[]): T {
   const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
   let random = Math.random() * totalWeight;
-  
+
   for (const item of items) {
     random -= item.weight;
     if (random <= 0) return item;
   }
-  
+
   return items[items.length - 1];
 }
 ```
@@ -250,7 +250,7 @@ const LEVEL_1_THOUGHTS = [
   'Camarada de Copas',
   'Dia 1 Servo',
   'Gato Preto',
-  'Lente de Homem Morto'
+  'Lente de Homem Morto',
 ];
 
 const LEVEL_2_THOUGHTS = [
@@ -264,7 +264,7 @@ const LEVEL_2_THOUGHTS = [
   'Forte Inabalável',
   'Lutador de Rua',
   'Wompty-Dompty Dom Centre',
-  'Iluminação Falsa'
+  'Iluminação Falsa',
 ];
 
 function generateInitialThought(archetype: Archetype | null): string {
@@ -272,7 +272,7 @@ function generateInitialThought(archetype: Archetype | null): string {
     // Escolher do pool do arquétipo
     return randomChoice(archetype.thoughtPool);
   }
-  
+
   // 70% chance Nível 1, 30% chance Nível 2
   const pool = Math.random() < 0.7 ? LEVEL_1_THOUGHTS : LEVEL_2_THOUGHTS;
   return randomChoice(pool);
@@ -283,47 +283,136 @@ function generateInitialThought(archetype: Archetype | null): string {
 
 ```typescript
 const FIRST_NAMES_MALE = [
-  'João', 'Pedro', 'Lucas', 'Gabriel', 'Rafael', 'Matheus',
-  'Carlos', 'Fernando', 'Ricardo', 'André', 'Bruno', 'Diego',
-  'Felipe', 'Gustavo', 'Henrique', 'Igor', 'Júlio', 'Leonardo',
-  'Marcelo', 'Nicolas', 'Otávio', 'Paulo', 'Rodrigo', 'Thiago',
-  'Vinicius', 'William', 'Alexandre', 'Daniel', 'Eduardo', 'Fábio'
+  'João',
+  'Pedro',
+  'Lucas',
+  'Gabriel',
+  'Rafael',
+  'Matheus',
+  'Carlos',
+  'Fernando',
+  'Ricardo',
+  'André',
+  'Bruno',
+  'Diego',
+  'Felipe',
+  'Gustavo',
+  'Henrique',
+  'Igor',
+  'Júlio',
+  'Leonardo',
+  'Marcelo',
+  'Nicolas',
+  'Otávio',
+  'Paulo',
+  'Rodrigo',
+  'Thiago',
+  'Vinicius',
+  'William',
+  'Alexandre',
+  'Daniel',
+  'Eduardo',
+  'Fábio',
 ];
 
 const FIRST_NAMES_FEMALE = [
-  'Ana', 'Maria', 'Julia', 'Beatriz', 'Carolina', 'Fernanda',
-  'Gabriela', 'Helena', 'Isabela', 'Juliana', 'Larissa', 'Mariana',
-  'Natália', 'Paula', 'Rafaela', 'Sofia', 'Tatiana', 'Vanessa',
-  'Amanda', 'Bianca', 'Camila', 'Daniela', 'Eduarda', 'Fabiana',
-  'Giovana', 'Letícia', 'Melissa', 'Patrícia', 'Renata', 'Vitória'
+  'Ana',
+  'Maria',
+  'Julia',
+  'Beatriz',
+  'Carolina',
+  'Fernanda',
+  'Gabriela',
+  'Helena',
+  'Isabela',
+  'Juliana',
+  'Larissa',
+  'Mariana',
+  'Natália',
+  'Paula',
+  'Rafaela',
+  'Sofia',
+  'Tatiana',
+  'Vanessa',
+  'Amanda',
+  'Bianca',
+  'Camila',
+  'Daniela',
+  'Eduarda',
+  'Fabiana',
+  'Giovana',
+  'Letícia',
+  'Melissa',
+  'Patrícia',
+  'Renata',
+  'Vitória',
 ];
 
 const LAST_NAMES = [
-  'Silva', 'Santos', 'Oliveira', 'Souza', 'Rodrigues', 'Ferreira',
-  'Alves', 'Pereira', 'Lima', 'Gomes', 'Costa', 'Ribeiro',
-  'Martins', 'Carvalho', 'Rocha', 'Almeida', 'Nascimento', 'Araújo',
-  'Melo', 'Barbosa', 'Cardoso', 'Correia', 'Dias', 'Fernandes',
-  'Freitas', 'Garcia', 'Gonçalves', 'Lopes', 'Machado', 'Marques',
-  'Mendes', 'Miranda', 'Monteiro', 'Moreira', 'Nunes', 'Pinto',
-  'Ramos', 'Reis', 'Rezende', 'Ribeiro', 'Rocha', 'Santana',
-  'Teixeira', 'Vieira', 'Castro', 'Campos', 'Moura', 'Pires'
+  'Silva',
+  'Santos',
+  'Oliveira',
+  'Souza',
+  'Rodrigues',
+  'Ferreira',
+  'Alves',
+  'Pereira',
+  'Lima',
+  'Gomes',
+  'Costa',
+  'Ribeiro',
+  'Martins',
+  'Carvalho',
+  'Rocha',
+  'Almeida',
+  'Nascimento',
+  'Araújo',
+  'Melo',
+  'Barbosa',
+  'Cardoso',
+  'Correia',
+  'Dias',
+  'Fernandes',
+  'Freitas',
+  'Garcia',
+  'Gonçalves',
+  'Lopes',
+  'Machado',
+  'Marques',
+  'Mendes',
+  'Miranda',
+  'Monteiro',
+  'Moreira',
+  'Nunes',
+  'Pinto',
+  'Ramos',
+  'Reis',
+  'Rezende',
+  'Ribeiro',
+  'Rocha',
+  'Santana',
+  'Teixeira',
+  'Vieira',
+  'Castro',
+  'Campos',
+  'Moura',
+  'Pires',
 ];
 
 function generateBrazilianName(gender?: 'male' | 'female'): string {
   const genderChoice = gender || (Math.random() < 0.5 ? 'male' : 'female');
-  
-  const firstName = genderChoice === 'male'
-    ? randomChoice(FIRST_NAMES_MALE)
-    : randomChoice(FIRST_NAMES_FEMALE);
-  
+
+  const firstName =
+    genderChoice === 'male' ? randomChoice(FIRST_NAMES_MALE) : randomChoice(FIRST_NAMES_FEMALE);
+
   const lastName = randomChoice(LAST_NAMES);
-  
+
   // 30% chance de nome composto
   if (Math.random() < 0.3) {
     const middleName = randomChoice(LAST_NAMES);
     return `${firstName} ${middleName} ${lastName}`;
   }
-  
+
   return `${firstName} ${lastName}`;
 }
 ```
@@ -341,33 +430,29 @@ interface GenerateCharacterOptions {
   name?: string;
 }
 
-function generateRandomCharacter(
-  options: GenerateCharacterOptions = {}
-): Character {
+function generateRandomCharacter(options: GenerateCharacterOptions = {}): Character {
   // 1. Selecionar arquétipo
   const archetypeKey = options.archetype || 'random';
-  const archetype = archetypeKey === 'random' 
-    ? null 
-    : ARCHETYPES[archetypeKey];
-  
+  const archetype = archetypeKey === 'random' ? null : ARCHETYPES[archetypeKey];
+
   // 2. Gerar atributos
   const attributes = archetype
     ? generateAttributesFromArchetype(archetype)
     : generateRandomAttributes();
-  
+
   // 3. Gerar perícias
   const skills = generateSkills(attributes, archetype);
-  
+
   // 4. Gerar reflexão inicial
   const initialThought = generateInitialThought(archetype);
-  
+
   // 5. Gerar nome
   const name = options.name || generateBrazilianName(options.gender);
-  
+
   // 6. Calcular recursos
   const morale = 1 + skills.volition;
   const health = 1 + skills.endurance;
-  
+
   // 7. Criar personagem
   return {
     id: generateUUID(),
@@ -382,7 +467,7 @@ function generateRandomCharacter(
       health,
       healthMax: health,
       money: 10, // R$ 10 inicial
-      xp: 0
+      xp: 0,
     },
     thoughtCabinet: {
       slots: 3,
@@ -395,17 +480,17 @@ function generateRandomCharacter(
           acquiredAt: new Date(),
           internalizedAt: new Date(),
           problem: getThoughtProblem(initialThought),
-          solution: getThoughtSolution(initialThought)
-        }
-      ]
+          solution: getThoughtSolution(initialThought),
+        },
+      ],
     },
     inventory: [],
     conditions: [],
     history: {
       rollHistory: [],
       xpHistory: [],
-      progressionHistory: []
-    }
+      progressionHistory: [],
+    },
   };
 }
 ```
@@ -450,9 +535,9 @@ function getSkillLimit(skillName: string, attributes: Attributes): number {
     reactionSpeed: 'motorics',
     savoirFaire: 'motorics',
     interfacing: 'motorics',
-    composure: 'motorics'
+    composure: 'motorics',
   };
-  
+
   const parentAttribute = attributeMap[skillName];
   return attributes[parentAttribute] + 1; // Limite = Atributo + 1
 }
@@ -477,9 +562,9 @@ export function RandomCharacterGenerator() {
   const handleGenerate = () => {
     const options = {
       archetype: archetype === 'random' ? undefined : archetype,
-      gender: gender === 'random' ? undefined : gender
+      gender: gender === 'random' ? undefined : gender,
     };
-    
+
     const character = generateRandomCharacter(options);
     setGeneratedCharacter(character);
   };
@@ -493,7 +578,7 @@ export function RandomCharacterGenerator() {
   return (
     <div className="random-generator">
       <h2>Gerador de Personagens Aleatórios</h2>
-      
+
       <div className="options">
         <label>
           Arquétipo:
@@ -505,7 +590,7 @@ export function RandomCharacterGenerator() {
             <option value="fast">⚡ Veloz e Perigoso</option>
           </select>
         </label>
-        
+
         <label>
           Gênero:
           <select value={gender} onChange={(e) => setGender(e.target.value)}>
@@ -515,15 +600,15 @@ export function RandomCharacterGenerator() {
           </select>
         </label>
       </div>
-      
+
       <button onClick={handleGenerate} className="btn-primary">
         🎲 Gerar Personagem
       </button>
-      
+
       {generatedCharacter && (
         <div className="preview">
           <h3>{generatedCharacter.name}</h3>
-          
+
           <div className="attributes">
             <h4>Atributos</h4>
             <ul>
@@ -533,7 +618,7 @@ export function RandomCharacterGenerator() {
               <li>MOT: {generatedCharacter.attributes.motorics}</li>
             </ul>
           </div>
-          
+
           <div className="resources">
             <h4>Recursos</h4>
             <ul>
@@ -541,12 +626,12 @@ export function RandomCharacterGenerator() {
               <li>Saúde: {generatedCharacter.resources.health}</li>
             </ul>
           </div>
-          
+
           <div className="thought">
             <h4>Reflexão Inicial</h4>
             <p>{generatedCharacter.thoughtCabinet.thoughts[0].name}</p>
           </div>
-          
+
           <div className="actions">
             <button onClick={handleSave} className="btn-success">
               ✓ Salvar Personagem
@@ -609,7 +694,7 @@ describe('Random Character Generator', () => {
 
   it('should respect attribute limits (1-5)', () => {
     const attrs = generateRandomAttributes();
-    Object.values(attrs).forEach(value => {
+    Object.values(attrs).forEach((value) => {
       expect(value).toBeGreaterThanOrEqual(1);
       expect(value).toBeLessThanOrEqual(5);
     });
@@ -618,17 +703,17 @@ describe('Random Character Generator', () => {
   it('should distribute 12 skill points', () => {
     const attrs = { intellect: 4, psyche: 2, physique: 2, motorics: 2 };
     const skills = generateSkills(attrs, null);
-    
+
     const basePoints = Object.values(attrs).reduce((a, b) => a + b, 0) * 6; // 48
     const totalPoints = Object.values(skills).reduce((a, b) => a + b, 0);
-    
+
     expect(totalPoints).toBe(basePoints + 12);
   });
 
   it('should respect skill limits', () => {
     const attrs = { intellect: 3, psyche: 2, physique: 2, motorics: 2 };
     const skills = generateSkills(attrs, null);
-    
+
     // Perícias de INT não podem exceder 4 (3 + 1)
     expect(skills.logic).toBeLessThanOrEqual(4);
     expect(skills.encyclopedia).toBeLessThanOrEqual(4);
@@ -648,6 +733,7 @@ describe('Random Character Generator', () => {
 ### 7.1. Adicionar ao Plano de Ação
 
 **Fase 12: Gerador de Personagens (Semana 18)**
+
 - Implementar algoritmos de geração
 - Criar componente RandomCharacterGenerator
 - Testes unitários
@@ -656,6 +742,7 @@ describe('Random Character Generator', () => {
 ### 7.2. Adicionar ao Plano de Design
 
 **Novo Componente:**
+
 - RandomCharacterGenerator (organism)
 - Botão "🎲 Gerar Aleatório" na tela de personagens
 

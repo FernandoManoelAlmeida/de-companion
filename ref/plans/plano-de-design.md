@@ -11,21 +11,25 @@
 ### 1.1. Princípios Fundamentais
 
 #### 1. Noir Existencial
+
 - **Paleta Escura:** Tons de cinza, preto, com acentos de amarelo/âmbar (inspirado em Disco Elysium)
 - **Tipografia:** Fontes serifadas para títulos (atmosfera literária), sans-serif para corpo
 - **Atmosfera:** Melancólica, introspectiva, urbana degradada
 
 #### 2. Funcionalidade Sobre Forma
+
 - **Clareza:** Informação sempre visível e acessível
 - **Hierarquia:** Elementos importantes em destaque
 - **Feedback:** Interações com resposta visual imediata
 
 #### 3. Mobile-First, Desktop-Enhanced
+
 - **Prioridade Mobile:** Design pensado primeiro para telas pequenas
 - **Expansão Desktop:** Aproveitar espaço extra sem poluir
 - **Touch-Friendly:** Botões grandes (min 44x44px), gestos intuitivos
 
 #### 4. Acessibilidade Universal
+
 - **WCAG 2.1 AA:** Contraste mínimo 4.5:1, navegação por teclado
 - **Screen Readers:** Semântica HTML correta, ARIA labels
 - **Sem Dependência de Cor:** Informação não apenas por cor
@@ -37,42 +41,45 @@
 ### 2.1. Paleta de Cores
 
 #### Cores Primárias
+
 ```css
 /* Background */
---bg-primary: #0a0a0a;      /* Preto profundo */
---bg-secondary: #1a1a1a;    /* Cinza escuro */
---bg-tertiary: #2a2a2a;     /* Cinza médio */
+--bg-primary: #0a0a0a; /* Preto profundo */
+--bg-secondary: #1a1a1a; /* Cinza escuro */
+--bg-tertiary: #2a2a2a; /* Cinza médio */
 
 /* Foreground */
---fg-primary: #e8e8e8;      /* Branco sujo */
---fg-secondary: #b8b8b8;    /* Cinza claro */
---fg-tertiary: #888888;     /* Cinza médio */
+--fg-primary: #e8e8e8; /* Branco sujo */
+--fg-secondary: #b8b8b8; /* Cinza claro */
+--fg-tertiary: #888888; /* Cinza médio */
 
 /* Accent */
---accent-primary: #d4af37;  /* Dourado/Âmbar */
+--accent-primary: #d4af37; /* Dourado/Âmbar */
 --accent-secondary: #8b7355; /* Bronze */
---accent-danger: #c44536;   /* Vermelho queimado */
---accent-success: #5a7d5a;  /* Verde musgo */
+--accent-danger: #c44536; /* Vermelho queimado */
+--accent-success: #5a7d5a; /* Verde musgo */
 ```
 
 #### Cores Semânticas
+
 ```css
 /* Atributos */
---intellect: #4a90e2;       /* Azul frio */
---psyche: #9b59b6;          /* Roxo */
---physique: #e74c3c;        /* Vermelho */
---motorics: #f39c12;        /* Laranja */
+--intellect: #4a90e2; /* Azul frio */
+--psyche: #9b59b6; /* Roxo */
+--physique: #e74c3c; /* Vermelho */
+--motorics: #f39c12; /* Laranja */
 
 /* Estados */
---morale: #9b59b6;          /* Roxo (Psique) */
---health: #e74c3c;          /* Vermelho (Físico) */
---xp: #d4af37;              /* Dourado */
---money: #5a7d5a;           /* Verde */
+--morale: #9b59b6; /* Roxo (Psique) */
+--health: #e74c3c; /* Vermelho (Físico) */
+--xp: #d4af37; /* Dourado */
+--money: #5a7d5a; /* Verde */
 ```
 
 ### 2.2. Tipografia
 
 #### Fontes
+
 ```css
 /* Títulos e Headers */
 --font-display: 'Playfair Display', serif;
@@ -83,17 +90,18 @@
 --font-mono: 'JetBrains Mono', monospace;
 
 /* Tamanhos */
---text-xs: 0.75rem;    /* 12px */
---text-sm: 0.875rem;   /* 14px */
---text-base: 1rem;     /* 16px */
---text-lg: 1.125rem;   /* 18px */
---text-xl: 1.25rem;    /* 20px */
---text-2xl: 1.5rem;    /* 24px */
---text-3xl: 1.875rem;  /* 30px */
---text-4xl: 2.25rem;   /* 36px */
+--text-xs: 0.75rem; /* 12px */
+--text-sm: 0.875rem; /* 14px */
+--text-base: 1rem; /* 16px */
+--text-lg: 1.125rem; /* 18px */
+--text-xl: 1.25rem; /* 20px */
+--text-2xl: 1.5rem; /* 24px */
+--text-3xl: 1.875rem; /* 30px */
+--text-4xl: 2.25rem; /* 36px */
 ```
 
 #### Hierarquia Tipográfica
+
 - **H1:** Display, 36px, bold, accent color
 - **H2:** Heading, 24px, semibold, primary color
 - **H3:** Heading, 20px, semibold, primary color
@@ -104,28 +112,31 @@
 ### 2.3. Espaçamento e Grid
 
 #### Sistema de Espaçamento (8px base)
+
 ```css
---space-1: 0.25rem;  /* 4px */
---space-2: 0.5rem;   /* 8px */
---space-3: 0.75rem;  /* 12px */
---space-4: 1rem;     /* 16px */
---space-6: 1.5rem;   /* 24px */
---space-8: 2rem;     /* 32px */
---space-12: 3rem;    /* 48px */
---space-16: 4rem;    /* 64px */
+--space-1: 0.25rem; /* 4px */
+--space-2: 0.5rem; /* 8px */
+--space-3: 0.75rem; /* 12px */
+--space-4: 1rem; /* 16px */
+--space-6: 1.5rem; /* 24px */
+--space-8: 2rem; /* 32px */
+--space-12: 3rem; /* 48px */
+--space-16: 4rem; /* 64px */
 ```
 
 #### Breakpoints
+
 ```css
---mobile: 320px;     /* Mínimo suportado */
---tablet: 768px;     /* iPad */
---desktop: 1024px;   /* Laptop */
---wide: 1440px;      /* Desktop grande */
+--mobile: 320px; /* Mínimo suportado */
+--tablet: 768px; /* iPad */
+--desktop: 1024px; /* Laptop */
+--wide: 1440px; /* Desktop grande */
 ```
 
 ### 2.4. Componentes Visuais
 
 #### Bordas e Sombras
+
 ```css
 /* Bordas */
 --border-radius-sm: 4px;
@@ -144,6 +155,7 @@
 ```
 
 #### Animações
+
 ```css
 /* Transições */
 --transition-fast: 150ms ease-in-out;
@@ -163,6 +175,7 @@
 ### 3.1. Componentes Base (Atoms)
 
 #### Button
+
 ```tsx
 // Variantes
 <Button variant="primary">Criar Personagem</Button>
@@ -181,6 +194,7 @@
 ```
 
 **Especificações:**
+
 - **Primary:** Background accent-primary, texto preto, hover glow
 - **Secondary:** Border accent-primary, texto accent-primary, hover fill
 - **Danger:** Background accent-danger, texto branco
@@ -189,8 +203,9 @@
 - **Padding:** 12px 24px (md), 8px 16px (sm), 16px 32px (lg)
 
 #### Input
+
 ```tsx
-<Input 
+<Input
   label="Nome do Personagem"
   placeholder="Digite o nome..."
   error="Nome é obrigatório"
@@ -199,6 +214,7 @@
 ```
 
 **Especificações:**
+
 - **Background:** bg-secondary
 - **Border:** 1px solid tertiary, focus accent-primary
 - **Height:** 48px (touch-friendly)
@@ -207,6 +223,7 @@
 - **Error:** text-sm, accent-danger, abaixo do input
 
 #### Card
+
 ```tsx
 <Card variant="default">
   <CardHeader>Título</CardHeader>
@@ -216,6 +233,7 @@
 ```
 
 **Especificações:**
+
 - **Background:** bg-secondary
 - **Border:** 1px solid bg-tertiary
 - **Border Radius:** 8px
@@ -223,6 +241,7 @@
 - **Shadow:** shadow-md, hover shadow-lg
 
 #### Badge
+
 ```tsx
 <Badge variant="intellect">INT 4</Badge>
 <Badge variant="psyche">PSY 2</Badge>
@@ -230,17 +249,20 @@
 ```
 
 **Especificações:**
+
 - **Padding:** 4px 8px
 - **Border Radius:** 4px
 - **Font Size:** 12px, uppercase, bold
 - **Colors:** Usar cores semânticas dos atributos
 
 #### LanguageSwitcher
+
 ```tsx
 <LanguageSwitcher />
 ```
 
 **Layout:**
+
 ```
 ┌─────────────────┐
 │ 🇧🇷 Português ▼ │
@@ -257,6 +279,7 @@
 ```
 
 **Especificações:**
+
 - **Posição:** Header (canto superior direito)
 - **Detecção Automática:** Via Accept-Language
 - **Persistência:** Cookie NEXT_LOCALE
@@ -266,6 +289,7 @@
 ### 3.2. Componentes Compostos (Molecules)
 
 #### AttributeDisplay
+
 ```tsx
 <AttributeDisplay
   name="Intelecto"
@@ -273,12 +297,13 @@
   color="intellect"
   skills={[
     { name: 'Lógica', value: 5 },
-    { name: 'Enciclopédia', value: 4 }
+    { name: 'Enciclopédia', value: 4 },
   ]}
 />
 ```
 
 **Layout:**
+
 ```
 ┌─────────────────────────┐
 │ INTELECTO           [4] │ ← Header com badge
@@ -291,6 +316,7 @@
 ```
 
 #### DiceRoller (Sistema Padrão)
+
 ```tsx
 <DiceRoller
   skillName="Percepção"
@@ -302,6 +328,7 @@
 ```
 
 **Layout:**
+
 ```
 ┌─────────────────────────┐
 │ Percepção               │
@@ -315,13 +342,13 @@
 ```
 
 #### GenericDiceRoller (Notação xdY)
+
 ```tsx
-<GenericDiceRoller
-  onRoll={(result) => console.log(result)}
-/>
+<GenericDiceRoller onRoll={(result) => console.log(result)} />
 ```
 
 **Layout:**
+
 ```
 ┌─────────────────────────┐
 │ Rolagem Genérica        │
@@ -341,23 +368,20 @@
 ```
 
 **Funcionalidades:**
+
 - Parse de notação: `1d20`, `2d6`, `3d8+5`, `4d10-3`
 - Validação de entrada
 - Histórico de rolagens genéricas
 - Suporte a modificadores (+X, -X)
 
 #### ResourceBar
+
 ```tsx
-<ResourceBar
-  label="Moral"
-  current={3}
-  max={5}
-  color="morale"
-  icon={<HeartIcon />}
-/>
+<ResourceBar label="Moral" current={3} max={5} color="morale" icon={<HeartIcon />} />
 ```
 
 **Layout:**
+
 ```
 ┌─────────────────────────┐
 │ ❤️ Moral          [3/5] │
@@ -368,7 +392,9 @@
 ### 3.3. Componentes Complexos (Organisms)
 
 #### CharacterSheet
+
 **Layout Desktop:**
+
 ```
 ┌────────────────────────────────────────┐
 │ [Nome]                    [XP: 120]    │
@@ -393,6 +419,7 @@
 ```
 
 **Layout Mobile:**
+
 ```
 ┌──────────────────┐
 │ [Nome]           │
@@ -416,6 +443,7 @@
 ```
 
 #### ThoughtCabinet
+
 ```
 ┌────────────────────────────────────────┐
 │ GABINETE DE REFLEXÕES          [3/12]  │
@@ -441,6 +469,7 @@
 ```
 
 #### CampaignManager (Modo Narrador)
+
 ```
 ┌────────────────────────────────────────┐
 │ 🎭 MODO NARRADOR                       │
@@ -478,6 +507,7 @@
 ```
 
 #### CampaignView (Modo Jogador)
+
 ```
 ┌────────────────────────────────────────┐
 │ 👤 MODO JOGADOR: João Silva            │
@@ -501,6 +531,7 @@
 ```
 
 #### RandomCharacterGenerator
+
 ```
 ┌────────────────────────────────────────┐
 │ Gerador de Personagens Aleatórios     │
@@ -550,6 +581,7 @@ graph TD
 ```
 
 **Wireframe - Passo 2: Atributos**
+
 ```
 ┌────────────────────────────────────────┐
 │ Criação de Personagem           [2/5]  │
@@ -594,6 +626,7 @@ graph TD
 ```
 
 **Wireframe - Rolagem**
+
 ```
 ┌────────────────────────────────────────┐
 │ Rolar: Percepção                       │
@@ -640,18 +673,21 @@ graph TD
 ### 5.1. Estratégias por Breakpoint
 
 #### Mobile (320px - 767px)
+
 - **Layout:** Single column, accordions para seções
 - **Navegação:** Bottom tab bar (Home, Personagens, Campanhas, Ferramentas)
 - **Interações:** Touch gestures (swipe, long press)
 - **Densidade:** Espaçamento generoso (min 44px touch targets)
 
 #### Tablet (768px - 1023px)
+
 - **Layout:** Two columns onde apropriado
 - **Navegação:** Side drawer + top bar
 - **Interações:** Híbrido (touch + mouse)
 - **Densidade:** Moderada
 
 #### Desktop (1024px+)
+
 - **Layout:** Multi-column, sidebars permanentes
 - **Navegação:** Sidebar fixa + breadcrumbs
 - **Interações:** Mouse + keyboard shortcuts
@@ -660,6 +696,7 @@ graph TD
 ### 5.2. Componentes Adaptativos
 
 #### Navegação
+
 ```tsx
 // Mobile: Bottom Tab Bar
 <nav className="fixed bottom-0 flex justify-around">
@@ -677,6 +714,7 @@ graph TD
 ```
 
 #### Ficha de Personagem
+
 ```tsx
 // Mobile: Accordions
 <Accordion>
@@ -700,6 +738,7 @@ graph TD
 ### 6.1. Checklist WCAG 2.1 AA
 
 #### Perceptível
+
 - ✅ Contraste mínimo 4.5:1 (texto normal)
 - ✅ Contraste mínimo 3:1 (texto grande)
 - ✅ Texto redimensionável até 200%
@@ -707,6 +746,7 @@ graph TD
 - ✅ Legendas para vídeos (se aplicável)
 
 #### Operável
+
 - ✅ Navegação completa por teclado
 - ✅ Sem armadilhas de teclado
 - ✅ Tempo suficiente para interações
@@ -714,6 +754,7 @@ graph TD
 - ✅ Skip links para conteúdo principal
 
 #### Compreensível
+
 - ✅ Linguagem clara e simples
 - ✅ Navegação consistente
 - ✅ Identificação de erros clara
@@ -721,6 +762,7 @@ graph TD
 - ✅ Prevenção de erros (confirmações)
 
 #### Robusto
+
 - ✅ HTML semântico válido
 - ✅ ARIA labels onde necessário
 - ✅ Compatibilidade com screen readers
@@ -729,12 +771,15 @@ graph TD
 ### 6.2. Implementação Técnica
 
 #### Semântica HTML
+
 ```tsx
 <main>
   <h1>Detetive Existencial Companion</h1>
   <nav aria-label="Navegação principal">
     <ul>
-      <li><a href="/characters">Personagens</a></li>
+      <li>
+        <a href="/characters">Personagens</a>
+      </li>
     </ul>
   </nav>
   <section aria-labelledby="characters-heading">
@@ -745,8 +790,9 @@ graph TD
 ```
 
 #### ARIA Labels
+
 ```tsx
-<button 
+<button
   aria-label="Rolar dados para Percepção"
   aria-describedby="roll-description"
 >
@@ -758,6 +804,7 @@ graph TD
 ```
 
 #### Navegação por Teclado
+
 ```tsx
 // Atalhos globais
 useEffect(() => {
@@ -786,6 +833,7 @@ useEffect(() => {
 ### 7.2. Animações Específicas
 
 #### Rolagem de Dados
+
 ```tsx
 // Animação de "shake" ao rolar
 @keyframes diceRoll {
@@ -800,6 +848,7 @@ useEffect(() => {
 ```
 
 #### Ganho de XP
+
 ```tsx
 // Número flutuando e desaparecendo
 @keyframes xpGain {
@@ -822,6 +871,7 @@ useEffect(() => {
 ```
 
 #### Hover em Cards
+
 ```tsx
 .card {
   transition: transform 250ms ease-out, box-shadow 250ms ease-out;
@@ -840,6 +890,7 @@ useEffect(() => {
 ### 8.1. Estados de Componentes
 
 #### Loading
+
 ```tsx
 <Button loading>
   <Spinner /> Salvando...
@@ -847,20 +898,19 @@ useEffect(() => {
 ```
 
 #### Success
+
 ```tsx
-<Toast variant="success">
-  ✓ Personagem salvo com sucesso!
-</Toast>
+<Toast variant="success">✓ Personagem salvo com sucesso!</Toast>
 ```
 
 #### Error
+
 ```tsx
-<Toast variant="error">
-  ✗ Erro ao salvar. Tente novamente.
-</Toast>
+<Toast variant="error">✗ Erro ao salvar. Tente novamente.</Toast>
 ```
 
 #### Empty State
+
 ```tsx
 <EmptyState
   icon={<UserIcon />}
@@ -872,25 +922,27 @@ useEffect(() => {
 
 ### 8.2. Feedback Visual
 
-| Ação | Feedback |
-|------|----------|
-| **Salvar dados** | Toast "Salvo", ícone de check |
-| **Erro de validação** | Campo vermelho, mensagem de erro |
-| **Rolagem de dados** | Animação de shake, resultado destacado |
-| **Ganho de XP** | Número flutuante, barra de progresso |
-| **Reflexão internalizada** | Confete, som de "ding" (opcional) |
-| **Dano em Moral/Saúde** | Barra pisca vermelho, shake |
+| Ação                       | Feedback                               |
+| -------------------------- | -------------------------------------- |
+| **Salvar dados**           | Toast "Salvo", ícone de check          |
+| **Erro de validação**      | Campo vermelho, mensagem de erro       |
+| **Rolagem de dados**       | Animação de shake, resultado destacado |
+| **Ganho de XP**            | Número flutuante, barra de progresso   |
+| **Reflexão internalizada** | Confete, som de "ding" (opcional)      |
+| **Dano em Moral/Saúde**    | Barra pisca vermelho, shake            |
 
 ---
 
 ## 9. PROTÓTIPOS E MOCKUPS
 
 ### 9.1. Ferramentas Recomendadas
+
 - **Figma:** Design de alta fidelidade, protótipos interativos
 - **Excalidraw:** Wireframes rápidos, fluxos de usuário
 - **Coolors:** Geração de paletas de cores
 
 ### 9.2. Entregáveis de Design
+
 1. **Wireframes Low-Fidelity:** Estrutura básica de todas as telas
 2. **Mockups High-Fidelity:** Design final com cores, tipografia, imagens
 3. **Protótipo Interativo:** Navegação entre telas, animações
@@ -973,7 +1025,8 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: 'bg-accent-primary text-black hover:shadow-[0_0_10px_rgba(212,175,55,0.5)]',
-        secondary: 'border border-accent-primary text-accent-primary hover:bg-accent-primary hover:text-black',
+        secondary:
+          'border border-accent-primary text-accent-primary hover:bg-accent-primary hover:text-black',
         danger: 'bg-accent-danger text-white hover:bg-accent-danger/90',
         ghost: 'text-fg-secondary hover:bg-bg-tertiary',
       },
@@ -991,25 +1044,13 @@ const buttonVariants = cva(
 );
 
 interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   loading?: boolean;
 }
 
-export function Button({ 
-  className, 
-  variant, 
-  size, 
-  loading, 
-  children, 
-  ...props 
-}: ButtonProps) {
+export function Button({ className, variant, size, loading, children, ...props }: ButtonProps) {
   return (
-    <button
-      className={buttonVariants({ variant, size, className })}
-      disabled={loading}
-      {...props}
-    >
+    <button className={buttonVariants({ variant, size, className })} disabled={loading} {...props}>
       {loading && <Spinner className="mr-2" />}
       {children}
     </button>

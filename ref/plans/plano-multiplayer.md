@@ -8,14 +8,17 @@
 ## 1. VISÃO GERAL
 
 ### 1.1. Funcionalidade
+
 Transformar campanhas **locais** (apenas um dispositivo) em campanhas **compartilhadas** (múltiplos usuários conectados em tempo real).
 
 ### 1.2. Casos de Uso
+
 - **Sessão Presencial:** Todos na mesma mesa, cada um com seu dispositivo
 - **Sessão Online:** Jogadores remotos via Discord/Zoom
 - **Jogo Assíncrono:** Jogadores fazem ações em momentos diferentes
 
 ### 1.3. Benefícios
+
 - ✅ Sincronização automática de dados
 - ✅ Narrador revela informações em tempo real
 - ✅ Todos veem rolagens simultaneamente
@@ -29,6 +32,7 @@ Transformar campanhas **locais** (apenas um dispositivo) em campanhas **comparti
 ### 2.1. Escolha de Backend: Firebase Realtime Database
 
 **Por que Firebase?**
+
 - ✅ Sincronização em tempo real nativa
 - ✅ Offline support (cache local)
 - ✅ Fácil integração com Next.js
@@ -37,6 +41,7 @@ Transformar campanhas **locais** (apenas um dispositivo) em campanhas **comparti
 - ✅ Security Rules para controle de acesso
 
 **Alternativas Consideradas:**
+
 - Supabase: Mais complexo, PostgreSQL
 - WebRTC P2P: Sem servidor, mas requer todos online
 - Socket.io: Requer servidor Node.js próprio
@@ -66,7 +71,7 @@ npm install @firebase/database
         "inviteCode": "ABC-123-XYZ",
         "narratorId": "user_abc123"
       },
-      
+
       "permissions": {
         "narrator": "user_abc123",
         "players": {
@@ -77,7 +82,7 @@ npm install @firebase/database
           "user_jkl012": true
         }
       },
-      
+
       "characters": {
         "{characterId}": {
           "ownerId": "user_def456",
@@ -88,7 +93,7 @@ npm install @firebase/database
           "updatedAt": 1703606400000
         }
       },
-      
+
       "sessions": {
         "{sessionId}": {
           "sessionNumber": 12,
@@ -96,7 +101,7 @@ npm install @firebase/database
           "summary": "Confronto no cais",
           "narratorSummary": "Pistas ocultas...",
           "isActive": true,
-          
+
           "events": {
             "{eventId}": {
               "type": "roll", // "roll" | "note" | "combat" | "revelation"
@@ -114,7 +119,7 @@ npm install @firebase/database
           }
         }
       },
-      
+
       "narratorNotes": {
         "{noteId}": {
           "content": "Suspeito esconde arma no porão",
@@ -124,7 +129,7 @@ npm install @firebase/database
           "tags": ["pista", "arma"]
         }
       },
-      
+
       "presence": {
         "user_abc123": {
           "online": true,
@@ -138,7 +143,7 @@ npm install @firebase/database
           "characterId": "{characterId}"
         }
       },
-      
+
       "chat": {
         "{messageId}": {
           "userId": "user_def456",
@@ -150,7 +155,7 @@ npm install @firebase/database
       }
     }
   },
-  
+
   "users": {
     "{userId}": {
       "displayName": "Fernando",
@@ -159,7 +164,7 @@ npm install @firebase/database
       "createdAt": 1703606400000
     }
   },
-  
+
   "inviteCodes": {
     "ABC-123-XYZ": {
       "campaignId": "{campaignId}",
@@ -253,7 +258,7 @@ function generateInviteCode(): string {
   const parts = [
     Array.from({ length: 3 }, () => chars[Math.floor(Math.random() * chars.length)]).join(''),
     Array.from({ length: 3 }, () => chars[Math.floor(Math.random() * chars.length)]).join(''),
-    Array.from({ length: 3 }, () => chars[Math.floor(Math.random() * chars.length)]).join('')
+    Array.from({ length: 3 }, () => chars[Math.floor(Math.random() * chars.length)]).join(''),
   ];
   return parts.join('-'); // "ABC-123-XYZ"
 }
@@ -265,16 +270,16 @@ export async function createInviteCode(
 ): Promise<string> {
   const code = generateInviteCode();
   const inviteRef = ref(database, `inviteCodes/${code}`);
-  
+
   await set(inviteRef, {
     campaignId,
     createdBy: userId,
     createdAt: Date.now(),
     expiresAt: Date.now() + 7 * 24 * 60 * 60 * 1000, // 7 dias
     maxUses,
-    usedCount: 0
+    usedCount: 0,
   });
-  
+
   return code;
 }
 
@@ -285,21 +290,21 @@ export async function validateInviteCode(code: string): Promise<{
 }> {
   const inviteRef = ref(database, `inviteCodes/${code}`);
   const snapshot = await get(inviteRef);
-  
+
   if (!snapshot.exists()) {
     return { valid: false, error: 'Código inválido' };
   }
-  
+
   const invite = snapshot.val();
-  
+
   if (Date.now() > invite.expiresAt) {
     return { valid: false, error: 'Código expirado' };
   }
-  
+
   if (invite.usedCount >= invite.maxUses) {
     return { valid: false, error: 'Código atingiu limite de usos' };
   }
-  
+
   return { valid: true, campaignId: invite.campaignId };
 }
 ```
@@ -321,33 +326,33 @@ export async function joinCampaign(
   if (!validation.valid) {
     throw new Error(validation.error);
   }
-  
+
   const campaignId = validation.campaignId!;
-  
+
   // 2. Adicionar usuário às permissões
   const permissionsRef = ref(database, `campaigns/${campaignId}/permissions/players/${userId}`);
   await set(permissionsRef, true);
-  
+
   // 3. Vincular personagem (se fornecido)
   if (characterId) {
     const charRef = ref(database, `campaigns/${campaignId}/characters/${characterId}`);
     await update(charRef, {
       ownerId: userId,
-      linkedAt: Date.now()
+      linkedAt: Date.now(),
     });
   }
-  
+
   // 4. Incrementar contador de usos
   const inviteRef = ref(database, `inviteCodes/${inviteCode}/usedCount`);
   await update(inviteRef, increment(1));
-  
+
   // 5. Adicionar presença
   const presenceRef = ref(database, `campaigns/${campaignId}/presence/${userId}`);
   await set(presenceRef, {
     online: true,
     lastSeen: Date.now(),
     role: 'player',
-    characterId: characterId || null
+    characterId: characterId || null,
   });
 }
 ```
@@ -373,18 +378,18 @@ export function useCampaignSync(campaignId: string) {
     if (!campaignId) return;
 
     const campaignRef = ref(database, `campaigns/${campaignId}`);
-    
+
     // Escutar mudanças
     const unsubscribe = onValue(campaignRef, async (snapshot) => {
       setSyncing(true);
       const data = snapshot.val();
-      
+
       if (data) {
         // Sincronizar com IndexedDB local
         await syncToLocal(campaignId, data);
         setLastSync(new Date());
       }
-      
+
       setSyncing(false);
     });
 
@@ -400,26 +405,26 @@ async function syncToLocal(campaignId: string, data: any) {
     id: campaignId,
     ...data.metadata,
     mode: 'multiplayer',
-    syncedAt: Date.now()
+    syncedAt: Date.now(),
   });
-  
+
   // Atualizar personagens
   if (data.characters) {
     for (const [charId, charData] of Object.entries(data.characters)) {
       await db.characters.put({
         id: charId,
-        ...charData as any
+        ...(charData as any),
       });
     }
   }
-  
+
   // Atualizar sessões
   if (data.sessions) {
     for (const [sessionId, sessionData] of Object.entries(data.sessions)) {
       await db.sessions.put({
         id: sessionId,
         campaignId,
-        ...sessionData as any
+        ...(sessionData as any),
       });
     }
   }
@@ -433,31 +438,28 @@ async function syncToLocal(campaignId: string, data: any) {
 import { ref, update } from 'firebase/database';
 import { database } from './firebase';
 
-export async function revealNote(
-  campaignId: string,
-  noteId: string
-): Promise<void> {
+export async function revealNote(campaignId: string, noteId: string): Promise<void> {
   const noteRef = ref(database, `campaigns/${campaignId}/narratorNotes/${noteId}`);
-  
+
   await update(noteRef, {
     isRevealed: true,
-    revealedAt: Date.now()
+    revealedAt: Date.now(),
   });
-  
+
   // Todos os jogadores conectados recebem atualização automaticamente
 }
 
 export async function revealAllNotes(campaignId: string): Promise<void> {
   const notesRef = ref(database, `campaigns/${campaignId}/narratorNotes`);
   const snapshot = await get(notesRef);
-  
+
   if (snapshot.exists()) {
     const updates: any = {};
     snapshot.forEach((child) => {
       updates[`${child.key}/isRevealed`] = true;
       updates[`${child.key}/revealedAt`] = Date.now();
     });
-    
+
     await update(notesRef, updates);
   }
 }
@@ -480,27 +482,27 @@ export function usePresence(campaignId: string, userId: string, role: string) {
     if (!campaignId || !userId) return;
 
     const presenceRef = ref(database, `campaigns/${campaignId}/presence/${userId}`);
-    
+
     // Marcar como online
     set(presenceRef, {
       online: true,
       lastSeen: serverTimestamp(),
-      role
+      role,
     });
-    
+
     // Configurar desconexão
     onDisconnect(presenceRef).set({
       online: false,
       lastSeen: serverTimestamp(),
-      role
+      role,
     });
-    
+
     // Cleanup
     return () => {
       set(presenceRef, {
         online: false,
         lastSeen: Date.now(),
-        role
+        role,
       });
     };
   }, [campaignId, userId, role]);
@@ -528,7 +530,7 @@ export function PresenceIndicator({ campaignId }: { campaignId: string }) {
 
   useEffect(() => {
     const presenceRef = ref(database, `campaigns/${campaignId}/presence`);
-    
+
     const unsubscribe = onValue(presenceRef, (snapshot) => {
       setUsers(snapshot.val() || {});
     });
@@ -550,7 +552,7 @@ export function PresenceIndicator({ campaignId }: { campaignId: string }) {
           </li>
         ))}
       </ul>
-      
+
       {offline.length > 0 && (
         <>
           <h4>💤 Offline ({offline.length})</h4>
@@ -582,16 +584,16 @@ export function PresenceIndicator({ campaignId }: { campaignId: string }) {
           data.child('permissions/players/' + auth.uid).exists() ||
           data.child('permissions/spectators/' + auth.uid).exists()
         )",
-        
+
         "metadata": {
           ".write": "auth != null && data.parent().child('permissions/narrator').val() == auth.uid"
         },
-        
+
         "narratorNotes": {
           ".read": "auth != null && data.parent().child('permissions/narrator').val() == auth.uid",
           ".write": "auth != null && data.parent().child('permissions/narrator').val() == auth.uid"
         },
-        
+
         "characters": {
           "$characterId": {
             ".write": "auth != null && (
@@ -600,23 +602,23 @@ export function PresenceIndicator({ campaignId }: { campaignId: string }) {
             )"
           }
         },
-        
+
         "sessions": {
           ".write": "auth != null && data.parent().child('permissions/narrator').val() == auth.uid"
         },
-        
+
         "presence": {
           "$userId": {
             ".write": "auth != null && $userId == auth.uid"
           }
         },
-        
+
         "chat": {
           ".write": "auth != null"
         }
       }
     },
-    
+
     "inviteCodes": {
       "$code": {
         ".read": "auth != null",
@@ -652,7 +654,7 @@ export function CreateCampaignModal() {
       description,
       mode,
       narratorId: user!.uid,
-      createdAt: new Date()
+      createdAt: new Date(),
     });
 
     if (mode === 'multiplayer') {
@@ -660,7 +662,7 @@ export function CreateCampaignModal() {
       const campaignRef = ref(database, `campaigns/${campaign.id}`);
       await set(campaignRef, {
         metadata: { name, description, narratorId: user!.uid },
-        permissions: { narrator: user!.uid, players: {}, spectators: {} }
+        permissions: { narrator: user!.uid, players: {}, spectators: {} },
       });
 
       // Gerar código de convite
@@ -672,9 +674,9 @@ export function CreateCampaignModal() {
   return (
     <div className="modal">
       <h2>Nova Campanha</h2>
-      
+
       <input placeholder="Nome da campanha" />
-      
+
       <label>
         Modo:
         <select value={mode} onChange={(e) => setMode(e.target.value as any)}>
@@ -682,16 +684,14 @@ export function CreateCampaignModal() {
           <option value="multiplayer">Multiplayer (compartilhado)</option>
         </select>
       </label>
-      
+
       <button onClick={handleCreate}>Criar Campanha</button>
-      
+
       {inviteCode && (
         <div className="invite-code">
           <h3>Código de Convite:</h3>
           <code>{inviteCode}</code>
-          <button onClick={() => navigator.clipboard.writeText(inviteCode)}>
-            Copiar
-          </button>
+          <button onClick={() => navigator.clipboard.writeText(inviteCode)}>Copiar</button>
         </div>
       )}
     </div>
@@ -715,7 +715,7 @@ export function JoinCampaignModal() {
 
   const handleJoin = async () => {
     setError(null);
-    
+
     const validation = await validateInviteCode(code);
     if (!validation.valid) {
       setError(validation.error!);
@@ -729,15 +729,15 @@ export function JoinCampaignModal() {
   return (
     <div className="modal">
       <h2>Entrar em Campanha</h2>
-      
+
       <input
         placeholder="Código de Convite (ABC-123-XYZ)"
         value={code}
         onChange={(e) => setCode(e.target.value.toUpperCase())}
       />
-      
+
       {error && <p className="error">{error}</p>}
-      
+
       <button onClick={handleJoin}>Entrar</button>
     </div>
   );
@@ -760,13 +760,13 @@ export async function sendMessage(
   message: string
 ): Promise<void> {
   const chatRef = ref(database, `campaigns/${campaignId}/chat`);
-  
+
   await push(chatRef, {
     userId,
     userName,
     message,
     timestamp: Date.now(),
-    type: 'text'
+    type: 'text',
   });
 }
 
@@ -776,7 +776,7 @@ export function useChatMessages(campaignId: string, limit: number = 50) {
   useEffect(() => {
     const chatRef = ref(database, `campaigns/${campaignId}/chat`);
     const chatQuery = query(chatRef, orderByChild('timestamp'), limitToLast(limit));
-    
+
     const unsubscribe = onValue(chatQuery, (snapshot) => {
       const msgs: any[] = [];
       snapshot.forEach((child) => {
@@ -797,11 +797,13 @@ export function useChatMessages(campaignId: string, limit: number = 50) {
 ## 10. CUSTOS E LIMITES
 
 ### Firebase Spark (Gratuito)
+
 - **Armazenamento:** 1 GB
 - **Transferência:** 10 GB/mês
 - **Conexões simultâneas:** 100
 
 ### Estimativa de Uso
+
 - 1 campanha ativa ≈ 5 MB
 - 1 sessão de 4 horas ≈ 2 MB de eventos
 - **Capacidade:** ~200 campanhas simultâneas
@@ -811,26 +813,31 @@ export function useChatMessages(campaignId: string, limit: number = 50) {
 ## 11. ROADMAP DE IMPLEMENTAÇÃO
 
 ### Fase 1: Setup (1 semana)
+
 - [ ] Configurar Firebase projeto
 - [ ] Implementar autenticação anônima
 - [ ] Security Rules básicas
 
 ### Fase 2: Convites (1 semana)
+
 - [ ] Sistema de códigos de convite
 - [ ] UI de criar/entrar campanha
 - [ ] Validação e expiração
 
 ### Fase 3: Sincronização (2 semanas)
+
 - [ ] Sync em tempo real (Firebase ↔ IndexedDB)
 - [ ] Resolução de conflitos
 - [ ] Offline support
 
 ### Fase 4: Presença e Chat (1 semana)
+
 - [ ] Sistema de presença
 - [ ] Indicadores online/offline
 - [ ] Chat integrado
 
 ### Fase 5: Testes e Polish (1 semana)
+
 - [ ] Testes com múltiplos usuários
 - [ ] Performance optimization
 - [ ] Bug fixes

@@ -1,4 +1,5 @@
 # **Um Sistema Noir de RPG**
+
 ## INTRODUÇÃO
 
 Este sistema é baseado no CRPG Disco Elysium, modificando suas mecânicas para funcionar em um RPG de Mesa. Embora pensado para narrativas investigativas, assim como o jogo em que se baseia, este sistema é aberto para interações diversas e histórias que não necessariamente precisam envolver investigar algo. O que move o jogo é a trama e esta é movida pelas escolhas dos personagens principais: os jogadores. Suas mentes vão interpretar e ver o mundo a sua volta e levar eles a lugares onde o inimaginável pode acontecer, afinal, quem interpreta o mundo são eles próprios, o narrador apenas os guia em suas interações entre suas mentes ordinárias e o mundo a sua volta.
@@ -23,9 +24,11 @@ Este sistema é baseado no CRPG Disco Elysium, modificando suas mecânicas para 
 ## **1. CONCEITOS FUNDAMENTAIS**
 
 ### **1.1. Estrutura da Mente**
+
 Um personagem de jogador é um conjunto de vozes discordantes habitando o mesmo crânio. Cada uma tem personalidade própria e influencia a narrativa independentemente da vontade consciente, essas vozes nem sempre falam coisas coerentes ou verdades, mas mesmo assim elas fazem parte da personagem. Em termos de jogo, quem interpreta as vozes é o Narrador.
 
 **Quatro Atributos Mentais:**
+
 - **INTELECTO (INT)**: Lógica, conhecimento, argumentação
 - **PSIQUE (PSY)**: Emoção, força de vontade, intuição
 - **FÍSICO (FYS)**: Força, resistência, instinto de sobrevivência
@@ -34,6 +37,7 @@ Um personagem de jogador é um conjunto de vozes discordantes habitando o mesmo 
 **Seis Perícias por Atributo**: Cada uma é uma **voz personificada** com desejo, medo e opinião sobre suas escolhas.
 
 ### **1.2. Recursos de Sobrevivência**
+
 - **Moral**: Saúde mental. Quando chega a zero, o personagem entra em colapso psicológico.
 - **Saúde**: Integridade física. Quando chega a zero, o personagem desmaia.
 - **Reflexões**: Ideologias internalizadas que dão bônus narrativos e mecânicos.
@@ -45,9 +49,11 @@ Um personagem de jogador é um conjunto de vozes discordantes habitando o mesmo 
 ## **2. CRIAÇÃO DE PERSONAGEM**
 
 ### **2.1. Distribuição de Atributos**
+
 O jogador possui **8 pontos** para distribuir entre os quatro Atributos. Nenhum pode começar abaixo de **1** ou acima de **5**.
 
 **Builds Recomendadas:**
+
 - **Detetive Clássico:** INT 4, PSY 2, FYS 2, MOT 2
 - **Trem-Bala Emocional:** INT 1, PSY 5, FYS 2, MOT 2
 - **Brutamontes com Sentimentos:** INT 1, PSY 2, FYS 5, MOT 2
@@ -58,22 +64,26 @@ O jogador possui **8 pontos** para distribuir entre os quatro Atributos. Nenhum 
 O jogador possui **12 Pontos de Perícia** adicionais para distribuir **livremente** após a distribuição inicial (nível igual ao Atributo pai).
 
 **Limites Importantes:**
+
 - **Limite por Atributo**: Nenhuma perícia pode exceder seu **Atributo Pai +1** (máximo 6 sem bônus)
 - **Limite Global**: Nenhuma perícia pode exceder **nível 9** (com bônus de Reflexão)
 
 **Sobrecarga Temporal (Regra Simplificada):**
 Quando o jogador aumenta uma perícia **1 nível acima** do Atributo pai, o personagem sofre **tensão interna**:
+
 - **Efeito**: -4 em testes dessa perícia específica
 - **Custo Narrativo**: A voz dessa perícia fica "muito alta" - o Narrador deve interpretá-la como irritante, obsessiva ou autodestrutiva
 - **Removendo Sobrecarga**: Ao aumentar o Atributo pai, **todas as penalidades são removidas** e o limite de perícia aumenta naturalmente
 
 **Exemplo Prático:**
+
 - INT 3 → Perícias de INTELECTO com limite 4
 - Você aumenta Lógica de 3 para 4 (sobrecarga ativa)
 - Testes de Lógica passam a ser: 2d6 + (nível 4) + (INT 3) - 2 = 2d6 + 5
 - Quando INT chega a 4, a penalidade desaparece automaticamente
 
 ### **2.3. Recursos Iniciais**
+
 - **Moral Inicial** = 1 + Nível da perícia **Vontade**
 - **Saúde Inicial** = 1 + Nível da perícia **Resistência**
 - **Slots de Reflexão** = 3 (pode comprar mais: 1 Ponto de Perícia por slot, máximo de 12)
@@ -81,9 +91,11 @@ Quando o jogador aumenta uma perícia **1 nível acima** do Atributo pai, o pers
 - **Substâncias**: 2 unidades (se **Eletroquímica ≥ 3**)
 
 ### **2.4. Primeira Reflexão**
+
 Escolha **uma Reflexão de Nível 1 ou 2** já internalizada. Esta é sua **crença central** - você já "pagou" o custo dela no passado narrativo e recebe sua Solução imediatamente.
 
 **Opções Recomendadas:**
+
 - **Advogado de Si Mesmo** (Nível 1): Para detetives autossuficientes
 - **Coxinha do Bar** (Nível 2): Para personagens que escondem fragilidade
 - **O Apodrecimento** (Nível 2): Para investigadores em crise existencial
@@ -93,6 +105,7 @@ Escolha **uma Reflexão de Nível 1 ou 2** já internalizada. Esta é sua **cren
 ## **3. SISTEMA DE RESOLUÇÃO**
 
 ### **3.1. Testes de Perícia**
+
 **Rolagem Padrão:** 2d6 + Nível da Perícia + Nível do Atributo Pai
 
 **Sucesso:** Total ≥ Dificuldade da Provação (CD)
@@ -118,13 +131,15 @@ Escolha **uma Reflexão de Nível 1 ou 2** já internalizada. Esta é sua **cren
 
 **Exemplo de Ativação:** Um personagem com Percepção 4 (MOT 2) tem passivo 12. Se a cena se passa numa sala onde há um documento escondido, e o documento é relevante para a narrativa, o teste passivo ativa-se e o personagem nota o documento sem precisar pedir um teste.
 
-**Testes Assistidos:** 
+**Testes Assistidos:**
+
 - **Perícias**: Se o jogador possui **duas perícias relevantes com nível ≥ 3**, role **3d6** e descarte o menor resultado.
 - **Aliados**: Um jogador aliado com perícia relevante ≥ 3 pode conceder **+1d6 adicional** (total 3d6) em seu teste, representando orientação externa.
 - **Reflexões**: Se o jogador possui uma Reflexão internalizada que se aplica à situação, ela pode conceder **+1d6 adicional** (total 3d6).
 - **Limite**: O jogador só pode receber **uma** fonte de assistência externa por teste (aliado OU reflexão).
 
 **Exemplos de Combos:**
+
 - Empatia + Drama: Detectar mentiras emocionais
 - Percepção + Cálculo Visual: Reconstruir cena de crime
 - Interface + Lógica: Diagnosticar problemas técnicos complexos
@@ -151,7 +166,7 @@ Cada perícia é uma voz personificada que influencia a narrativa e oferece bôn
 | Perícia                    | Descrição Narrativa                                                                                                                                    | Efeito Mecânico                                                                                                                                                                                                         |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Vontade**                | O terapeuta que evita suicídio pela força do otimismo, sussurrando "você consegue" mesmo quando você não consegue mais se lembrar do seu próprio nome. | **+1 Moral máx.; limite de nível +1**<br>Aumenta sua Moral máxima em +1 ponto. Vontade é a defesa principal contra dano mental e colapsos psicológicos. Aumenta o limite máximo de nível em +1.                         |
-| **Império Interior**       | O poeta que conversa com lâmpadas e o vento, convencido de que até o vazio tem consciência. Ele é o vazio.                                             | **Diálogos com objetos; limite de nível +1**<br>Permite interagir com objetos inanimados e receber visões/presentimentos sobrenaturais. Fonte de *insights* irracionais. Aumenta o limite máximo de nível em +1.        |
+| **Império Interior**       | O poeta que conversa com lâmpadas e o vento, convencido de que até o vazio tem consciência. Ele é o vazio.                                             | **Diálogos com objetos; limite de nível +1**<br>Permite interagir com objetos inanimados e receber visões/presentimentos sobrenaturais. Fonte de _insights_ irracionais. Aumenta o limite máximo de nível em +1.        |
 | **Empatia**                | O espelho emocional que absorve sentimentos alheios até se afogar neles. Ele chora quando você faz outras pessoas chorarem.                            | **Revela emoções ocultas; limite de nível +1**<br>Testes bem-sucedidos permitem sentir o que NPCs sentem, revelando motivações ocultas. Desbloqueia opções compassivas. Aumenta o limite máximo de nível em +1.         |
 | **Autoridade**             | O capitão que exige que o cosmos reconheça sua insígnia, gritando ordens para o espelho. Ele desmaia quando ninguém obedece.                           | **Intimidação social; limite de nível +1**<br>Testes bem-sucedidos permitem impor sua vontade e exigir respeito. Útil em confrontos sociais. Aumenta o limite máximo de nível em +1.                                    |
 | **Espírito da Corporação** | A antena policial que captura a respiração de colegas, sentindo quando um irmão de farda morre. Ele te obriga a fazer o brinde "vida longa à Cidade".  | **Flashes da corporação; limite de nível +1**<br>Fornece vislumbres do que colegas de instituição estão fazendo. Fortalece vínculos organizacionais. Aumenta o limite máximo de nível em +1.                            |
@@ -159,14 +174,14 @@ Cada perícia é uma voz personificada que influencia a narrativa e oferece bôn
 
 ### **4.3. FÍSICO (FYS)**
 
-| Perícia | Descrição Narrativa | Efeito Mecânico |
-|---------|---------------------|-----------------|
-| **Resistência** | O carregador de móveis que decide se você aguenta mais uma noite, se você tem combustível para continuar. Ele é o último a desistir. | **+1 Saúde máx.; limite de nível +1**<br>Aumenta sua Saúde máxima em +1 ponto. Determina quanto dano físico você pode absorver antes de desmaiar. Aumenta o limite máximo de nível em +1. |
-| **Limiar de Dor** | O masoquista que ri ao bater o dedo na quina, convencido de que dor é só sua mente mentindo para você. Ele quer que você teste isso. | **Ignora penalidades de dor; limite de nível +1**<br>Permite ignorar penalidades de testes ao sofrer dano ou estar ferido. Quanto maior, mais você pode "aguentar". Aumenta o limite máximo de nível em +1. |
-| **Instrumento Físico** | O lutador de clube que mede homens pelo bíceps e mulheres pela forma que seguram um copo. Ele quer que você resolva tudo com socos. | **Força bruta; limite de nível +1**<br>Testes bem-sucedidos permitem arrombar portas, levantar objetos pesados, intimidar fisicamente. Representa força pura. Aumenta o limite máximo de nível em +1. |
-| **Eletroquímica** | O viciado que celebra cada cerveja como Nirvana, cada pílula como Apocalipse adiado. Ele sussurra que você merece mais uma dose. Sempre. | **Drogas dão buffs; limite de nível +1**<br>Protege contra efeitos negativos de substâncias e amplifica os positivos. Permite identificar drogas e toxinas. Aumenta o limite máximo de nível em +1. |
-| **Arrepios** | A cidade inteira que sobe pela espinha quando venta, sussurrando segredos através de canos e buracos de fechadura. Ela sabe o que você fez. | **Visões urbanas; limite de nível +1**<br>Conecta o personagem ao ambiente urbano, fornecendo visões e presságios. Equivalente físico do Império Interior. Aumenta o limite máximo de nível em +1. |
-| **Meia-Luz** | O guarda-costas paranoico que vê faca em toda sombra, convencido de que o mundo é uma cena de crime esperando acontecer. Ele nunca desliga. | **Fuga ou luta; limite de nível +1**<br>Determina reação em situações de perigo. Altos níveis aumentam iniciativa e permitem agir primeiro. Aumenta o limite máximo de nível em +1. |
+| Perícia                | Descrição Narrativa                                                                                                                         | Efeito Mecânico                                                                                                                                                                                             |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Resistência**        | O carregador de móveis que decide se você aguenta mais uma noite, se você tem combustível para continuar. Ele é o último a desistir.        | **+1 Saúde máx.; limite de nível +1**<br>Aumenta sua Saúde máxima em +1 ponto. Determina quanto dano físico você pode absorver antes de desmaiar. Aumenta o limite máximo de nível em +1.                   |
+| **Limiar de Dor**      | O masoquista que ri ao bater o dedo na quina, convencido de que dor é só sua mente mentindo para você. Ele quer que você teste isso.        | **Ignora penalidades de dor; limite de nível +1**<br>Permite ignorar penalidades de testes ao sofrer dano ou estar ferido. Quanto maior, mais você pode "aguentar". Aumenta o limite máximo de nível em +1. |
+| **Instrumento Físico** | O lutador de clube que mede homens pelo bíceps e mulheres pela forma que seguram um copo. Ele quer que você resolva tudo com socos.         | **Força bruta; limite de nível +1**<br>Testes bem-sucedidos permitem arrombar portas, levantar objetos pesados, intimidar fisicamente. Representa força pura. Aumenta o limite máximo de nível em +1.       |
+| **Eletroquímica**      | O viciado que celebra cada cerveja como Nirvana, cada pílula como Apocalipse adiado. Ele sussurra que você merece mais uma dose. Sempre.    | **Drogas dão buffs; limite de nível +1**<br>Protege contra efeitos negativos de substâncias e amplifica os positivos. Permite identificar drogas e toxinas. Aumenta o limite máximo de nível em +1.         |
+| **Arrepios**           | A cidade inteira que sobe pela espinha quando venta, sussurrando segredos através de canos e buracos de fechadura. Ela sabe o que você fez. | **Visões urbanas; limite de nível +1**<br>Conecta o personagem ao ambiente urbano, fornecendo visões e presságios. Equivalente físico do Império Interior. Aumenta o limite máximo de nível em +1.          |
+| **Meia-Luz**           | O guarda-costas paranoico que vê faca em toda sombra, convencido de que o mundo é uma cena de crime esperando acontecer. Ele nunca desliga. | **Fuga ou luta; limite de nível +1**<br>Determina reação em situações de perigo. Altos níveis aumentam iniciativa e permitem agir primeiro. Aumenta o limite máximo de nível em +1.                         |
 
 ### **4.4. MOTRICIDADE (MOT)**
 
@@ -188,6 +203,7 @@ Cada perícia é uma voz personificada que influencia a narrativa e oferece bôn
 O Gabinete é o cérebro secundário do jogador - onde ideologias, memórias delirantes e filosofias de bar se cristalizam.
 
 **Processo:**
+
 1. **Aquisição**: Descubra uma ideia no mundo (NPC, objeto, fracasso espetacular)
 2. **Internalização**: Ocupe um slot vazio e aceite a ideia
 3. **Processamento**: Enquanto "cozinha", sofre o **Problema** (penalidade narrativa e mecânica)
@@ -226,18 +242,19 @@ Penalidade de **-1 a -4** em uma ou duas perícias + efeito narrativo.
 Bônus proporcional ao Problema + **limite de nível +1** (se expandir horizontes).
 
 **Passo 4: Valide o Balanceamento**
+
 - Bônus não deve exceder +4 específico ou +2 geral
 - Penalidade deve ser sentida frequentemente
 - Limite +1 é padrão
 
 **Template:**
-- **Nome**: Título evocativo 
-- **Origem**: Ação repetida ou defesa veemente 
-- **Problema**: -X (Perícia) e efeito narrativo 
-- **Solução**: +X (Perícia) e (limite +1, se aplicável) 
-- **Tempo**: Nível 1-4 
-- **Descrição**: 1-2 frases que personificam a ideia
 
+- **Nome**: Título evocativo
+- **Origem**: Ação repetida ou defesa veemente
+- **Problema**: -X (Perícia) e efeito narrativo
+- **Solução**: +X (Perícia) e (limite +1, se aplicável)
+- **Tempo**: Nível 1-4
+- **Descrição**: 1-2 frases que personificam a ideia
 
 ---
 
@@ -247,97 +264,105 @@ Bônus proporcional ao Problema + **limite de nível +1** (se expandir horizonte
 
 | Nome                     | Origem                                                     | Descrição Narrativa                                                                       | Problema                                                      | Solução                                          |
 | ------------------------ | ---------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------ |
-| **Advogado de Si Mesmo** | Replicar "eu mesmo sei o que faço" 3+ vezes                | *"Decide que o melhor defensor é você mesmo – e nunca mais para de argumentar."*          | **-1** Empatia (você soa como advogado arrogante)             | **+1** Retórica & limite de nível +1             |
-| **Camarada de Copas**    | Beber sozinho 3+ vezes em situações sociais                | *"Você e o copo são camaradas – o copo nunca discuta, apenas escuta."*                    | **-1** Lógica (o álcool dificulta raciocínio claro)           | **+1** Coordenação Mão-Olho & limite de nível +1 |
-| **Dia 1 Servo**          | Expressar "hoje começa minha ruína" em 3+ manhãs distintas | *"Todo dia é o primeiro dia de escravidão – e corre em círculos para fugir de si mesmo."* | **-1** Vontade (falta de propósito enfraquece a mente)        | **+1** Velocidade de Reação & limite de nível +1 |
-| **Gato Preto**           | Suspeitar de azar/sinais após 3+ eventos ruins             | *"Você é o gato que atravessa – traz má sorte para si mesmo e para os outros."*           | **-1** Meia-Luz (paranoia aumenta, mas é mal direcionada)     | **+1** Savoire Faire & limite de nível +1        |
-| **Lente de Homem Morto** | Examinar fotos de cadáveres ou cenas de crime 3+ vezes     | *"Olha pelo olho de quem morreu – e vê o mundo como uma cena de crime eterna."*           | **-1** Cálculo Visual (substitui análise visual por morbidez) | **+1** Lógica & limite de nível +1               |
+| **Advogado de Si Mesmo** | Replicar "eu mesmo sei o que faço" 3+ vezes                | _"Decide que o melhor defensor é você mesmo – e nunca mais para de argumentar."_          | **-1** Empatia (você soa como advogado arrogante)             | **+1** Retórica & limite de nível +1             |
+| **Camarada de Copas**    | Beber sozinho 3+ vezes em situações sociais                | _"Você e o copo são camaradas – o copo nunca discuta, apenas escuta."_                    | **-1** Lógica (o álcool dificulta raciocínio claro)           | **+1** Coordenação Mão-Olho & limite de nível +1 |
+| **Dia 1 Servo**          | Expressar "hoje começa minha ruína" em 3+ manhãs distintas | _"Todo dia é o primeiro dia de escravidão – e corre em círculos para fugir de si mesmo."_ | **-1** Vontade (falta de propósito enfraquece a mente)        | **+1** Velocidade de Reação & limite de nível +1 |
+| **Gato Preto**           | Suspeitar de azar/sinais após 3+ eventos ruins             | _"Você é o gato que atravessa – traz má sorte para si mesmo e para os outros."_           | **-1** Meia-Luz (paranoia aumenta, mas é mal direcionada)     | **+1** Savoire Faire & limite de nível +1        |
+| **Lente de Homem Morto** | Examinar fotos de cadáveres ou cenas de crime 3+ vezes     | _"Olha pelo olho de quem morreu – e vê o mundo como uma cena de crime eterna."_           | **-1** Cálculo Visual (substitui análise visual por morbidez) | **+1** Lógica & limite de nível +1               |
 
 ### **6.2. Nível 2: Ideologias Improvisadas (1 Sessão)**
 
-| Nome | Origem | Descrição Narrativa                                                                                                          | Problema | Solução |
-|------|--------|---------------------|----------|---------|
-| **Ama-se Como um Predador** | Admiração própria em espelho 3+ vezes em momentos de tensão | *"Transforma auto-ódio em narcisismo muscular: você se ama como leão ama a própria juba – por instinto, não por mérito."*    | **-2** Empatia (narcisismo bloqueia conexão com outros) | **+2** Instrumento Físico & limite de nível +1 |
-| **Apologia do Homem-Bomba** | Explodir/quebrar objetos 3+ vezes para liberar estresse | *"Decide que explosões são uma forma de arte – e de terapia. Quebrar é criar em reverso."*                                   | **-2** Composição (impulsividade destrutiva) | **+2** Eletroquímica & limite de nível +1 |
-| **Arte Suja** | Entrar em 3+ ambientes degradados por "inspiração" | *"Acredita que arte verdadeira tem cheiro de banheiro público. Beleza só existe na degradação."*                             | **-2** Conceitualização (subverte a própria definição de arte) | **+2** Drama & limite de nível +1 |
-| **Coxinha do Bar** | Comer sozinho em 3+ estabelecimentos populares | *"Você é a coxinha – crocante por fora, mole por dentro. Uma fachada de resistência."*                                       | **-2** Empatia (esconder emoções bloqueia conexão) | **+2** Instrumento Físico em testes para esconder/mascarar emoções ou fragilidade & limite de nível +1 |
-| **Disco Elysium** | Olhar fixamente para o céu/horizonte 3+ vezes por +1 minuto | *"A música que toca ao olhar o céu da cidade – uma melodia que só você ouve, composta de ruído urbano e silêncio mortal."*   | **-2** Enciclopédia (substitui fatos por sensações) | **+2** Conceitualização & limite de nível +1 |
-| **Dose Dupla** | Consumir 2+ doses simultaneamente 3+ vezes | *"Tudo fica melhor com duas doses. Uma para o corpo, uma para a alma – e mais duas para esquecer a diferença."*              | **-1** Percepção & **-1** Coordenação (dupla intoxicação) | **+2** Eletroquímica & limite de nível +1. Se alcoolizado, **teste CD 8**: sucesso = +2 adicional por 1 cena apenas. Falha = Condição "Vício Leve" imediata. |
-| **Foco Laser** | Repetir "preciso focar" ao tentar ignorar distrações 3+ vezes | *"Cérebro vira feixe de luz único – tudo mais é distração que deve ser queimada."*                                           | **-2** Percepção (foco excessivo cega para o contexto) | **+2** Coordenação Mão-Olho & limite de nível +1 |
-| **Forte Inabalável** | Sustentar opinião impopular 3+ vezes sob pressão social | *"Você é o rochedo – ondas quebram, você fica."*                                                                             | **-2** Vontade (rigidez mental enfraquece a adaptação) | **+2** Resistência & limite de nível +1 |
-| **Lutador de Rua** | Encarar situações de conflito físico com sorriso 3+ vezes | *"Mundo é um ringue – você o desafiante, sempre pronto para o próximo round."*                                               | **-2** Instrumento Físico (confiança excessiva em luta leva a erros) | **+2** Meia-Luz & limite de nível +1 |
-| **Wompty-Dompty Dom Centre** | Ler placas estranhas ou ouvir fatos triviais 3+ vezes | *"O centro de dominação de Wompty-Dompty. Você se tornou um radar de trivialidades, capturando fatos inúteis como troféus."* | **-2** Lógica (prioriza curiosidades sobre dedução) | **+2** Enciclopédia & limite de nível +1. Ao descobrir fatos obscuros: +5 XP (não cumulativo por cena) |
-| **Iluminação Falsa** | Ter uma epifania sob pressão que falha | *"A luz que você viu era de um trem vindo na sua direção. Epifanias sob pressão são ilusões perigosas."*                     | **-2** Vontade (desilusão consome esperança) | **+2** em testes de **Conceitualização** quando não houver tempo para pensar; **+2** Conceitualização & limite de nível +1 |
+| Nome                         | Origem                                                        | Descrição Narrativa                                                                                                          | Problema                                                             | Solução                                                                                                                                                      |
+| ---------------------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Ama-se Como um Predador**  | Admiração própria em espelho 3+ vezes em momentos de tensão   | _"Transforma auto-ódio em narcisismo muscular: você se ama como leão ama a própria juba – por instinto, não por mérito."_    | **-2** Empatia (narcisismo bloqueia conexão com outros)              | **+2** Instrumento Físico & limite de nível +1                                                                                                               |
+| **Apologia do Homem-Bomba**  | Explodir/quebrar objetos 3+ vezes para liberar estresse       | _"Decide que explosões são uma forma de arte – e de terapia. Quebrar é criar em reverso."_                                   | **-2** Composição (impulsividade destrutiva)                         | **+2** Eletroquímica & limite de nível +1                                                                                                                    |
+| **Arte Suja**                | Entrar em 3+ ambientes degradados por "inspiração"            | _"Acredita que arte verdadeira tem cheiro de banheiro público. Beleza só existe na degradação."_                             | **-2** Conceitualização (subverte a própria definição de arte)       | **+2** Drama & limite de nível +1                                                                                                                            |
+| **Coxinha do Bar**           | Comer sozinho em 3+ estabelecimentos populares                | _"Você é a coxinha – crocante por fora, mole por dentro. Uma fachada de resistência."_                                       | **-2** Empatia (esconder emoções bloqueia conexão)                   | **+2** Instrumento Físico em testes para esconder/mascarar emoções ou fragilidade & limite de nível +1                                                       |
+| **Disco Elysium**            | Olhar fixamente para o céu/horizonte 3+ vezes por +1 minuto   | _"A música que toca ao olhar o céu da cidade – uma melodia que só você ouve, composta de ruído urbano e silêncio mortal."_   | **-2** Enciclopédia (substitui fatos por sensações)                  | **+2** Conceitualização & limite de nível +1                                                                                                                 |
+| **Dose Dupla**               | Consumir 2+ doses simultaneamente 3+ vezes                    | _"Tudo fica melhor com duas doses. Uma para o corpo, uma para a alma – e mais duas para esquecer a diferença."_              | **-1** Percepção & **-1** Coordenação (dupla intoxicação)            | **+2** Eletroquímica & limite de nível +1. Se alcoolizado, **teste CD 8**: sucesso = +2 adicional por 1 cena apenas. Falha = Condição "Vício Leve" imediata. |
+| **Foco Laser**               | Repetir "preciso focar" ao tentar ignorar distrações 3+ vezes | _"Cérebro vira feixe de luz único – tudo mais é distração que deve ser queimada."_                                           | **-2** Percepção (foco excessivo cega para o contexto)               | **+2** Coordenação Mão-Olho & limite de nível +1                                                                                                             |
+| **Forte Inabalável**         | Sustentar opinião impopular 3+ vezes sob pressão social       | _"Você é o rochedo – ondas quebram, você fica."_                                                                             | **-2** Vontade (rigidez mental enfraquece a adaptação)               | **+2** Resistência & limite de nível +1                                                                                                                      |
+| **Lutador de Rua**           | Encarar situações de conflito físico com sorriso 3+ vezes     | _"Mundo é um ringue – você o desafiante, sempre pronto para o próximo round."_                                               | **-2** Instrumento Físico (confiança excessiva em luta leva a erros) | **+2** Meia-Luz & limite de nível +1                                                                                                                         |
+| **Wompty-Dompty Dom Centre** | Ler placas estranhas ou ouvir fatos triviais 3+ vezes         | _"O centro de dominação de Wompty-Dompty. Você se tornou um radar de trivialidades, capturando fatos inúteis como troféus."_ | **-2** Lógica (prioriza curiosidades sobre dedução)                  | **+2** Enciclopédia & limite de nível +1. Ao descobrir fatos obscuros: +5 XP (não cumulativo por cena)                                                       |
+| **Iluminação Falsa**         | Ter uma epifania sob pressão que falha                        | _"A luz que você viu era de um trem vindo na sua direção. Epifanias sob pressão são ilusões perigosas."_                     | **-2** Vontade (desilusão consome esperança)                         | **+2** em testes de **Conceitualização** quando não houver tempo para pensar; **+2** Conceitualização & limite de nível +1                                   |
 
 ### **6.3. Nível 3: Crenças Estruturais (2-3 Sessões)**
 
 | Nome                          | Origem                                                   | Descrição Narrativa                                                                          | Problema                                                                   | Solução                                                                                                                                                                         |
 | ----------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Anti-Partido Apático**      | Criticar política/trabalho em 3+ conversas diferentes    | *"Declara guerra à política: o único partido é o do sofá. Compromisso é prisão."*            | **-3** Autoridade (rejeição de hierarquia enfraquece comando)              | **+3** Cálculo Visual & **+7** Moral máx. **Restrição:** Não pode participar de sistemas hierárquicos sem teste de Vontade CD 13.                                               |
-| **Auto-Perfuração Radical**   | Autossabotagem deliberada em 3+ momentos críticos        | *"Perfura o próprio ego para deixar a luz entrar – ou sair. Autossabotagem como filosofia."* | **-3** Vontade (autossabotagem consome energia mental)                     | **+3** Império Interior & limite de nível +1                                                                                                                                    |
-| **Cena Jamrock**              | Observar tragédias alheias com fascínio 3+ vezes         | *"Você é a câmera lenta que filma a tragédia, fascinado pela destruição alheia."*            | **-3** Savoire Faire (fascinação paralisa ação)                            | **+3** Percepção & limite de nível +1                                                                                                                                           |
-| **Complexo Dialético**        | Culpar sistema/capitalismo em 3+ situações distintas     | *"Você encontrou o inimigo comum perfeito – e ele tem nome de marca: Capitalismo."*          | **-3** Autoridade (soar como conspiracionista enfraquece comando)          | **+4** Retórica vs ricos & **-2** Retórica vs pobres & limite de nível +1                                                                                                       |
-| **Coração de Gelo**           | Rejeitar help afetivo 3+ vezes consecutivas              | *"Congela o peito – nada entra, nada sai. Emoções são armadilhas."*                          | **-3** Empatia (congelar emoções bloqueia conexão)                         | **+3** Lógica & limite de nível +1                                                                                                                                              |
-| **Engenheiro de Homens-Copo** | Ver pessoas como ferramentas em 3+ situações pragmáticas | *"Pessoas são copos – frágeis, úteis, descartáveis. Ferramentas para um fim."*               | **-3** Espírito de Corpo (desumanização bloqueia vínculos organizacionais) | **+3** Interface & limite de nível +1                                                                                                                                           |
-| **Fascismo Racional**         | Defende ordem/beleza em 3+ argumentações distintas       | *"Ordem é beleza – beleza é ordem. O caos é a verdadeira imoralidade."*                      | **-3** Drama (racionalidade extrema bloqueia intuição teatral)             | **+3** Autoridade & limite de nível +1                                                                                                                                          |
-| **Foda-se o Mundo**           | Destrutividade existencial manifesta 3+ vezes            | *"Mundo é o problema – você a solução final. Destruição como catarse."*                      | **-3** Vontade (ceticismo existencial consome esperança)                   | **+3** Instrumento Físico & limite de nível +1                                                                                                                                  |
-| **Homem-Revólver**            | Resolver conflitos mencionando violência 3+ vezes        | *"Você é a arma – resto é munição. Resolver conflitos através da capacidade de violência."*  | **-3** Interface (tecnologia é inferior à ação direta)                     | **+3** Coordenação Mão-Olho & limite de nível +1                                                                                                                                |
-| **O Apodrecimento**           | Admitir próprio fracasso como inevitável 3+ vezes        | *"Você é maçã que apodrece – é só o começo. Decadência como inevitabilidade."*               | **-3** Vontade (fatalismo consome energia vital)                           | **+3** Eletroquímica & limite de nível +1                                                                                                                                       |
-| **Cidadão Medicare**          | Usar drogas medicinais 5+ vezes para recuperar Saúde     | *"Você e o sistema de saúde são parceiros de negócios. Droga é medicamento, não recreação."* | **-3** Eletroquímica (só vê drogas como medicina, perde a "diversão")      | **+3 Saúde máx.** e pode usar kits de primeiros socorros como ações livres; +3 Resistência & limite de nível +1. **Restrição:** Sua perícia Eletroquímica é travada em nível 1. |
+| **Anti-Partido Apático**      | Criticar política/trabalho em 3+ conversas diferentes    | _"Declara guerra à política: o único partido é o do sofá. Compromisso é prisão."_            | **-3** Autoridade (rejeição de hierarquia enfraquece comando)              | **+3** Cálculo Visual & **+7** Moral máx. **Restrição:** Não pode participar de sistemas hierárquicos sem teste de Vontade CD 13.                                               |
+| **Auto-Perfuração Radical**   | Autossabotagem deliberada em 3+ momentos críticos        | _"Perfura o próprio ego para deixar a luz entrar – ou sair. Autossabotagem como filosofia."_ | **-3** Vontade (autossabotagem consome energia mental)                     | **+3** Império Interior & limite de nível +1                                                                                                                                    |
+| **Cena Jamrock**              | Observar tragédias alheias com fascínio 3+ vezes         | _"Você é a câmera lenta que filma a tragédia, fascinado pela destruição alheia."_            | **-3** Savoire Faire (fascinação paralisa ação)                            | **+3** Percepção & limite de nível +1                                                                                                                                           |
+| **Complexo Dialético**        | Culpar sistema/capitalismo em 3+ situações distintas     | _"Você encontrou o inimigo comum perfeito – e ele tem nome de marca: Capitalismo."_          | **-3** Autoridade (soar como conspiracionista enfraquece comando)          | **+4** Retórica vs ricos & **-2** Retórica vs pobres & limite de nível +1                                                                                                       |
+| **Coração de Gelo**           | Rejeitar help afetivo 3+ vezes consecutivas              | _"Congela o peito – nada entra, nada sai. Emoções são armadilhas."_                          | **-3** Empatia (congelar emoções bloqueia conexão)                         | **+3** Lógica & limite de nível +1                                                                                                                                              |
+| **Engenheiro de Homens-Copo** | Ver pessoas como ferramentas em 3+ situações pragmáticas | _"Pessoas são copos – frágeis, úteis, descartáveis. Ferramentas para um fim."_               | **-3** Espírito de Corpo (desumanização bloqueia vínculos organizacionais) | **+3** Interface & limite de nível +1                                                                                                                                           |
+| **Fascismo Racional**         | Defende ordem/beleza em 3+ argumentações distintas       | _"Ordem é beleza – beleza é ordem. O caos é a verdadeira imoralidade."_                      | **-3** Drama (racionalidade extrema bloqueia intuição teatral)             | **+3** Autoridade & limite de nível +1                                                                                                                                          |
+| **Foda-se o Mundo**           | Destrutividade existencial manifesta 3+ vezes            | _"Mundo é o problema – você a solução final. Destruição como catarse."_                      | **-3** Vontade (ceticismo existencial consome esperança)                   | **+3** Instrumento Físico & limite de nível +1                                                                                                                                  |
+| **Homem-Revólver**            | Resolver conflitos mencionando violência 3+ vezes        | _"Você é a arma – resto é munição. Resolver conflitos através da capacidade de violência."_  | **-3** Interface (tecnologia é inferior à ação direta)                     | **+3** Coordenação Mão-Olho & limite de nível +1                                                                                                                                |
+| **O Apodrecimento**           | Admitir próprio fracasso como inevitável 3+ vezes        | _"Você é maçã que apodrece – é só o começo. Decadência como inevitabilidade."_               | **-3** Vontade (fatalismo consome energia vital)                           | **+3** Eletroquímica & limite de nível +1                                                                                                                                       |
+| **Cidadão Medicare**          | Usar drogas medicinais 5+ vezes para recuperar Saúde     | _"Você e o sistema de saúde são parceiros de negócios. Droga é medicamento, não recreação."_ | **-3** Eletroquímica (só vê drogas como medicina, perde a "diversão")      | **+3 Saúde máx.** e pode usar kits de primeiros socorros como ações livres; +3 Resistência & limite de nível +1. **Restrição:** Sua perícia Eletroquímica é travada em nível 1. |
 
 ### **6.4. Nível 4: Transformações Existenciais (4-6 Sessões)**
 
 | Nome                        | Origem                                                             | Descrição Narrativa                                                                                              | Problema                                                                    | Solução                                                                                                              |
 | --------------------------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| **Bom Velho**               | Declamar amor/apreço pela cidade 5+ vezes em momentos vulneráveis  | *"Decide que a Cidade é a única mulher que nunca o traiu. Amor patético pela cidade que o destrói."*             | **-4** Enciclopédia (obsessão cega pela cidade bloqueia conhecimento geral) | **+4** Espírito de Corpo & limite de nível +1                                                                        |
-| **Capitão da Cidade**       | Defender a Cidade contra críticas 5+ vezes com paixão nacionalista | *"A Cidade é seu navio naufragado – você seu capitão louco. Defende-a contra críticas com paixão nacionalista."* | **-4** Drama (patriotismo cega para nuances sociais)                        | **+4** Autoridade & **+10** Moral máx. **Restrição:** Não pode aceitar críticas à cidade sem teste de Vontade CD 15. |
-| **Canal do Medo**           | Buscar perigo/profecias 5+ vezes ao invés de segurança             | *"Sintoniza rádio que só transmite desastres iminentes. Busca perigo como profecia auto-realizável."*            | **-4** Composição (paranoia consome serenidade)                             | **+4** Meia-Luz & limite de nível +1                                                                                 |
-| **Centrismo Cético**        | Tentar agradar todos os lados em 5+ debates políticos              | *"Centro é a única posição que não mancha o terno. Tentar agradar todos os lados."*                              | **-4** Retórica (ambivalência enfraquece argumentação)                      | **+4** Cálculo Visual & limite de nível +1                                                                           |
-| **Hora de ir para Casa**    | Tentar abandonar missão/investigação 5+ vezes                      | *"Todo lugar é casa – todo momento é hora de ir. Desejo constante de abandono."*                                 | **-4** Composição (inconstância enfraquece postura)                         | **+4** Vontade & limite de nível +1                                                                                  |
-| **Indígena da Ilha**        | Reclamar de turistas/estrangeiros 5+ vezes                         | *"Nativo de ilha que ninguém mais enxerga. Reclama de turistas/estrangeiros com xenofobia nostálgica."*          | **-4** Enciclopédia (rejeição do "novo" bloqueia conhecimento)              | **+4** Império Interior & limite de nível +1                                                                         |
-| **Máquina de Guerra**       | Ver si mesmo como instrumento de destruição 5+ vezes               | *"Você é a engrenagem – resto é graxa. Ver si mesmo como instrumento de destruição impessoal."*                  | **-4** Instrumento Físico (máquina não tem força "humana")                  | **+4** Interface & limite de nível +1                                                                                |
-| **Maré de Mercúrio**        | Escapar de responsabilidades 5+ vezes por ser "fluido"             | *"Você é mercúrio – escorre por qualquer fresta. Escapismo como filosofia de existência fluida."*                | **-4** Eletroquímica (evitar substâncias para manter fluidez)               | **+4** Composição & limite de nível +1                                                                               |
-| **Moralismo Racional**      | Criar sistemas morais rígidos para si mesmo 5+ vezes               | *"Moral é equação – você a calculadora. Sistemas morais rígidos como código de programação."*                    | **-4** Drama (moralidade rígida bloqueia teatralidade)                      | **+4** Vontade & limite de nível +1                                                                                  |
-| **Não Há Trabalho Escravo** | Recusar tarefas "abaixo de você" 5+ vezes                          | *"Todo trabalho é escravidão – recuse-se. Elitismo disfarçado de princípio."*                                    | **-4** Instrumento Físico (rejeição de esforço físico enfraquece o corpo)   | **+4** Empatia & limite de nível +1                                                                                  |
+| **Bom Velho**               | Declamar amor/apreço pela cidade 5+ vezes em momentos vulneráveis  | _"Decide que a Cidade é a única mulher que nunca o traiu. Amor patético pela cidade que o destrói."_             | **-4** Enciclopédia (obsessão cega pela cidade bloqueia conhecimento geral) | **+4** Espírito de Corpo & limite de nível +1                                                                        |
+| **Capitão da Cidade**       | Defender a Cidade contra críticas 5+ vezes com paixão nacionalista | _"A Cidade é seu navio naufragado – você seu capitão louco. Defende-a contra críticas com paixão nacionalista."_ | **-4** Drama (patriotismo cega para nuances sociais)                        | **+4** Autoridade & **+10** Moral máx. **Restrição:** Não pode aceitar críticas à cidade sem teste de Vontade CD 15. |
+| **Canal do Medo**           | Buscar perigo/profecias 5+ vezes ao invés de segurança             | _"Sintoniza rádio que só transmite desastres iminentes. Busca perigo como profecia auto-realizável."_            | **-4** Composição (paranoia consome serenidade)                             | **+4** Meia-Luz & limite de nível +1                                                                                 |
+| **Centrismo Cético**        | Tentar agradar todos os lados em 5+ debates políticos              | _"Centro é a única posição que não mancha o terno. Tentar agradar todos os lados."_                              | **-4** Retórica (ambivalência enfraquece argumentação)                      | **+4** Cálculo Visual & limite de nível +1                                                                           |
+| **Hora de ir para Casa**    | Tentar abandonar missão/investigação 5+ vezes                      | _"Todo lugar é casa – todo momento é hora de ir. Desejo constante de abandono."_                                 | **-4** Composição (inconstância enfraquece postura)                         | **+4** Vontade & limite de nível +1                                                                                  |
+| **Indígena da Ilha**        | Reclamar de turistas/estrangeiros 5+ vezes                         | _"Nativo de ilha que ninguém mais enxerga. Reclama de turistas/estrangeiros com xenofobia nostálgica."_          | **-4** Enciclopédia (rejeição do "novo" bloqueia conhecimento)              | **+4** Império Interior & limite de nível +1                                                                         |
+| **Máquina de Guerra**       | Ver si mesmo como instrumento de destruição 5+ vezes               | _"Você é a engrenagem – resto é graxa. Ver si mesmo como instrumento de destruição impessoal."_                  | **-4** Instrumento Físico (máquina não tem força "humana")                  | **+4** Interface & limite de nível +1                                                                                |
+| **Maré de Mercúrio**        | Escapar de responsabilidades 5+ vezes por ser "fluido"             | _"Você é mercúrio – escorre por qualquer fresta. Escapismo como filosofia de existência fluida."_                | **-4** Eletroquímica (evitar substâncias para manter fluidez)               | **+4** Composição & limite de nível +1                                                                               |
+| **Moralismo Racional**      | Criar sistemas morais rígidos para si mesmo 5+ vezes               | _"Moral é equação – você a calculadora. Sistemas morais rígidos como código de programação."_                    | **-4** Drama (moralidade rígida bloqueia teatralidade)                      | **+4** Vontade & limite de nível +1                                                                                  |
+| **Não Há Trabalho Escravo** | Recusar tarefas "abaixo de você" 5+ vezes                          | _"Todo trabalho é escravidão – recuse-se. Elitismo disfarçado de princípio."_                                    | **-4** Instrumento Físico (rejeição de esforço físico enfraquece o corpo)   | **+4** Empatia & limite de nível +1                                                                                  |
 
 ---
 
 ## **7. MORAL, SAÚDE E RECURSOS**
 
 ### **7.1. Moral (Saúde Mental)**
+
 **Cálculo:** 1 + Nível da perícia **Vontade**
 
 **Aumentando o Máximo:**
+
 - **Base**: 1 + Vontade
 - **Reflexões**: Algumas concedem bônus permanentes (ex: +7 Moral máx)
 - **Limite Absoluto**: 15 (apenas alcançável via Reflexões Nível 4)
 
 **Como Recuperar:**
+
 - **Repouso seguro**: +1. Repouso seguro significa dormir fora da rua, em local fechado e razoavelmente seguro (hotel, abrigo, casa de amigo, ou mesmo um canto tranquilo num edifício abandonado que ninguém frequenta). Deve durar no mínimo **6 horas** para contar como repouso seguro. Dormir na rua não é repouso seguro e não concede recuperação.
 - **Diálogo terapêutico**: +1 a +3. Conversas profundas com NPCs de confiança, momentos de vulnerabilidade partilhada, ou sessões improvisadas de auto-reflexão podem restaurar Moral. A quantidade e o efeito dependem da qualidade narrativa do momento e ficam ao critério do Narrador. Se os jogadores abusarem deste recurso (tentando restaurar Moral excessivamente através de diálogos superficiais ou repetitivos), o Narrador deve introduzir complicadores narrativos — o NPC pode tornar-se desconfiado, a conversa pode revelar informações problemáticas, ou o personagem pode ganhar uma Condição negativa em vez de Moral.
 - Consumir substâncias: +2 (com riscos)
 - Reflexões específicas: +1 ao falhar
 
 **Perda e Colapso:**
+
 - Falhar testes de Vontade ou Meia-Luz
 - Sobrecarga emocional (Empatia alta em trauma)
 - **Moral 0**: Colapso psicológico.
 
 ### **7.2. Saúde (Bem-Estar Físico)**
+
 **Cálculo:** 1 + Nível da perícia **Resistência**
 
 **Aumentando o Máximo:**
+
 - **Base**: 1 + Resistência
 - **Reflexões**: Algumas concedem bônus permanentes (ex: +3 Saúde máx)
 - **Limite Absoluto**: 15 (apenas alcançável via Reflexões Nível 4)
 
 **Como Recuperar:**
+
 - **Repouso seguro**: +1. Conforme definido na secção de Moral, repouso seguro significa 6 horas fora da rua em local fechado.
 - Comida/drinks: +1 a +2
 - Kit de Primeiros Socorros: +3 (10 minutos)
 - 24h sem ferimentos graves: +1
 
 **Perda e Colapso:**
+
 - Falhar testes de Limiar de Dor
 - Exaustão extrema
 - **Saúde 0**: Desmaio. -1 em todos os testes físicos, descrições de tremores e palpitações quando acordar.
@@ -370,12 +395,14 @@ Quem possui **Velocidade de Reação** mais alta age primeiro. Em caso de empate
 
 **2. Teste de Ataque**
 O atacante faz um teste usando a perícia apropriada:
+
 - **Instrumento Físico** (FYS): Socos, chutes, armas brancas, combate corpo a corpo
 - **Coordenação Mão-Olho** (MOT): Armas de fogo, armas de lançamento, ataques à distância
 - **Meia-Luz** (FYS): Reações defensivas, esquivas, contra-ataques oportunistas
 
 **3. Teste de Defesa (Opcional)**
 O alvo pode tentar esquivar-se ou bloquear. Isso requer um teste separado:
+
 - **Meia-Luz** (FYS): Esquiva física, movimentação evasiva
 - **Instrumento Físico** (FYS): Bloqueio com objetos, defesa com os braços
 - **Savoire Faire** (MOT): Desvio elegante, uso do ambiente para proteção
@@ -387,14 +414,14 @@ Se o atacante obtiver **sucesso**, isto é, maior ou igual ao teste do defensor,
 
 ### **8.2. Armas e Seus Efeitos**
 
-| Arma | Custo | Bônus de Ataque | Notas Narrativas |
-|------|-------|-----------------|------------------|
-| **Faca de bolso** | R$ 25 | +1 Instrumento Físico | Comum, útil, descartável |
-| **Garrafa quebrada** | R$ 0 | 0 | Fragmenta após uso (1 cena) |
-| **Taco de baseball** | R$ 20 | +1 Instrumento Físico | Alcance médio, força bruta |
-| **Revólver velho** | R$ 80 | +2 Coordenação Mão-Olho | Barulhento, confiável |
-| **Pistola** | R$ 150 | +3 Coordenação Mão-Olho | Precisa, letal |
-| **Cassetete** | R$ 40 | +1 Instrumento Físico | Não letal (reduz dano pela metade, arredondado para cima) |
+| Arma                 | Custo  | Bônus de Ataque         | Notas Narrativas                                          |
+| -------------------- | ------ | ----------------------- | --------------------------------------------------------- |
+| **Faca de bolso**    | R$ 25  | +1 Instrumento Físico   | Comum, útil, descartável                                  |
+| **Garrafa quebrada** | R$ 0   | 0                       | Fragmenta após uso (1 cena)                               |
+| **Taco de baseball** | R$ 20  | +1 Instrumento Físico   | Alcance médio, força bruta                                |
+| **Revólver velho**   | R$ 80  | +2 Coordenação Mão-Olho | Barulhento, confiável                                     |
+| **Pistola**          | R$ 150 | +3 Coordenação Mão-Olho | Precisa, letal                                            |
+| **Cassetete**        | R$ 40  | +1 Instrumento Físico   | Não letal (reduz dano pela metade, arredondado para cima) |
 
 **Munição:** Armas de fogo usam balas. Cada disparo é um teste. Munição custa R$ 5 por bala e pode ser difícil de encontrar em certas áreas da cidade.
 
@@ -403,6 +430,7 @@ Se o atacante obtiver **sucesso**, isto é, maior ou igual ao teste do defensor,
 ### **8.3. Esconderijo e Cobertura**
 
 O ambiente pode conceder bônus defensivos:
+
 - **Cobertura parcial** (móveis, colunas, veículos): +1d6 ao teste de defesa
 - **Cobertura total** (paredes grossas, veículos blindados): Teste de defesa não é necessário, mas ataques contra o alvo também não podem mirar especificamente nele
 - **Terreno difícil** (escadas, entulho, água): -1 ao teste de ataque do atacante
@@ -424,16 +452,19 @@ O ambiente pode conceder bônus defensivos:
 | Escolhas ideológicas              | +30        | Defender crenças fortemente |
 
 **Multiplicadores:**
+
 - **Primeira vez** fazendo algo: XP dobrado
 - **Wompty-Dompty Dom Centre**: +10 XP por fato obscuro descoberto
 
 ### **9.2. Gasto de XP**
 
 **Pontos de Perícia:** +1 a cada **50 XP** acumulados
+
 - Usado para aumentar perícia em +1 nível (respeitando limites)
 - Usado para comprar +1 slot de Reflexão (1 ponto por slot)
 
 **Pontos de Atributo:** Eventos narrativos específicos **OU** gaste **3 Pontos de Perícia acumulados** para +1 em um Atributo
+
 - Ao aumentar um Atributo, **aumenta o limite** de todas as suas 6 perícias filhas
 
 ---
@@ -441,7 +472,9 @@ O ambiente pode conceder bônus defensivos:
 ## **10. MECÂNICAS AVANÇADAS**
 
 ### **10.1. Sistema de Palpites**
+
 Antes de rolar, gaste **1 ponto de Moral temporário** para receber uma dica do Narrador:
+
 - **Lógica passiva sucedida**: Revela CD exato
 - **Império Interior passivo sucedido**: Descreve pior cenário
 - **Falha**: Moral não recupera até fim da cena
@@ -485,21 +518,25 @@ Reflexões ideologicamente opostas (ex: "Fascismo Racional" + "Complexo Dialéti
 ### **10.4. Diálogo com o Mundo**
 
 **Enciclopédia (INT) - Memória da Cidade:**
+
 - **Teste CD 12**: "O que esse lugar já viu?"
 - **Sucesso**: Cidade revela segredo histórico
 - **Falha crítica**: Cidade mente (informação falsa que parece verdadeira)
 
 **Arrepios (FYS) - Pressentimento Urbano:**
+
 - **Passivo (nível ≥ 3)**: Narrador DEVE fornecer 1 insight sensorial sem ser solicitado
 - **Ativo CD 10**: "O que a cidade sente agora?"
 - **Falha**: Sobrecarga sensorial (-1 Percepção por 1 cena)
 
 **Império Interior (PSY) - Psicometria Delirante:**
+
 - **Teste CD 10**: Segurar objeto e perguntar "O que você testemunhou?"
 - **Sucesso**: Objeto responde com visão simbólica
 - **Falha**: Voz do objeto é mais forte (teste Vontade CD 12 ou -1 Moral)
 
 **Interface (MOT) - Diagnosticar Máquina:**
+
 - **Teste CD 8**: Analisar aparelhos
 - **Crítico (16+)**: Simpatiza com máquina (reparar = +1 Moral, destruir = -1 Moral)
 
@@ -508,16 +545,19 @@ Reflexões ideologicamente opostas (ex: "Fascismo Racional" + "Complexo Dialéti
 A Cidade é um ser vivo por si só, ela tem **Moral** e **Saúde**, ambas começando em **10**.
 
 **Como "Machucar" a Cidade:**
-- Falhar testes de **Arrepios** ou **Império Interior**: -1 Saúde da Cidade    
+
+- Falhar testes de **Arrepios** ou **Império Interior**: -1 Saúde da Cidade
 - Ignorar crimes/sofrimento urbano: -1 Moral da Cidade
 - Destruir patrimônio histórico: -2 de ambos
 
 **Efeitos da Cidade Ferida:**
+
 - **Saúde < 5**: +1 em testes de **Eletroquímica** (caos aumenta vício), mas -1 em **Composição**
 - **Moral < 5**: +1 em testes de **Império Interior** (cidade chora), mas -1 em **Autoridade**
 - **Ambos < 3**: Eventos aleatórios urbanos a cada cena (barulhos, violência, visões)
 
 **Como "Curar" a Cidade:**
+
 - Resolver mistérios que afetam comunidade: +1 Moral
 - Conservar/restaurar locais: +1 Saúde
 - Internalizar Reflexão que idolatra cidade: +2 em ambos
@@ -552,12 +592,13 @@ Quando a Cidade está ferida (Moral ou Saúde abaixo de 3) ou quando o Narrador 
 ## **11. ECONOMIA E SUBSISTÊNCIA**
 
 ### **11.1. Gastos Diários Essenciais**
-| Item | Custo | Efeito de Ignorar |
-|------|-------|-------------------|
-| **Moradia** | R$ 15/noite (hotel podre) / R$ 0 (rua) | Na rua: +0 recuperação, teste Arrepios CD 10 ou Insonia |
-| **Alimentação** | R$ 15/dia (boteco) / R$ 0 (fome) | Após 1 dia: -1 Saúde; 3 dias: colapso físico |
-| **Higiene** | R$ 5 (chuveiro público) / R$ 0 (imundo) | 2 dias: -1 Autoridade e Composição; 4 dias: -2 social |
-| **Informação** | R$ 20-50 (suborno) / tempo (investigação) | Gastar R$ 50+: +20 XP e +1 em testes por 1 cena |
+
+| Item            | Custo                                     | Efeito de Ignorar                                       |
+| --------------- | ----------------------------------------- | ------------------------------------------------------- |
+| **Moradia**     | R$ 15/noite (hotel podre) / R$ 0 (rua)    | Na rua: +0 recuperação, teste Arrepios CD 10 ou Insonia |
+| **Alimentação** | R$ 15/dia (boteco) / R$ 0 (fome)          | Após 1 dia: -1 Saúde; 3 dias: colapso físico            |
+| **Higiene**     | R$ 5 (chuveiro público) / R$ 0 (imundo)   | 2 dias: -1 Autoridade e Composição; 4 dias: -2 social   |
+| **Informação**  | R$ 20-50 (suborno) / tempo (investigação) | Gastar R$ 50+: +20 XP e +1 em testes por 1 cena         |
 
 ### **11.2. Dinheiro como XP**
 
@@ -589,6 +630,7 @@ Quando a Cidade está ferida (Moral ou Saúde abaixo de 3) ou quando o Narrador 
 ## **12. REFERÊNCIAS RÁPIDAS**
 
 ### **12.1. Fórmulas Essenciais**
+
 - **Teste de Perícia:** 2d6 + Nível da Perícia + Nível do Atributo
 - **Teste Passivo:** Nível da Perícia + Nível do Atributo + 6
 - **Moral Máxima:** 1 + Vontade (limite 15 com bônus)
@@ -597,106 +639,114 @@ Quando a Cidade está ferida (Moral ou Saúde abaixo de 3) ou quando o Narrador 
 - **Ponto de Atributo:** 3 Pontos de Perícia acumulados
 
 ### **12.2. Itens Comuns**
-| Item | Custo | Efeito | Riscos |
-|------|-------|--------|--------|
-| Café preto | R$ 3 | +1 Moral (2 cenas) | Nenhum |
-| Cerveja comum | R$ 5 | +1 Moral, -1 Percepção | Ressaca: -1 Lógica |
-| Whisky barato | R$ 15 | +2 Moral, -1 Coordenação | Teste Eletroquímica CD 8 |
-| Sanduíche | R$ 8 | +1 Saúde | Nenhum |
-| Kit Primeiros Socorros | R$ 30 | +3 Saúde | Uso único, 10 min |
-| Cigarros (maço) | R$ 12 | +1 Moral/cigarro | Teste CD 10 após 3 usos |
-| Roupa social | R$ 80 | +1 Autoridade | Até sujar |
-| Tênis confortável | R$ 60 | +1 Savoire Faire | Permite movimento silencioso |
-| Faca de bolso | R$ 25 | +1 Instrumento Físico | Ferramenta ou arma improvisada |
+
+| Item                   | Custo | Efeito                   | Riscos                         |
+| ---------------------- | ----- | ------------------------ | ------------------------------ |
+| Café preto             | R$ 3  | +1 Moral (2 cenas)       | Nenhum                         |
+| Cerveja comum          | R$ 5  | +1 Moral, -1 Percepção   | Ressaca: -1 Lógica             |
+| Whisky barato          | R$ 15 | +2 Moral, -1 Coordenação | Teste Eletroquímica CD 8       |
+| Sanduíche              | R$ 8  | +1 Saúde                 | Nenhum                         |
+| Kit Primeiros Socorros | R$ 30 | +3 Saúde                 | Uso único, 10 min              |
+| Cigarros (maço)        | R$ 12 | +1 Moral/cigarro         | Teste CD 10 após 3 usos        |
+| Roupa social           | R$ 80 | +1 Autoridade            | Até sujar                      |
+| Tênis confortável      | R$ 60 | +1 Savoire Faire         | Permite movimento silencioso   |
+| Faca de bolso          | R$ 25 | +1 Instrumento Físico    | Ferramenta ou arma improvisada |
 
 ---
 
 ## **13. FICHAS PRONTAS**
 
 ### **13.1. Detetive Clássico**
+
 **Atributos:** INT 4 | PSY 2 | FYS 2 | MOT 2  
 **Moral:** 4 | **Saúde:** 3 | **Slots:** 3 | **Dinheiro:** R$ 10
 
-| INTELECTO (4) | PSIQUE (2) | FÍSICO (2) | MOTRICIDADE (2) |
-|---------------|-----------|-----------|----------------|
-| Lógica 5 | Vontade 3 | Resistência 2 | Coordenação Mão-Olho 3 |
-| Enciclopédia 5 | Império Interior 2 | Limiar de Dor 2 | Percepção 4 |
-| Retórica 4 | Empatia 4 | Instrumento Físico 2 | Velocidade de Reação 3 |
-| Conceitualização 4 | Autoridade 2 | Eletroquímica 2 | Savoire Faire 3 |
-| Cálculo Visual 5 | Espírito de Corpo 2 | Arrepios 2 | Interface 2 |
-| Drama 4 | Sugestão 3 | Meia-Luz 2 | Composição 2 |
+| INTELECTO (4)      | PSIQUE (2)          | FÍSICO (2)           | MOTRICIDADE (2)        |
+| ------------------ | ------------------- | -------------------- | ---------------------- |
+| Lógica 5           | Vontade 3           | Resistência 2        | Coordenação Mão-Olho 3 |
+| Enciclopédia 5     | Império Interior 2  | Limiar de Dor 2      | Percepção 4            |
+| Retórica 4         | Empatia 4           | Instrumento Físico 2 | Velocidade de Reação 3 |
+| Conceitualização 4 | Autoridade 2        | Eletroquímica 2      | Savoire Faire 3        |
+| Cálculo Visual 5   | Espírito de Corpo 2 | Arrepios 2           | Interface 2            |
+| Drama 4            | Sugestão 3          | Meia-Luz 2           | Composição 2           |
 
-**Reflexão Inicial:** Advogado de Si Mesmo  
+**Reflexão Inicial:** Advogado de Si Mesmo
 
 ---
 
 ### **13.2. Trem-Bala Emocional**
+
 **Atributos:** INT 1 | PSY 5 | FYS 2 | MOT 2  
 **Moral:** 7 | **Saúde:** 3 | **Slots:** 3 | **Dinheiro:** R$ 10
 
-| INTELECTO (1) | PSIQUE (5) | FÍSICO (2) | MOTRICIDADE (2) |
-|---------------|-----------|-----------|----------------|
-| Lógica 1 | Vontade 6 | Resistência 2 | Coordenação Mão-Olho 2 |
-| Enciclopédia 1 | Império Interior 6 | Limiar de Dor 2 | Percepção 3 |
-| Retórica 1 | Empatia 6 | Instrumento Físico 3 | Velocidade de Reação 4 |
-| Conceitualização 1 | Autoridade 2 | Eletroquímica 4 | Savoire Faire 3 |
-| Cálculo Visual 1 | Espírito de Corpo 2 | Arrepios 3 | Interface 2 |
-| Drama 1 | Sugestão 5 | Meia-Luz 3 | Composição 1 |
+| INTELECTO (1)      | PSIQUE (5)          | FÍSICO (2)           | MOTRICIDADE (2)        |
+| ------------------ | ------------------- | -------------------- | ---------------------- |
+| Lógica 1           | Vontade 6           | Resistência 2        | Coordenação Mão-Olho 2 |
+| Enciclopédia 1     | Império Interior 6  | Limiar de Dor 2      | Percepção 3            |
+| Retórica 1         | Empatia 6           | Instrumento Físico 3 | Velocidade de Reação 4 |
+| Conceitualização 1 | Autoridade 2        | Eletroquímica 4      | Savoire Faire 3        |
+| Cálculo Visual 1   | Espírito de Corpo 2 | Arrepios 3           | Interface 2            |
+| Drama 1            | Sugestão 5          | Meia-Luz 3           | Composição 1           |
 
-**Reflexão Inicial:** Camarada de Copas  
+**Reflexão Inicial:** Camarada de Copas
 
 ---
 
 ### **13.3. Brutamontes com Sentimentos**
+
 **Atributos:** INT 1 | PSY 2 | FYS 5 | MOT 2  
 **Moral:** 4 | **Saúde:** 7 | **Slots:** 3 | **Dinheiro:** R$ 10
 
-| INTELECTO (1) | PSIQUE (2) | FÍSICO (5) | MOTRICIDADE (2) |
-|---------------|-----------|-----------|----------------|
-| Lógica 1 | Vontade 3 | Resistência 6 | Coordenação Mão-Olho 3 |
-| Enciclopédia 1 | Império Interior 2 | Limiar de Dor 6 | Percepção 3 |
-| Retórica 1 | Empatia 4 | Instrumento Físico 6 | Velocidade de Reação 2 |
-| Conceitualização 1 | Autoridade 2 | Eletroquímica 5 | Savoire Faire 3 |
-| Cálculo Visual 1 | Espírito de Corpo 2 | Arrepios 6 | Interface 2 |
-| Drama 2 | Sugestão 2 | Meia-Luz 4 | Composição 2 |
+| INTELECTO (1)      | PSIQUE (2)          | FÍSICO (5)           | MOTRICIDADE (2)        |
+| ------------------ | ------------------- | -------------------- | ---------------------- |
+| Lógica 1           | Vontade 3           | Resistência 6        | Coordenação Mão-Olho 3 |
+| Enciclopédia 1     | Império Interior 2  | Limiar de Dor 6      | Percepção 3            |
+| Retórica 1         | Empatia 4           | Instrumento Físico 6 | Velocidade de Reação 2 |
+| Conceitualização 1 | Autoridade 2        | Eletroquímica 5      | Savoire Faire 3        |
+| Cálculo Visual 1   | Espírito de Corpo 2 | Arrepios 6           | Interface 2            |
+| Drama 2            | Sugestão 2          | Meia-Luz 4           | Composição 2           |
 
-**Reflexão Inicial:** Coxinha do Bar  
+**Reflexão Inicial:** Coxinha do Bar
 
 ---
 
 ### **13.4. Veloz e Perigoso**
+
 **Atributos:** INT 2 | PSY 1 | FYS 3 | MOT 4  
 **Moral:** 3 | **Saúde:** 5 | **Slots:** 3 | **Dinheiro:** R$ 10
 
-| INTELECTO (2) | PSIQUE (1) | FÍSICO (3) | MOTRICIDADE (4) |
-|---------------|-----------|-----------|----------------|
-| Lógica 1 | Vontade 2 | Resistência 4 | Coordenação Mão-Olho 5 |
-| Enciclopédia 2 | Império Interior 2 | Limiar de Dor 3 | Percepção 3 |
-| Retórica 2 | Empatia 1 | Instrumento Físico 4 | Velocidade de Reação 5 |
-| Conceitualização 2 | Autoridade 1 | Eletroquímica 5 | Savoire Faire 5 |
-| Cálculo Visual 2 | Espírito de Corpo 1 | Arrepios 4 | Interface 5 |
-| Drama 1 | Sugestão 1 | Meia-Luz 4 | Composição 1 |
+| INTELECTO (2)      | PSIQUE (1)          | FÍSICO (3)           | MOTRICIDADE (4)        |
+| ------------------ | ------------------- | -------------------- | ---------------------- |
+| Lógica 1           | Vontade 2           | Resistência 4        | Coordenação Mão-Olho 5 |
+| Enciclopédia 2     | Império Interior 2  | Limiar de Dor 3      | Percepção 3            |
+| Retórica 2         | Empatia 1           | Instrumento Físico 4 | Velocidade de Reação 5 |
+| Conceitualização 2 | Autoridade 1        | Eletroquímica 5      | Savoire Faire 5        |
+| Cálculo Visual 2   | Espírito de Corpo 1 | Arrepios 4           | Interface 5            |
+| Drama 1            | Sugestão 1          | Meia-Luz 4           | Composição 1           |
 
-**Reflexão Inicial:** Gato Preto  
+**Reflexão Inicial:** Gato Preto
 
 ---
 
 ## **14 CRIAÇÃO REATIVA E NARRATIVA COMPARTILHADA**
 
-Orientações de narrativa: **Não prepare detalhes. Reaja à loucura como eco.** 
+Orientações de narrativa: **Não prepare detalhes. Reaja à loucura como eco.**
 Eles inventam. Você adiciona mais e complica.
+
 ### **14.1. Aceitação imediata**
 
-Quando um jogador diz *"isso me lembra..."* ou *"conheço um lugar onde..."*, **interrompa e aceite antes de terminar**:
+Quando um jogador diz _"isso me lembra..."_ ou _"conheço um lugar onde..."_, **interrompa e aceite antes de terminar**:
 
-> **Jogador:** *"Esta esquina tem um bar..."*  
-> **Você (imediatamente):** *"Com certeza. O cheiro de cerveja azeda te atinge. O que você lembra dele?"*
+> **Jogador:** _"Esta esquina tem um bar..."_  
+> **Você (imediatamente):** _"Com certeza. O cheiro de cerveja azeda te atinge. O que você lembra dele?"_
 
 **NUNCA diga:**
+
 - "Não, aqui não tem bar."
 - "Você está confundindo com outro lugar."
 
 **SEMPRE diga:**
+
 - "Sim, e ele está **fechado por crime**."
 - "Sim, e o dono **te deve uma**."
 - "Sim, e **você foi banido** de lá."
@@ -706,16 +756,16 @@ Quando um jogador diz *"isso me lembra..."* ou *"conheço um lugar onde..."*, **
 Todo detalhe inventado **DEVE** custar. Não em dinheiro. Em **sanidade, conexão ou dignidade**.
 
 **Exemplo:**
-Jogador: *"Conheço o faxineiro da delegacia."*  
-Você: *"Sim, e ele é seu **ex-parceiro** que você **denunciou** por corrupção. Ele te vê e some nos fundos. Teste Drama CD 12 para segui-lo sem ser notado."*
+Jogador: _"Conheço o faxineiro da delegacia."_  
+Você: _"Sim, e ele é seu **ex-parceiro** que você **denunciou** por corrupção. Ele te vê e some nos fundos. Teste Drama CD 12 para segui-lo sem ser notado."_
 
-**Regra mental:** *"O detalhe é verdade, mas o detalhe me odeia."*
+**Regra mental:** _"O detalhe é verdade, mas o detalhe me odeia."_
 
 ### **14.3. Check-in a cada momento**
 
 Se a mesa fica quieta, **force a projeção**:
 
-> **Você:** *"O que esta cena **projeta** na sua cabeça? O cheiro, o som, a merda na parede - o que **lembra** você de Revachol? Se não responder, teste Vontade CD 14 ou ganha 'Paranóia'."*
+> **Você:** _"O que esta cena **projeta** na sua cabeça? O cheiro, o som, a merda na parede - o que **lembra** você de Revachol? Se não responder, teste Vontade CD 14 ou ganha 'Paranóia'."_
 
 **Não é pergunta aberta.** É **ordem de criação**.
 
@@ -725,13 +775,14 @@ Se eles inventam um NPC, lugar ou objeto, você deve conectar a trama principal.
 
 **Exemplo:**
 Jogador inventou **"gato preto da esquina"**.  
-Você anota: *"Gato = pertence à vítima. Coleira tem serial number da arma."*
+Você anota: _"Gato = pertence à vítima. Coleira tem serial number da arma."_
 
 **Se não conseguir conectar:** O detalhe **desaparece** na próxima cena.
 
 ### **14.5. Não prepare, anote**
 
 Antes da sessão, escreva apenas **3 palavras-chave**, exemplo:
+
 - **Cadáver**
 - **Faca**
 - **Relógio**
@@ -739,11 +790,12 @@ Antes da sessão, escreva apenas **3 palavras-chave**, exemplo:
 Durante a sessão, **preencha com as projeções dos jogadores**.
 
 **Ficha do Mestre ao vivo:**
+
 ```
 CADÁVER:
 - Jogador 1 disse: "Tem tatuagem de sereia"
         → É da **ex-mulher** do suspeito principal
-- Jogador 2 disse: "Cheira a mar"  
+- Jogador 2 disse: "Cheira a mar"
         → A vítima **não morreu aqui**. Foi jogada do cais.
 ```
 
@@ -752,6 +804,7 @@ CADÁVER:
 ### **14.6. Métrica de sucesso do Narrador**
 
 No fim da sessão, **contabilize:**
+
 - **Quantas projeções usei?** (Meta: mínimo 5)
 - **Quantas complicações criei?** (Meta: 1 por projeção)
 - **Quantas resolvi o mistério sozinho?** (Meta: ZERO)
@@ -763,31 +816,37 @@ Se você **resolveu sozinho**, **você falhou**. A cidade só existe se **eles v
 ## **15. CONSELHOS DE NARRADOR**
 
 ### **15.1. Narrando XP e Progressão**
+
 - **Nunca anuncie XP numericamente**: "Você sente algo se consolidar dentro de você" é melhor que "+10 XP"
 - **Recompense a ousadia**: Falhar um teste Vermelho deve valer mais que passar num trivial
 - **Ritmo de progressão**: Personagens devem evoluir a cada 3-4 sessões intensas
 
 ### **15.2. Narrando Moral e Saúde**
+
 - **Moral baixa** = vozes ficam agressivas, insights mais paranoicos
 - **Saúde baixa** = descrições exaustivas, tremores, palpitações
 - **Recuperação** nunca deve ser instantânea; sempre exige narrativa
 
 ### **15.3. Usando as Vozes**
+
 - Cada perícia deve **falar** durante a jogada, não apenas numerar dados
 - Falhas são **operações narrativas** tão valiosas quanto sucessos
 - Deixe as vozes **conflitarem** umas com as outras para criar tensão interna
 
 ### **15.4. Interpretando Reflexões**
+
 - Reflexões são **ideologias**, não apenas buffs
 - Internalizar uma Reflexão deve **mudar como o personagem pensa**
 - O Problema durante pesquisa é **roleplay ativo**, não apenas penalidade numérica
 
 ### **15.5. Mundo como Personagem**
+
 - **Itens, roupas e drogas** fornecem modificadores temporários
 - **Cenário** deve ser vivo: use Arrepios para "ouvir" a cidade, Enciclopédia para lembrar história dos lugares
 - **Relacionamentos** afetam testes: aliados podem conceder +1 ou -1
 
 ### **15.6. Dicas de Mestre**
+
 - **Sempre ofereça alternativas "grátis"** com custo narrativo claro. A degradação deve ser uma **escolha**, não inevitabilidade
 - **Descreva transações como sensações**: "O R$ 50 some da sua mão como água quente"
 - **Use metáforas sensoriais**: "O concreto geme como ossos velhos", "A sombra dança quando você não olha"
@@ -797,6 +856,7 @@ Se você **resolveu sozinho**, **você falhou**. A cidade só existe se **eles v
 ## **16. APÊNDICE: NOTAS DE DESIGN**
 
 ### **16.1. Princípios do Sistema**
+
 1. **Fracasso é progresso**: XP por falha incentiva narrativa sobre otimização
 2. **Vozes sobre números**: Mecânicas servem à narrativa interna do personagem
 3. **Mundo reativo**: A cidade responde à psicologia do jogador
@@ -804,7 +864,9 @@ Se você **resolveu sozinho**, **você falhou**. A cidade só existe se **eles v
 5. **Ideologias como equipamento**: Reflexões são tanto power-up quanto roleplay obrigatório
 
 ### **16.2. Adaptando para Outros Mundos**
+
 Este sistema funciona para **qualquer cenário de detective existencial**:
+
 - Crie sua própria cidade em cooperação entre Narrador e jogadores
 - Ajuste custos de itens à sua economia
 - Modifique Reflexões para ideologias do seu cenário
